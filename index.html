@@ -214,6 +214,13 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
 .lines{display:grid;gap:10px}
 .line{display:grid;grid-template-columns:minmax(0,1fr) 5.2rem auto;gap:8px;align-items:end}
 .line .rm{width:42px;height:48px;border:0;background:transparent;color:var(--muted);border-radius:10px}
+.itrow{display:grid;grid-template-columns:1fr 56px 84px 38px;gap:8px;align-items:end}
+.itrow label{font-size:.78rem}
+.itrow .icon-btn{width:38px;height:48px;border-radius:var(--r-sm)}
+.itwrap{display:grid;gap:10px}
+.itnote{margin:-4px 0 0;font-size:.8rem;color:var(--good)}
+.itnote.no{color:var(--muted)}
+.btn.ghost{width:100%}
 .pv{border-radius:var(--r-sm);padding:12px 14px;background:var(--accent-soft);font-size:.95rem;display:grid;gap:2px}
 .pv b{font-family:var(--font-display);font-size:1.15rem}
 .pv.warn{background:var(--warn-soft)}
@@ -839,15 +846,31 @@ function renderSettings(){
 
 /* ---------- the entry sheet ---------- */
 function nowHM(){const n=new Date();return pad(n.getHours())+':'+pad(n.getMinutes());}
+function newItem(name,qty){return {name:name||'',qty:String(qty||1),cost:'',auto:true,how:''};}
+function itemLookup(it,gcat){
+  if(gcat!=='ff'){return;}
+  const r=ffLookup(it.name),q=num(toEn(String(it.qty)))||1;
+  if(r){it.cost=String(r2(r.cost*q));it.how=r.how;}else{it.how='';if(it.auto)it.cost='';}
+}
+function itemsTotal(d){
+  let tot=0,miss=0,n=0;
+  d.items.forEach(it=>{if(!String(it.name||'').trim())return;n++;const c=String(it.cost==null?'':it.cost).trim();if(c===''||isNaN(num(toEn(c))))miss++;else tot+=num(toEn(c));});
+  return {tot:r2(tot),miss,n};
+}
+function itemsLabel(items){return items.filter(i=>String(i.name||'').trim()).map(i=>{const q=num(toEn(String(i.qty)))||1;return i.name.trim()+(q!==1?' ×'+q:'');}).join(', ');}
 function blankDraft(kind){
   return {mode:'new',kind,amount:'',amtAuto:true,fee:'',provider:'bkash',party:'',note:'',date:S.today,time:nowHM(),trx:'',src:'manual',cat:EXP_CATS[0],
-    name:'',cost:'',costAuto:true,ffHow:'',gcat:DB.settings.lastCat||'ff',lines:[],pid:'',qty:'',newName:'',newSell:'',updBuy:true,remember:true,id:null,inboxId:null,confirmDel:false};
+    name:'',cost:'',costAuto:true,ffHow:'',items:[newItem()],gcat:DB.settings.lastCat||'ff',lines:[],pid:'',qty:'',newName:'',newSell:'',updBuy:true,remember:true,id:null,inboxId:null,confirmDel:false};
 }
 function draftFromTxn(t){
   const d=blankDraft(t.kind);
   d.mode='edit';d.id=t.id;d.amount=String(t.amount);d.amtAuto=false;d.fee=t.fee?String(t.fee):'';
   d.provider=t.provider||'other';d.party=t.party||'';d.note=t.note||'';d.date=t.date;d.time=t.time||'12:00';d.trx=t.trx||'';d.src=t.src||'manual';
-  if(t.kind==='sale'){d.name=t.name||(t.lines&&t.lines.length?t.lines.map(l=>l.name).join(', '):'');d.cost=hasCost(t)?String(r2(saleCost(t))):'';d.gcat=t.gcat||'other';d.costAuto=false;}
+  if(t.kind==='sale'){d.name=t.name||(t.lines&&t.lines.length?t.lines.map(l=>l.name).join(', '):'');d.cost=hasCost(t)?String(r2(saleCost(t))):'';d.gcat=t.gcat||'other';d.costAuto=false;
+    if(t.items&&t.items.length){d.items=t.items.map(i=>({name:i.name,qty:String(i.qty||1),cost:i.cost==null?'':String(i.cost),auto:false,how:''}));}
+    else if(hasCost(t)){d.items=[{name:d.name,qty:'1',cost:d.cost,auto:false,how:''}];}
+    else{const parts=d.name.split(',').map(x=>x.trim()).filter(Boolean);d.items=(parts.length?parts:['']).map(n=>{const it=newItem(n);itemLookup(it,d.gcat);return it;});}
+  }
   if(t.kind==='stock'){d.pid=t.pid||'';d.qty=String(t.qty||'');}
   if(t.kind==='expense'){d.cat=t.cat||EXP_CATS[0];}
   return d;
@@ -880,10 +903,11 @@ function lineCost(d){
 function previewHTML(d){
   const amount=num(toEn(d.amount||''))||0;
   if(d.kind==='sale'){
-    if(d.cost===''||d.cost==null)return '<div class="pv warn">কেনা দাম লিখলে এখানে লাভ দেখা যাবে। না লিখলে লাভে ধরা হবে না।</div>';
-    const cost=num(toEn(String(d.cost)))||0;const fee=num(toEn(d.fee||''))||0;
-    const p=r2(amount-cost-fee);
-    return '<div class="pv '+(p<0?'bad':'')+'"><span>কেনা দাম '+money(cost)+(fee?' · চার্জ '+money(fee):'')+'</span><b>'+(p<0?'লোকসান ':'লাভ ')+profitText(Math.abs(p))+'</b></div>';
+    const T=itemsTotal(d);
+    if(!T.n||T.miss)return '<div class="pv warn">'+(T.n&&T.miss?toBn(T.miss)+'টা আইটেমের কেনা দাম বাকি। সব আইটেমের দাম থাকলে এখানে লাভ দেখা যাবে।':'আইটেমের নাম লিখলে কেনা দাম নিজে বসবে, লাভও এখানে দেখা যাবে।')+'</div>';
+    const fee=num(toEn(d.fee||''))||0;
+    const p=r2(amount-T.tot-fee);
+    return '<div class="pv '+(p<0?'bad':'')+'"><span>মোট কেনা দাম '+money(T.tot)+(fee?' · চার্জ '+money(fee):'')+'</span><b>'+(p<0?'লোকসান ':'লাভ ')+profitText(Math.abs(p))+'</b></div>';
   }
   return '';
 }
@@ -903,9 +927,17 @@ function sheetHTML(){
   h+='<div class="seg" role="group" aria-label="ধরন">'+['sale','expense'].map(k=>'<button type="button" data-a="sh-kind" data-k="'+k+'" aria-pressed="'+(d.kind===k)+'">'+(k==='stock'?'পেমেন্ট':titles[k])+'</button>').join('')+'</div>';
   if(d.kind==='sale'){
     h+='<label for="shG">ক্যাটাগরি<select id="shG" data-f="gcat">'+GCATS.map(c=>'<option value="'+c[0]+'"'+(d.gcat===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select></label>';
-    h+='<label for="shName">কী বিক্রি করলেন<input id="shName" type="text" list="nameList" data-f="name" value="'+esc(d.name||'')+'" placeholder="যেমন: eFootball 2000 coin"></label><datalist id="nameList">'+savedNames().map(n=>'<option value="'+esc(n)+'">').join('')+(d.gcat==='ff'?ffNames().map(n=>'<option value="'+esc(n)+'">').join(''):'')+'</datalist>'+(d.gcat==='ff'?'<p class="help" id="ffHint">'+(d.ffHow?'দাম মিলেছে: '+esc(d.ffHow):'নাম, প্যাক বা ডায়মন্ড সংখ্যা (যেমন ১৫০০) লিখলে কেনা দাম নিজে বসবে।')+'</p>':'');
-    h+='<div class="grid2"><label for="shAmount">বিক্রির টাকা<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ২২০০"></label>'
-      +'<label for="shCost">কেনা দাম (সাপ্লায়ার থেকে)<input id="shCost" type="text" inputmode="decimal" data-f="cost" value="'+esc(d.cost!==''&&d.cost!=null?toBn(d.cost):'')+'" placeholder="যেমন ১৮১০"></label></div>';
+    h+='<datalist id="nameList">'+savedNames().map(n=>'<option value="'+esc(n)+'">').join('')+(d.gcat==='ff'?ffNames().map(n=>'<option value="'+esc(n)+'">').join(''):'')+'</datalist>';
+    h+='<div class="itwrap"><span class="mlabel">কী কী বিক্রি করলেন</span>';
+    d.items.forEach((it,i)=>{
+      h+='<div class="itrow"><label>নাম<input type="text" list="nameList" data-f="i-name" data-i="'+i+'" value="'+esc(it.name)+'" placeholder="যেমন: 1010 Diamond"></label>'
+        +'<label>সংখ্যা<input type="text" inputmode="numeric" data-f="i-qty" data-i="'+i+'" value="'+esc(toBn(it.qty))+'"></label>'
+        +'<label>কেনা দাম<input type="text" inputmode="decimal" data-f="i-cost" data-i="'+i+'" id="ic'+i+'" value="'+esc(it.cost!==''&&it.cost!=null?toBn(it.cost):'')+'" placeholder="০"></label>'
+        +(d.items.length>1?'<button type="button" class="icon-btn" data-a="it-rm" data-i="'+i+'" aria-label="মুছুন">'+I.x+'</button>':'<span></span>')+'</div>'
+        +'<p class="itnote'+(it.how?'':' no')+'" id="in'+i+'">'+(it.how?'দাম মিলেছে: '+esc(it.how)+' (হাতে বদলানো যাবে)':'')+'</p>';
+    });
+    h+='<button type="button" class="btn ghost" data-a="it-add">+ আরেকটা আইটেম যোগ করুন</button></div>';
+    h+='<label for="shAmount">বিক্রির টাকা (মোট)<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ১০০০"></label>';
   }else{
     h+='<label for="shAmount">টাকার পরিমাণ<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ১৫০"></label>';
     h+='<label for="shCat">কী বাবদ<select id="shCat" data-f="cat">'+EXP_CATS.map(c=>'<option'+(c===d.cat?' selected':'')+'>'+esc(c)+'</option>').join('')+'</select></label>';
@@ -977,9 +1009,11 @@ function saveSheet(){
   const t={id:d.id||('m_'+uid()),kind:d.kind,amount:r2(amount),fee:r2(fee),provider:d.provider,trx:d.trx||'',party:d.party||'',note:String(d.note||'').trim(),date:d.date,time:d.time||'12:00',ts:ts,src:d.src||'manual'};
   
   if(d.kind==='sale'){
-    t.name=String(d.name||'').trim();t.gcat=d.gcat||'other';DB.settings.lastCat=t.gcat;
-    const c=String(d.cost==null?'':d.cost).trim();
-    if(c!==''&&!isNaN(num(toEn(c))))t.cost=r2(Math.max(0,num(toEn(c))));
+    t.gcat=d.gcat||'other';DB.settings.lastCat=t.gcat;
+    const T=itemsTotal(d);
+    t.name=itemsLabel(d.items);
+    t.items=d.items.filter(i=>String(i.name||'').trim()).map(i=>({name:i.name.trim(),qty:num(toEn(String(i.qty)))||1,cost:(String(i.cost).trim()===''||isNaN(num(toEn(String(i.cost)))))?null:r2(Math.max(0,num(toEn(String(i.cost)))))}));
+    if(T.n&&!T.miss)t.cost=r2(Math.max(0,T.tot));
   }else{
     t.cat=d.cat||EXP_CATS[0];
   }
@@ -1270,6 +1304,8 @@ document.addEventListener('click',e=>{
   else if(a==='sh-kind'){const d=S.sheet.d;d.kind=el.dataset.k;if(d.kind==='sale'&&d.amtAuto)syncAutoAmount();refreshSheet();}
   else if(a==='sh-addline'){const d=S.sheet.d;d.lines.push({pid:'',qty:1});refreshSheet();}
   else if(a==='sh-rmline'){const d=S.sheet.d;d.lines.splice(Number(el.dataset.i),1);if(!d.lines.length)d.lines.push({pid:'',qty:1});syncAutoAmount();refreshSheet();}
+  else if(a==='it-add'){const d=S.sheet.d;d.items.push(newItem());refreshSheet();}
+  else if(a==='it-rm'){const d=S.sheet.d;d.items.splice(Number(el.dataset.i),1);if(!d.items.length)d.items.push(newItem());refreshSheet();updPv();}
   else if(a==='paste'){pasteMessages();}
   else if(a==='clear-sms'){$('sms').value='';}
   else if(a==='prev'){shiftMonth(-1);}
@@ -1305,18 +1341,22 @@ function onField(e){
   else if(f==='provider')d.provider=t.value;
   else if(f==='cat')d.cat=t.value;
   else if(f==='qty'){d.qty=toEn(t.value);updPv();}
-  else if(f==='name'){
-    d.name=t.value;
-    if(d.gcat==='ff'&&d.costAuto!==false){
-      const r=ffLookup(d.name);d.ffHow=r?r.how:'';
-      if(r){d.cost=String(r.cost);const c=$('shCost');if(c)c.value=toBn(r.cost);}
-      const h=$('ffHint');if(h)h.textContent=r?'দাম মিলেছে: '+r.how:'নাম, প্যাক বা ডায়মন্ড সংখ্যা (যেমন ১৫০০) লিখলে কেনা দাম নিজে বসবে।';
-      updPv();
+  else if(f==='i-name'||f==='i-qty'||f==='i-cost'){
+    const i=Number(t.dataset.i),it=d.items[i];if(!it)return;
+    if(f==='i-cost'){it.cost=toEn(t.value);it.auto=false;it.how='';const n=$('in'+i);if(n){n.textContent='';n.className='itnote no';}}
+    else{
+      if(f==='i-name')it.name=t.value;else it.qty=toEn(t.value);
+      if(it.auto!==false||f==='i-name'&&!String(it.cost).trim()){
+        if(f==='i-name')it.auto=true;
+        itemLookup(it,d.gcat);
+        const c=$('ic'+i);if(c)c.value=it.cost?toBn(it.cost):'';
+        const n=$('in'+i);if(n){n.textContent=it.how?'দাম মিলেছে: '+it.how+' (হাতে বদলানো যাবে)':'';n.className='itnote'+(it.how?'':' no');}
+      }
     }
+    updPv();
   }
-  else if(f==='gcat'){d.gcat=t.value;refreshSheet();}
-  else if(f==='cost'){d.cost=toEn(t.value);d.costAuto=false;updPv();}
-  else if(f==='newName')d.newName=t.value;
+  else if(f==='gcat'){d.gcat=t.value;d.items.forEach(it=>{if(it.auto!==false)itemLookup(it,d.gcat);});refreshSheet();}
+    else if(f==='newName')d.newName=t.value;
   else if(f==='newSell')d.newSell=toEn(t.value);
   else if(f==='updBuy')d.updBuy=t.checked;
   else if(f==='remember')d.remember=t.checked;
