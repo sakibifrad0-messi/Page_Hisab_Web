@@ -247,7 +247,7 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৪</small></h1></div>
+      <div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৫</small></h1></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
       </div>
@@ -430,7 +430,7 @@ function guessAmount(raw){
   return r2(best);
 }
 /* the model: profit = sales whose goods are known - cost of those goods - expenses and fees. Buying stock is not an expense. */
-function hasCost(t){return t.cost!=null||!!hasCost(t);}
+function hasCost(t){return t.cost!=null||!!(t.lines&&t.lines.length);}
 function saleCost(t){return t.cost!=null?t.cost:(t.lines||[]).reduce((s,l)=>s+l.qty*l.cost,0);}
 function calc(list){
   const r={rev:0,revA:0,cogs:0,exp:0,fees:0,stock:0,unN:0,unAmt:0,n:list.length};
@@ -479,7 +479,7 @@ const I={
 
 /* ---------- storage ---------- */
 const KEY='pej-v2';
-function freshDB(){return {v:2,products:[],txns:[],inbox:[],rules:{},settings:{autoMatch:true,tgToken:'',tgChat:'',tgOffset:0,tgName:'',pin:''}};}
+function freshDB(){return {v:2,products:[],txns:[],inbox:[],rules:{},ff:null,settings:{autoMatch:true,tgToken:'',tgChat:'',tgOffset:0,tgName:'',pin:''}};}
 function loadDB(){
   const d=freshDB();
   try{
@@ -490,11 +490,52 @@ function loadDB(){
       d.inbox=Array.isArray(o.inbox)?o.inbox:[];
       d.rules=o.rules&&typeof o.rules==='object'?o.rules:{};
       d.settings=Object.assign(d.settings,o.settings||{});
+      d.ff=o.ff||null;
     }
   }catch(e){}
   return d;
 }
 let DB=loadDB();
+const FF_UNITS={25:18.7464,50:32.8704,115:72.9312,240:145.092,610:367.224,1240:731.88,2530:1470.18};
+const FF_NAMED={'Weekly':146.376,'Monthly':724.176,'Weekly Lite':35,'Lvl-6':35,'Lvl-10':57,'Lvl-15':57,'Lvl-20':57,'Lvl-25':57,'Lvl-30':80,'Level Up Pass Complete Set':343};
+if(!DB.ff)DB.ff={units:Object.assign({},FF_UNITS),named:Object.assign({},FF_NAMED),packs:{}};
+const GCATS=[['ff','Free Fire'],['efootball','eFootball'],['coc','COC'],['tiktok','TikTok'],['other','অন্যান্য']];
+const gcatName=k=>(GCATS.find(x=>x[0]===k)||['','']).slice(1)[0];
+/* cheapest way to build n diamonds from the unit sizes (unbounded knapsack, step 5) */
+function ffUnitCost(n){
+  n=Math.round(n);if(!(n>0)||n%5!==0||n>60000)return null;
+  const us=Object.keys(DB.ff.units).map(Number).filter(u=>u%5===0&&u<=n),m=n/5,INF=1e18,dp=new Array(m+1).fill(INF);dp[0]=0;
+  for(let i=1;i<=m;i++)for(const u of us){const k=i-u/5;if(k>=0&&dp[k]+DB.ff.units[u]<dp[i])dp[i]=dp[k]+DB.ff.units[u];}
+  return dp[m]>=INF?null:r2(dp[m]);
+}
+function ffLookup(txt){
+  const t=String(txt||'').trim();if(!t)return null;
+  const low=t.toLowerCase();
+  for(const k in DB.ff.named)if(k.toLowerCase()===low)return {cost:DB.ff.named[k],how:k};
+  for(const k in DB.ff.packs)if(k.toLowerCase()===low)return {cost:DB.ff.packs[k].price,how:k};
+  const n=parseInt(toEn(t).replace(/[^0-9]/g,''),10);
+  if(n>0&&/^[\d০-৯\s💎]+(diamond)?$/i.test(t)){
+    let best=null;for(const k in DB.ff.packs){const p=DB.ff.packs[k];if(p.dia===n&&(best==null||p.price<best))best=p.price;}
+    if(best!=null)return {cost:best,how:'প্যাক'};
+    const c=ffUnitCost(n);if(c!=null)return {cost:c,how:'ইউনিট হিসাব'};
+  }
+  return null;
+}
+/* bot's "Your Custom Packs" list -> packs with Est. Price */
+function parsePacks(text){
+  const out={};let n=0;
+  const re=/\*\*([^*\n]+)\*\*\s*(?:\(\s*(\d+)[^)]*\))?[\s\S]*?Est\.?\s*Price:\s*([\d.,]+)/gi;let m;
+  while((m=re.exec(text))){
+    const name=m[1].trim(),price=parseFloat(m[3].replace(/,/g,''));
+    if(!name||!(price>0))continue;
+    const dia=m[2]?parseInt(m[2],10):(parseInt(name.replace(/[^0-9]/g,''),10)||0);
+    const blk=text.slice(m.index,m.index+m[0].length+120);
+    const g=/Gtp\s+\S+\s+([^\n]+)/i.exec(blk);
+    if(!(name in out))n++;
+    out[name]={price:r2(price),dia:dia,cmd:g?g[1].trim():name};
+  }
+  return {packs:out,n:n};
+}
 function supplierDue(){
   let c=0,p=0;
   DB.txns.forEach(t=>{if(t.kind==='sale'&&hasCost(t))c+=saleCost(t);else if(t.kind==='stock')p+=t.amount;});
@@ -670,6 +711,12 @@ function renderStock(){
   let h=dueCardHTML();
   h+='<div class="mstats"><div><span>মোট মাল নিয়েছেন</span><b>'+money(cost)+'</b></div><div><span>মোট দিয়েছেন</span><b>'+money(paid)+'</b></div><div><span>আগের বাকি</span><b>'+money(DB.settings.openDue||0)+'</b></div></div>';
   h+='<label for="openDue">আগের বাকি (শুরুতে সাপ্লায়ারের কাছে যা ছিল)<input id="openDue" type="text" inputmode="decimal" data-g="openDue" value="'+esc(DB.settings.openDue?toBn(DB.settings.openDue):'')+'" placeholder="০"></label>';
+  const pk=Object.keys(DB.ff.packs);
+  h+='<article class="card"><h3>Free Fire দাম আপডেট</h3><p class="help">বটের "Your Custom Packs" তালিকা এখানে পেস্ট করলে সব প্যাকের দাম বদলে যাবে।</p>'
+    +'<label for="ffText">তালিকা<textarea id="ffText" rows="4" placeholder="এখানে পেস্ট করুন"></textarea></label>'
+    +'<div class="btn-row" style="margin-top:10px"><button type="button" class="btn primary" data-a="ff-save">দাম আপডেট করুন</button></div>'
+    +'<p class="help">এখন '+toBn(pk.length)+' টি প্যাকের দাম আছে।</p>'
+    +(pk.length?'<div class="rlist">'+pk.slice(0,60).map(k=>'<div class="ritem"><div class="rmain"><div class="rtitle">'+esc(k)+(DB.ff.packs[k].dia?' · '+toBn(DB.ff.packs[k].dia)+'💎':'')+'</div></div><div class="ramt">'+money(DB.ff.packs[k].price)+'<button type="button" class="link" data-a="ff-copy" data-k="'+esc(k)+'">কপি</button></div></div>').join('')+'</div>':'')+'</article>';
   h+='<div class="sec"><h2>দেওয়া পেমেন্ট</h2></div>';
   h+=pays.length?'<div class="rlist">'+pays.map(t=>txnRow(t,false)).join('')+'</div>':'<div class="empty"><p>এখনো কোনো পেমেন্ট দেননি।</p></div>';
   el.innerHTML=h;
@@ -794,13 +841,13 @@ function renderSettings(){
 function nowHM(){const n=new Date();return pad(n.getHours())+':'+pad(n.getMinutes());}
 function blankDraft(kind){
   return {mode:'new',kind,amount:'',amtAuto:true,fee:'',provider:'bkash',party:'',note:'',date:S.today,time:nowHM(),trx:'',src:'manual',cat:EXP_CATS[0],
-    name:'',cost:'',lines:[],pid:'',qty:'',newName:'',newSell:'',updBuy:true,remember:true,id:null,inboxId:null,confirmDel:false};
+    name:'',cost:'',costAuto:true,ffHow:'',gcat:DB.settings.lastCat||'ff',lines:[],pid:'',qty:'',newName:'',newSell:'',updBuy:true,remember:true,id:null,inboxId:null,confirmDel:false};
 }
 function draftFromTxn(t){
   const d=blankDraft(t.kind);
   d.mode='edit';d.id=t.id;d.amount=String(t.amount);d.amtAuto=false;d.fee=t.fee?String(t.fee):'';
   d.provider=t.provider||'other';d.party=t.party||'';d.note=t.note||'';d.date=t.date;d.time=t.time||'12:00';d.trx=t.trx||'';d.src=t.src||'manual';
-  if(t.kind==='sale'){d.name=t.name||(t.lines&&t.lines.length?t.lines.map(l=>l.name).join(', '):'');d.cost=hasCost(t)?String(r2(saleCost(t))):'';}
+  if(t.kind==='sale'){d.name=t.name||(t.lines&&t.lines.length?t.lines.map(l=>l.name).join(', '):'');d.cost=hasCost(t)?String(r2(saleCost(t))):'';d.gcat=t.gcat||'other';d.costAuto=false;}
   if(t.kind==='stock'){d.pid=t.pid||'';d.qty=String(t.qty||'');}
   if(t.kind==='expense'){d.cat=t.cat||EXP_CATS[0];}
   return d;
@@ -851,14 +898,16 @@ function optionsHTML(selected,placeholder,extraNew){
   if(extraNew)h+='<option value="__new"'+(selected==='__new'?' selected':'')+'>+ নতুন মাল</option>';
   return h;
 }
-function savedNames(){const m=new Map();DB.txns.filter(t=>t.kind==='sale'&&t.name).sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(t=>m.set(t.name,1));return [...m.keys()].reverse().slice(0,40);}
+function ffNames(){return Object.keys(DB.ff.named).concat(Object.keys(DB.ff.packs));}
+function savedNames(){const m=new Map();DB.txns.filter(t=>t.kind==='sale'&&t.name&&(!S.sheet||!S.sheet.d||S.sheet.d.gcat===(t.gcat||'other'))).sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(t=>m.set(t.name,1));return [...m.keys()].reverse().slice(0,40);}
 function sheetHTML(){
   const d=S.sheet.d;
   const titles={sale:'বিক্রি',stock:'সাপ্লায়ারকে পেমেন্ট',expense:'খরচ'};
   let h='<div class="sheet-head"><h2>'+(d.mode==='edit'?'এন্ট্রি ঠিক করুন':d.mode==='inbox'?'হিসাবে যোগ করুন':'নতুন '+titles[d.kind])+'</h2><button type="button" class="icon-btn" data-a="sheet-close" aria-label="বন্ধ করুন">'+I.x+'</button></div>';
   h+='<div class="seg" role="group" aria-label="ধরন">'+['sale','stock','expense'].map(k=>'<button type="button" data-a="sh-kind" data-k="'+k+'" aria-pressed="'+(d.kind===k)+'">'+(k==='stock'?'পেমেন্ট':titles[k])+'</button>').join('')+'</div>';
   if(d.kind==='sale'){
-    h+='<label for="shName">কী বিক্রি করলেন<input id="shName" type="text" list="nameList" data-f="name" value="'+esc(d.name||'')+'" placeholder="যেমন: eFootball 2000 coin"></label><datalist id="nameList">'+savedNames().map(n=>'<option value="'+esc(n)+'">').join('')+'</datalist>';
+    h+='<label for="shG">ক্যাটাগরি<select id="shG" data-f="gcat">'+GCATS.map(c=>'<option value="'+c[0]+'"'+(d.gcat===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select></label>';
+    h+='<label for="shName">কী বিক্রি করলেন<input id="shName" type="text" list="nameList" data-f="name" value="'+esc(d.name||'')+'" placeholder="যেমন: eFootball 2000 coin"></label><datalist id="nameList">'+savedNames().map(n=>'<option value="'+esc(n)+'">').join('')+(d.gcat==='ff'?ffNames().map(n=>'<option value="'+esc(n)+'">').join(''):'')+'</datalist>'+(d.gcat==='ff'?'<p class="help" id="ffHint">'+(d.ffHow?'দাম মিলেছে: '+esc(d.ffHow):'নাম, প্যাক বা ডায়মন্ড সংখ্যা (যেমন ১৫০০) লিখলে কেনা দাম নিজে বসবে।')+'</p>':'');
     h+='<div class="grid2"><label for="shAmount">বিক্রির টাকা<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ২২০০"></label>'
       +'<label for="shCost">কেনা দাম (সাপ্লায়ার থেকে)<input id="shCost" type="text" inputmode="decimal" data-f="cost" value="'+esc(d.cost!==''&&d.cost!=null?toBn(d.cost):'')+'" placeholder="যেমন ১৮১০"></label></div>';
   }else if(d.kind==='stock'){
@@ -934,7 +983,7 @@ function saveSheet(){
   const t={id:d.id||('m_'+uid()),kind:d.kind,amount:r2(amount),fee:r2(fee),provider:d.provider,trx:d.trx||'',party:d.party||'',note:String(d.note||'').trim(),date:d.date,time:d.time||'12:00',ts:ts,src:d.src||'manual'};
   
   if(d.kind==='sale'){
-    t.name=String(d.name||'').trim();
+    t.name=String(d.name||'').trim();t.gcat=d.gcat||'other';DB.settings.lastCat=t.gcat;
     const c=String(d.cost==null?'':d.cost).trim();
     if(c!==''&&!isNaN(num(toEn(c))))t.cost=r2(Math.max(0,num(toEn(c))));
   }else if(d.kind==='stock'){
@@ -1208,6 +1257,8 @@ document.addEventListener('click',e=>{
   if(a==='go'){if(S.sheet)closeSheet();go(el.dataset.v);}
   else if(a==='go-todo'){go('todo');}
   else if(a==='go-stock'){go('stock');}
+  else if(a==='ff-save'){const el2=$('ffText');const r=parsePacks(el2?el2.value:'');if(!r.n){toast('তালিকা চেনা যায়নি। বটের পুরো লেখাটি পেস্ট করুন।','err');return;}let ch=0;for(const k in r.packs){if(!DB.ff.packs[k]||DB.ff.packs[k].price!==r.packs[k].price)ch++;DB.ff.packs[k]=r.packs[k];}save();renderAll();toast(toBn(r.n)+' টি প্যাক পাওয়া গেছে, '+toBn(ch)+' টির দাম নতুন।');}
+  else if(a==='ff-copy'){const p=DB.ff.packs[el.dataset.k];if(p){const txt='Gtp UID '+p.cmd;if(A&&A.shareText){A.shareText(txt);}else{try{navigator.clipboard.writeText(txt);toast('কপি হয়েছে।');}catch(e){toast(txt);}}}}
   else if(a==='new'){openSheet(blankDraft(el.dataset.k));}
   else if(a==='edit'){const t=DB.txns.find(x=>x.id===el.dataset.id);if(t)openSheet(draftFromTxn(t));}
   else if(a==='new-product'){openProductSheet({id:'',name:'',buy:'',sell:'',open:'',min:''});}
@@ -1256,8 +1307,17 @@ function onField(e){
   else if(f==='provider')d.provider=t.value;
   else if(f==='cat')d.cat=t.value;
   else if(f==='qty'){d.qty=toEn(t.value);updPv();}
-  else if(f==='name')d.name=t.value;
-  else if(f==='cost'){d.cost=toEn(t.value);updPv();}
+  else if(f==='name'){
+    d.name=t.value;
+    if(d.gcat==='ff'&&d.costAuto!==false){
+      const r=ffLookup(d.name);d.ffHow=r?r.how:'';
+      if(r){d.cost=String(r.cost);const c=$('shCost');if(c)c.value=toBn(r.cost);}
+      const h=$('ffHint');if(h)h.textContent=r?'দাম মিলেছে: '+r.how:'নাম, প্যাক বা ডায়মন্ড সংখ্যা (যেমন ১৫০০) লিখলে কেনা দাম নিজে বসবে।';
+      updPv();
+    }
+  }
+  else if(f==='gcat'){d.gcat=t.value;refreshSheet();}
+  else if(f==='cost'){d.cost=toEn(t.value);d.costAuto=false;updPv();}
   else if(f==='newName')d.newName=t.value;
   else if(f==='newSell')d.newSell=toEn(t.value);
   else if(f==='updBuy')d.updBuy=t.checked;
