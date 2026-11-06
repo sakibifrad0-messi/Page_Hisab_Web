@@ -1,4 +1,6 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>পেজের হিসাব</title>
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}.sugg{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}.sugg:empty{display:none}
+.chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;font-size:.88rem}
+</style></head><body><title>পেজের হিসাব</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -261,7 +263,7 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৬</small></h1></div>
+      <div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৭</small></h1></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
       </div>
@@ -846,9 +848,20 @@ function renderSettings(){
 
 /* ---------- the entry sheet ---------- */
 function nowHM(){const n=new Date();return pad(n.getHours())+':'+pad(n.getMinutes());}
+function allNames(){const seen=new Set(),out=[];ffNames().concat(savedNames()).forEach(n=>{const k=String(n).toLowerCase();if(!seen.has(k)){seen.add(k);out.push(n);}});return out;}
+function suggFor(q){
+  q=toEn(String(q||'')).trim().toLowerCase();if(!q)return [];
+  const all=allNames(),st=[],inc=[];
+  all.forEach(n=>{const l=String(n).toLowerCase();if(l===q)return;if(l.indexOf(q)===0)st.push(n);else if(l.indexOf(q)>0)inc.push(n);});
+  return st.concat(inc).slice(0,6);
+}
+function showSugg(i){
+  const d=S.sheet&&S.sheet.d,box=$('sg'+i);if(!box||!d||!d.items[i])return;
+  const l=suggFor(d.items[i].name);S.sg=S.sg||{};S.sg[i]=l;
+  box.innerHTML=l.map((n,k)=>'<button type="button" class="chip" data-a="sg-pick" data-i="'+i+'" data-k="'+k+'">'+esc(n)+'</button>').join('');
+}
 function newItem(name,qty){return {name:name||'',qty:String(qty||1),cost:'',auto:true,how:''};}
 function itemLookup(it,gcat){
-  if(gcat!=='ff'){return;}
   const r=ffLookup(it.name),q=num(toEn(String(it.qty)))||1;
   if(r){it.cost=String(r2(r.cost*q));it.how=r.how;}else{it.how='';if(it.auto)it.cost='';}
 }
@@ -919,22 +932,20 @@ function optionsHTML(selected,placeholder,extraNew){
   return h;
 }
 function ffNames(){return DB.pl.units.map(u=>u.name).concat(DB.pl.packs.map(p=>p.name),DB.pl.items.map(i=>i.name));}
-function savedNames(){const m=new Map();DB.txns.filter(t=>t.kind==='sale'&&t.name&&(!S.sheet||!S.sheet.d||S.sheet.d.gcat===(t.gcat||'other'))).sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(t=>m.set(t.name,1));return [...m.keys()].reverse().slice(0,40);}
+function savedNames(){const m=new Map();DB.txns.filter(t=>t.kind==='sale'&&t.name).sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(t=>m.set(t.name,1));return [...m.keys()].reverse().slice(0,40);}
 function sheetHTML(){
   const d=S.sheet.d;
   const titles={sale:'বিক্রি',stock:'সাপ্লায়ারকে পেমেন্ট',expense:'খরচ'};
   let h='<div class="sheet-head"><h2>'+(d.mode==='edit'?'এন্ট্রি ঠিক করুন':d.mode==='inbox'?'হিসাবে যোগ করুন':'নতুন '+titles[d.kind])+'</h2><button type="button" class="icon-btn" data-a="sheet-close" aria-label="বন্ধ করুন">'+I.x+'</button></div>';
   h+='<div class="seg" role="group" aria-label="ধরন">'+['sale','expense'].map(k=>'<button type="button" data-a="sh-kind" data-k="'+k+'" aria-pressed="'+(d.kind===k)+'">'+(k==='stock'?'পেমেন্ট':titles[k])+'</button>').join('')+'</div>';
   if(d.kind==='sale'){
-    h+='<label for="shG">ক্যাটাগরি<select id="shG" data-f="gcat">'+GCATS.map(c=>'<option value="'+c[0]+'"'+(d.gcat===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select></label>';
-    h+='<datalist id="nameList">'+savedNames().map(n=>'<option value="'+esc(n)+'">').join('')+(d.gcat==='ff'?ffNames().map(n=>'<option value="'+esc(n)+'">').join(''):'')+'</datalist>';
     h+='<div class="itwrap"><span class="mlabel">কী কী বিক্রি করলেন</span>';
     d.items.forEach((it,i)=>{
-      h+='<div class="itrow"><label>নাম<input type="text" list="nameList" data-f="i-name" data-i="'+i+'" value="'+esc(it.name)+'" placeholder="যেমন: 1010 Diamond"></label>'
+      h+='<div class="itrow"><label>নাম<input type="text" autocomplete="off" data-f="i-name" data-i="'+i+'" value="'+esc(it.name)+'" placeholder="যেমন: 1010 Diamond"></label>'
         +'<label>সংখ্যা<input type="text" inputmode="numeric" data-f="i-qty" data-i="'+i+'" value="'+esc(toBn(it.qty))+'"></label>'
         +'<label>কেনা দাম<input type="text" inputmode="decimal" data-f="i-cost" data-i="'+i+'" id="ic'+i+'" value="'+esc(it.cost!==''&&it.cost!=null?toBn(it.cost):'')+'" placeholder="০"></label>'
         +(d.items.length>1?'<button type="button" class="icon-btn" data-a="it-rm" data-i="'+i+'" aria-label="মুছুন">'+I.x+'</button>':'<span></span>')+'</div>'
-        +'<p class="itnote'+(it.how?'':' no')+'" id="in'+i+'">'+(it.how?'দাম মিলেছে: '+esc(it.how)+' (হাতে বদলানো যাবে)':'')+'</p>';
+        +'<p class="itnote'+(it.how?'':' no')+'" id="in'+i+'">'+(it.how?'দাম মিলেছে: '+esc(it.how)+' (হাতে বদলানো যাবে)':'')+'</p><div class="sugg" id="sg'+i+'"></div>';
     });
     h+='<button type="button" class="btn ghost" data-a="it-add">+ আরেকটা আইটেম যোগ করুন</button></div>';
     h+='<label for="shAmount">বিক্রির টাকা (মোট)<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ১০০০"></label>';
@@ -1283,6 +1294,7 @@ document.addEventListener('click',e=>{
   if(a==='go'){if(S.sheet)closeSheet();go(el.dataset.v);}
   else if(a==='go-todo'){go('todo');}
   else if(a==='go-stock'){go('stock');}
+  else if(a==='sg-pick'){const d=S.sheet.d,i=Number(el.dataset.i),it=d.items[i],nm=(S.sg&&S.sg[i]||[])[Number(el.dataset.k)];if(it&&nm){it.name=nm;it.auto=true;itemLookup(it,d.gcat);refreshSheet();}}
   else if(a==='pk-new'){S.pk={name:'',parts:[]};renderStock();}
   else if(a==='pk-cancel'){S.pk=null;renderStock();}
   else if(a==='pk-add'){const uid2=$('pkU').value,q=Math.max(1,Math.round(num(toEn($('pkQ').value))||1));const ex=S.pk.parts.find(x=>x.u===uid2);if(ex)ex.q+=q;else S.pk.parts.push({u:uid2,q:q});const nm=$('pkName')?$('pkName').value:'';S.pk.name=nm;renderStock();}
@@ -1353,6 +1365,7 @@ function onField(e){
         const n=$('in'+i);if(n){n.textContent=it.how?'দাম মিলেছে: '+it.how+' (হাতে বদলানো যাবে)':'';n.className='itnote'+(it.how?'':' no');}
       }
     }
+    if(f==='i-name'){if(e.type==='input')showSugg(i);}else{const b=$('sg'+i);if(b)b.innerHTML='';}
     updPv();
   }
   else if(f==='gcat'){d.gcat=t.value;d.items.forEach(it=>{if(it.auto!==false)itemLookup(it,d.gcat);});refreshSheet();}
@@ -1377,6 +1390,7 @@ function onField(e){
   }
 }
 $('sheet').addEventListener('input',onField);
+$('sheet').addEventListener('mousedown',function(e){if(e.target.closest&&e.target.closest('.chip'))e.preventDefault();});
 $('sheet').addEventListener('change',onField);
 document.addEventListener('change',function(e){
   const t=e.target,g=t&&t.dataset&&t.dataset.g;if(!g)return;
