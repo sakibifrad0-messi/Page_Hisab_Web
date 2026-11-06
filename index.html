@@ -242,12 +242,19 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
 .pad button{height:62px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-family:var(--font-display);font-size:1.4rem;font-weight:600}
 .pad button.ghost{border-color:transparent;background:transparent}
 @media (max-width:360px){.grid2,.insights{grid-template-columns:1fr}.actions{gap:8px}}
+.plist{display:grid;gap:0;margin-top:8px}
+.prow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.prow:first-child{border-top:0}
+.pn{display:grid;gap:2px;min-width:0}.pn span{font-size:.78rem;color:var(--muted)}
+.pr{display:flex;align-items:center;gap:10px}
+.prow input{width:110px;text-align:right}
+.pk-form{display:grid;gap:10px;margin-top:12px}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৫</small></h1></div>
+      <div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৬</small></h1></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
       </div>
@@ -259,7 +266,6 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
     <header class="vhead"><h1>নতুন এন্ট্রি</h1><p>কী যোগ করবেন বেছে নিন।</p></header>
     <div class="actions">
       <button type="button" class="act" data-a="new" data-k="sale"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>বিক্রি</button>
-      <button type="button" class="act" data-a="new" data-k="stock"><span class="ico stock"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>সাপ্লায়ারকে পেমেন্ট</button>
       <button type="button" class="act" data-a="new" data-k="expense"><span class="ico expense"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>খরচ</button>
     </div>
     <div class="card pane">
@@ -281,7 +287,7 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
   </section>
 
   <section class="view" id="v-stock" hidden>
-    <header class="vhead"><h1>বাকি</h1><p>সাপ্লায়ারের কাছে কত বাকি আর কত দিলেন।</p></header>
+    <header class="vhead"><h1>দাম</h1><p>Free Fire UC দাম, কাস্টম প্যাক আর অন্যান্য আইটেম।</p></header>
     <div id="stockBody" class="stack"></div>
   </section>
 
@@ -306,7 +312,7 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
     <button type="button" class="tb" data-a="go" data-v="home" aria-current="page"><span class="tb-ico"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="badge" id="todoBadge" hidden></span></span>হোম</button>
     <button type="button" class="tb" data-a="go" data-v="days"><span class="tb-ico"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 4h11a2 2 0 0 1 2 2v14H8a2 2 0 0 1-2-2zM6 18a2 2 0 0 1 2-2h11M10 8h6M10 11.5h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>হিসাব</button>
     <button type="button" class="tb add" data-a="go" data-v="add"><span class="tb-ico"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>যোগ</button>
-    <button type="button" class="tb" data-a="go" data-v="stock"><span class="tb-ico"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>বাকি</button>
+    <button type="button" class="tb" data-a="go" data-v="stock"><span class="tb-ico"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>দাম</button>
     <button type="button" class="tb" data-a="go" data-v="report"><span class="tb-ico"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 20v-8M12 20V5M19 20v-12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>রিপোর্ট</button>
   </div>
 </nav>
@@ -479,67 +485,59 @@ const I={
 
 /* ---------- storage ---------- */
 const KEY='pej-v2';
-function freshDB(){return {v:2,products:[],txns:[],inbox:[],rules:{},ff:null,settings:{autoMatch:true,tgToken:'',tgChat:'',tgOffset:0,tgName:'',pin:''}};}
+function freshDB(){return {v:2,products:[],txns:[],inbox:[],rules:{},pl:null,oldPay:[],settings:{autoMatch:true,tgToken:'',tgChat:'',tgOffset:0,tgName:'',pin:''}};}
 function loadDB(){
   const d=freshDB();
   try{
     const o=JSON.parse(localStorage.getItem(KEY)||'null');
     if(o&&o.v===2){
       d.products=Array.isArray(o.products)?o.products:[];
-      d.txns=Array.isArray(o.txns)?o.txns:[];
+      d.txns=(Array.isArray(o.txns)?o.txns:[]).filter(t=>t.kind!=='stock');
+      d.oldPay=(Array.isArray(o.txns)?o.txns:[]).filter(t=>t.kind==='stock').concat(o.oldPay||[]);
       d.inbox=Array.isArray(o.inbox)?o.inbox:[];
       d.rules=o.rules&&typeof o.rules==='object'?o.rules:{};
       d.settings=Object.assign(d.settings,o.settings||{});
-      d.ff=o.ff||null;
+      d.pl=o.pl||null;
     }
   }catch(e){}
   return d;
 }
 let DB=loadDB();
-const FF_UNITS={25:18.7464,50:32.8704,115:72.9312,240:145.092,610:367.224,1240:731.88,2530:1470.18};
-const FF_NAMED={'Weekly':146.376,'Monthly':724.176,'Weekly Lite':35,'Lvl-6':35,'Lvl-10':57,'Lvl-15':57,'Lvl-20':57,'Lvl-25':57,'Lvl-30':80,'Level Up Pass Complete Set':343};
-if(!DB.ff)DB.ff={units:Object.assign({},FF_UNITS),named:Object.assign({},FF_NAMED),packs:{}};
+const PL_SEED=[[25,20,18.7464],[50,36,32.8704],[115,80,72.9312],[240,160,145.092],[610,405,367.224],[1240,810,731.88],[2530,1625,1470.18]];
+function plSeed(){
+  return {units:PL_SEED.map(a=>({id:'u'+a[1],name:a[0]+' Diamond',dia:a[0],uc:a[1],price:a[2]})).concat([{id:'u161',name:'Weekly',dia:0,uc:161,price:146.376},{id:'u800',name:'Monthly',dia:0,uc:800,price:724.176}]),
+    packs:[],
+    items:[['Weekly Lite',35],['Lvl-6',35],['Lvl-10',57],['Lvl-15',57],['Lvl-20',57],['Lvl-25',57],['Lvl-30',80],['Level Up Pass Complete Set',343]].map((a,i)=>({id:'i'+i,name:a[0],price:a[1]}))};
+}
+if(!DB.pl)DB.pl=plSeed();
 const GCATS=[['ff','Free Fire'],['efootball','eFootball'],['coc','COC'],['tiktok','TikTok'],['other','অন্যান্য']];
 const gcatName=k=>(GCATS.find(x=>x[0]===k)||['','']).slice(1)[0];
+const unitById=id=>DB.pl.units.find(u=>u.id===id);
+function packPrice(p){return r2(p.parts.reduce((a,x)=>{const u=unitById(x.u);return a+(u?u.price*x.q:0);},0));}
+function packDia(p){return p.parts.reduce((a,x)=>{const u=unitById(x.u);return a+(u?u.dia*x.q:0);},0);}
+function packText(p){return p.parts.map(x=>{const u=unitById(x.u);return u?toBn(x.q)+' × '+toBn(u.uc)+' UC':'';}).join(' + ');}
 /* cheapest way to build n diamonds from the unit sizes (unbounded knapsack, step 5) */
 function ffUnitCost(n){
   n=Math.round(n);if(!(n>0)||n%5!==0||n>60000)return null;
-  const us=Object.keys(DB.ff.units).map(Number).filter(u=>u%5===0&&u<=n),m=n/5,INF=1e18,dp=new Array(m+1).fill(INF);dp[0]=0;
-  for(let i=1;i<=m;i++)for(const u of us){const k=i-u/5;if(k>=0&&dp[k]+DB.ff.units[u]<dp[i])dp[i]=dp[k]+DB.ff.units[u];}
+  const us=DB.pl.units.filter(u=>u.dia>0&&u.dia%5===0&&u.dia<=n),m=n/5,INF=1e18,dp=new Array(m+1).fill(INF);dp[0]=0;
+  for(let i=1;i<=m;i++)for(const u of us){const k=i-u.dia/5;if(k>=0&&dp[k]+u.price<dp[i])dp[i]=dp[k]+u.price;}
   return dp[m]>=INF?null:r2(dp[m]);
 }
 function ffLookup(txt){
   const t=String(txt||'').trim();if(!t)return null;
   const low=t.toLowerCase();
-  for(const k in DB.ff.named)if(k.toLowerCase()===low)return {cost:DB.ff.named[k],how:k};
-  for(const k in DB.ff.packs)if(k.toLowerCase()===low)return {cost:DB.ff.packs[k].price,how:k};
+  for(const u of DB.pl.units)if(u.name.toLowerCase()===low)return {cost:r2(u.price),how:u.name};
+  for(const p of DB.pl.packs)if(p.name.toLowerCase()===low)return {cost:packPrice(p),how:p.name};
+  for(const i of DB.pl.items)if(i.name.toLowerCase()===low)return {cost:r2(i.price),how:i.name};
   const n=parseInt(toEn(t).replace(/[^0-9]/g,''),10);
   if(n>0&&/^[\d০-৯\s💎]+(diamond)?$/i.test(t)){
-    let best=null;for(const k in DB.ff.packs){const p=DB.ff.packs[k];if(p.dia===n&&(best==null||p.price<best))best=p.price;}
-    if(best!=null)return {cost:best,how:'প্যাক'};
-    const c=ffUnitCost(n);if(c!=null)return {cost:c,how:'ইউনিট হিসাব'};
+    let best=null;
+    DB.pl.packs.forEach(p=>{if(packDia(p)===n){const c=packPrice(p);if(best==null||c<best)best=c;}});
+    DB.pl.units.forEach(u=>{if(u.dia===n&&(best==null||u.price<best))best=u.price;});
+    if(best!=null)return {cost:r2(best),how:'আপনার দাম তালিকা'};
+    const c=ffUnitCost(n);if(c!=null)return {cost:c,how:'ইউনিট দিয়ে সবচেয়ে কম দাম'};
   }
   return null;
-}
-/* bot's "Your Custom Packs" list -> packs with Est. Price */
-function parsePacks(text){
-  const out={};let n=0;
-  const re=/\*\*([^*\n]+)\*\*\s*(?:\(\s*(\d+)[^)]*\))?[\s\S]*?Est\.?\s*Price:\s*([\d.,]+)/gi;let m;
-  while((m=re.exec(text))){
-    const name=m[1].trim(),price=parseFloat(m[3].replace(/,/g,''));
-    if(!name||!(price>0))continue;
-    const dia=m[2]?parseInt(m[2],10):(parseInt(name.replace(/[^0-9]/g,''),10)||0);
-    const blk=text.slice(m.index,m.index+m[0].length+120);
-    const g=/Gtp\s+\S+\s+([^\n]+)/i.exec(blk);
-    if(!(name in out))n++;
-    out[name]={price:r2(price),dia:dia,cmd:g?g[1].trim():name};
-  }
-  return {packs:out,n:n};
-}
-function supplierDue(){
-  let c=0,p=0;
-  DB.txns.forEach(t=>{if(t.kind==='sale'&&hasCost(t))c+=saleCost(t);else if(t.kind==='stock')p+=t.amount;});
-  return r2((DB.settings.openDue||0)+c-p);
 }
 let saveFailed=false;
 function save(){
@@ -623,11 +621,6 @@ function txnRow(t,withProfit){
 function alertHTML(cls,icon,title,sub,action,extra){
   return '<button type="button" class="alert '+cls+'" data-a="'+action+'"'+(extra||'')+'><span class="ai">'+icon+'</span><span><b>'+title+'</b><span class="s">'+sub+'</span></span><span class="go">'+I.go+'</span></button>';
 }
-function dueCardHTML(){
-  const d=supplierDue();
-  return '<article class="card"><span class="lbl">সাপ্লায়ারের কাছে বাকি</span><div class="num '+(d>0.004?'bad':'good')+'" style="font-size:30px">'+profitText(d)+'</div>'
-    +'<div class="btn-row" style="margin-top:12px"><button type="button" class="btn primary" data-a="new" data-k="stock">পেমেন্ট দিলাম</button><button type="button" class="btn" data-a="go" data-v="stock">হিসাব দেখুন</button></div></article>';
-}
 function renderHome(){
   const el=$('homeBody');
   const todayList=DB.txns.filter(t=>t.date===S.today);
@@ -650,7 +643,6 @@ function renderHome(){
     const sub=(unN?toBn(unN)+' টি বিক্রিতে কেনা দাম বসানো বাকি':'')+(unN&&DB.inbox.length?', ':'')+(DB.inbox.length?toBn(DB.inbox.length)+' টি লেনদেন দেখা দরকার':'');
     h+=alertHTML('',I.warn,'ঠিক করা বাকি আছে',sub,'go-todo');
   }
-  h+=dueCardHTML();
   h+='<article class="card month-card"><span class="lbl">এই মাসের লাভ</span><div class="num '+mcls+'">'+profitText(M.profit)+'</div>'
     +'<div class="month-foot"><span>বিক্রি '+money(M.revA)+' · মাল '+money(M.cogs)+' · খরচ '+money(M.expAll)+'</span><button type="button" class="link" data-a="go" data-v="report">রিপোর্ট দেখুন</button></div></article>';
   if(!DB.txns.length){
@@ -705,20 +697,29 @@ function renderDays(){
 }
 function renderStock(){
   const el=$('stockBody');
-  const pays=DB.txns.filter(t=>t.kind==='stock').sort((a,b)=>(b.ts||0)-(a.ts||0));
-  let cost=0;DB.txns.forEach(t=>{if(t.kind==='sale'&&hasCost(t))cost+=saleCost(t);});
-  const paid=pays.reduce((x,t)=>x+t.amount,0);
-  let h=dueCardHTML();
-  h+='<div class="mstats"><div><span>মোট মাল নিয়েছেন</span><b>'+money(cost)+'</b></div><div><span>মোট দিয়েছেন</span><b>'+money(paid)+'</b></div><div><span>আগের বাকি</span><b>'+money(DB.settings.openDue||0)+'</b></div></div>';
-  h+='<label for="openDue">আগের বাকি (শুরুতে সাপ্লায়ারের কাছে যা ছিল)<input id="openDue" type="text" inputmode="decimal" data-g="openDue" value="'+esc(DB.settings.openDue?toBn(DB.settings.openDue):'')+'" placeholder="০"></label>';
-  const pk=Object.keys(DB.ff.packs);
-  h+='<article class="card"><h3>Free Fire দাম আপডেট</h3><p class="help">বটের "Your Custom Packs" তালিকা এখানে পেস্ট করলে সব প্যাকের দাম বদলে যাবে।</p>'
-    +'<label for="ffText">তালিকা<textarea id="ffText" rows="4" placeholder="এখানে পেস্ট করুন"></textarea></label>'
-    +'<div class="btn-row" style="margin-top:10px"><button type="button" class="btn primary" data-a="ff-save">দাম আপডেট করুন</button></div>'
-    +'<p class="help">এখন '+toBn(pk.length)+' টি প্যাকের দাম আছে।</p>'
-    +(pk.length?'<div class="rlist">'+pk.slice(0,60).map(k=>'<div class="ritem"><div class="rmain"><div class="rtitle">'+esc(k)+(DB.ff.packs[k].dia?' · '+toBn(DB.ff.packs[k].dia)+'💎':'')+'</div></div><div class="ramt">'+money(DB.ff.packs[k].price)+'<button type="button" class="link" data-a="ff-copy" data-k="'+esc(k)+'">কপি</button></div></div>').join('')+'</div>':'')+'</article>';
-  h+='<div class="sec"><h2>দেওয়া পেমেন্ট</h2></div>';
-  h+=pays.length?'<div class="rlist">'+pays.map(t=>txnRow(t,false)).join('')+'</div>':'<div class="empty"><p>এখনো কোনো পেমেন্ট দেননি।</p></div>';
+  let h='<article class="card"><h3>Free Fire (UC)</h3><p class="help">প্রতিটির দাম বদলালে নিচের কাস্টম প্যাকের দামও নিজে বদলে যাবে।</p><div class="plist">';
+  DB.pl.units.forEach(u=>{
+    h+='<div class="prow"><div class="pn"><b>'+esc(u.name)+'</b><span>'+toBn(u.uc)+' UC</span></div><input type="text" inputmode="decimal" aria-label="'+esc(u.name)+' দাম" data-g="u-price" data-id="'+esc(u.id)+'" value="'+toBn(r2(u.price))+'"></div>';
+  });
+  h+='</div></article>';
+  h+='<article class="card"><h3>কাস্টম প্যাক</h3>';
+  if(DB.pl.packs.length){
+    h+='<div class="plist">'+DB.pl.packs.map(p=>'<div class="prow"><div class="pn"><b>'+esc(p.name)+'</b><span>'+packText(p)+(packDia(p)?' · '+toBn(packDia(p))+' ডায়মন্ড':'')+'</span></div><div class="pr"><b>'+money(packPrice(p))+'</b><button type="button" class="link" data-a="pk-del" data-id="'+esc(p.id)+'">মুছুন</button></div></div>').join('')+'</div>';
+  }else h+='<p class="help">যেমন 1625 UC × ২ দিলে ৫০৬০ ডায়মন্ডের প্যাক হবে।</p>';
+  if(S.pk){
+    const tot=packPrice(S.pk),dia=packDia(S.pk);
+    h+='<div class="pk-form"><div class="grid2"><label for="pkU">কোনটি<select id="pkU">'+DB.pl.units.map(u=>'<option value="'+esc(u.id)+'">'+esc(u.name)+' · '+toBn(u.uc)+' UC</option>').join('')+'</select></label>'
+      +'<label for="pkQ">কয়টি<input id="pkQ" type="text" inputmode="numeric" value="১"></label></div>'
+      +'<div class="btn-row"><button type="button" class="btn small" data-a="pk-add">+ যোগ করুন</button></div>'
+      +(S.pk.parts.length?'<div class="plist">'+S.pk.parts.map((x,i)=>{const u=unitById(x.u);return '<div class="prow"><div class="pn"><b>'+toBn(x.q)+' × '+esc(u?u.name:'')+'</b></div><button type="button" class="link" data-a="pk-rm" data-i="'+i+'">বাদ</button></div>';}).join('')+'</div><div class="pv"><span>মোট '+toBn(dia)+' ডায়মন্ড</span><b>'+money(tot)+'</b></div>':'')
+      +'<label for="pkName">প্যাকের নাম (না দিলে নিজে বসবে)<input id="pkName" type="text" data-g="pk-name" value="'+esc(S.pk.name||'')+'" placeholder="'+(dia?toBn(dia)+' Diamond':'')+'"></label>'
+      +'<div class="btn-row"><button type="button" class="btn primary" data-a="pk-save">প্যাক সংরক্ষণ করুন</button><button type="button" class="btn" data-a="pk-cancel">বাতিল</button></div></div>';
+  }else h+='<div class="btn-row" style="margin-top:12px"><button type="button" class="btn primary" data-a="pk-new">+ কাস্টম প্যাক বানান</button></div>';
+  h+='</article>';
+  h+='<article class="card"><h3>অন্যান্য আইটেম</h3>';
+  if(DB.pl.items.length)h+='<div class="plist">'+DB.pl.items.map(i=>'<div class="prow"><div class="pn"><b>'+esc(i.name)+'</b></div><div class="pr"><input type="text" inputmode="decimal" aria-label="'+esc(i.name)+' দাম" data-g="i-price" data-id="'+esc(i.id)+'" value="'+toBn(r2(i.price))+'"><button type="button" class="link" data-a="i-del" data-id="'+esc(i.id)+'">মুছুন</button></div></div>').join('')+'</div>';
+  h+='<div class="grid2" style="margin-top:12px"><label for="itName">আইটেমের নাম<input id="itName" type="text" placeholder="যেমন: TikTok 1000 coin"></label><label for="itPrice">কেনা দাম<input id="itPrice" type="text" inputmode="decimal" placeholder="যেমন ৯৫০"></label></div>'
+    +'<div class="btn-row"><button type="button" class="btn primary" data-a="i-add">আইটেম যোগ করুন</button></div></article>';
   el.innerHTML=h;
 }
 function renderReport(){
@@ -739,7 +740,6 @@ function renderReport(){
   if(T.unN>0){
     h+=alertHTML('','<span>'+I.warn+'</span>',toBn(T.unN)+' টি বিক্রির ('+money(T.unAmt)+') মাল বসানো হয়নি','এগুলো লাভে ধরা হয়নি। মাল বসালে লাভ বাড়বে বা কমবে।','go-todo');
   }
-  h+='<article class="card tight"><h3>মাল কেনায় বের হয়েছে</h3><div class="num">'+money(T.stock)+'</div><p class="help">এটা লাভ থেকে কাটা হয় না। মাল স্টকে জমা হয়েছে, বিক্রি হলে তখন ক্রয়মূল্য ধরা হয়।</p></article>';
   const pr={};
   list.forEach(t=>{
     if(t.kind!=='sale'||!t.lines||!t.lines.length)return;
@@ -885,10 +885,6 @@ function previewHTML(d){
     const p=r2(amount-cost-fee);
     return '<div class="pv '+(p<0?'bad':'')+'"><span>কেনা দাম '+money(cost)+(fee?' · চার্জ '+money(fee):'')+'</span><b>'+(p<0?'লোকসান ':'লাভ ')+profitText(Math.abs(p))+'</b></div>';
   }
-  if(d.kind==='stock'){
-    const due=supplierDue()+(d.mode==='edit'?(DB.txns.find(x=>x.id===d.id)||{amount:0}).amount||0:0)-amount;
-    return '<div class="pv"><span>পেমেন্টের পর সাপ্লায়ারের কাছে বাকি থাকবে</span><b>'+profitText(due)+'</b></div>';
-  }
   return '';
 }
 function optionsHTML(selected,placeholder,extraNew){
@@ -898,20 +894,18 @@ function optionsHTML(selected,placeholder,extraNew){
   if(extraNew)h+='<option value="__new"'+(selected==='__new'?' selected':'')+'>+ নতুন মাল</option>';
   return h;
 }
-function ffNames(){return Object.keys(DB.ff.named).concat(Object.keys(DB.ff.packs));}
+function ffNames(){return DB.pl.units.map(u=>u.name).concat(DB.pl.packs.map(p=>p.name),DB.pl.items.map(i=>i.name));}
 function savedNames(){const m=new Map();DB.txns.filter(t=>t.kind==='sale'&&t.name&&(!S.sheet||!S.sheet.d||S.sheet.d.gcat===(t.gcat||'other'))).sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(t=>m.set(t.name,1));return [...m.keys()].reverse().slice(0,40);}
 function sheetHTML(){
   const d=S.sheet.d;
   const titles={sale:'বিক্রি',stock:'সাপ্লায়ারকে পেমেন্ট',expense:'খরচ'};
   let h='<div class="sheet-head"><h2>'+(d.mode==='edit'?'এন্ট্রি ঠিক করুন':d.mode==='inbox'?'হিসাবে যোগ করুন':'নতুন '+titles[d.kind])+'</h2><button type="button" class="icon-btn" data-a="sheet-close" aria-label="বন্ধ করুন">'+I.x+'</button></div>';
-  h+='<div class="seg" role="group" aria-label="ধরন">'+['sale','stock','expense'].map(k=>'<button type="button" data-a="sh-kind" data-k="'+k+'" aria-pressed="'+(d.kind===k)+'">'+(k==='stock'?'পেমেন্ট':titles[k])+'</button>').join('')+'</div>';
+  h+='<div class="seg" role="group" aria-label="ধরন">'+['sale','expense'].map(k=>'<button type="button" data-a="sh-kind" data-k="'+k+'" aria-pressed="'+(d.kind===k)+'">'+(k==='stock'?'পেমেন্ট':titles[k])+'</button>').join('')+'</div>';
   if(d.kind==='sale'){
     h+='<label for="shG">ক্যাটাগরি<select id="shG" data-f="gcat">'+GCATS.map(c=>'<option value="'+c[0]+'"'+(d.gcat===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select></label>';
     h+='<label for="shName">কী বিক্রি করলেন<input id="shName" type="text" list="nameList" data-f="name" value="'+esc(d.name||'')+'" placeholder="যেমন: eFootball 2000 coin"></label><datalist id="nameList">'+savedNames().map(n=>'<option value="'+esc(n)+'">').join('')+(d.gcat==='ff'?ffNames().map(n=>'<option value="'+esc(n)+'">').join(''):'')+'</datalist>'+(d.gcat==='ff'?'<p class="help" id="ffHint">'+(d.ffHow?'দাম মিলেছে: '+esc(d.ffHow):'নাম, প্যাক বা ডায়মন্ড সংখ্যা (যেমন ১৫০০) লিখলে কেনা দাম নিজে বসবে।')+'</p>':'');
     h+='<div class="grid2"><label for="shAmount">বিক্রির টাকা<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ২২০০"></label>'
       +'<label for="shCost">কেনা দাম (সাপ্লায়ার থেকে)<input id="shCost" type="text" inputmode="decimal" data-f="cost" value="'+esc(d.cost!==''&&d.cost!=null?toBn(d.cost):'')+'" placeholder="যেমন ১৮১০"></label></div>';
-  }else if(d.kind==='stock'){
-    h+='<label for="shAmount">সাপ্লায়ারকে কত টাকা দিলেন<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ৫০০০"></label>';
   }else{
     h+='<label for="shAmount">টাকার পরিমাণ<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ১৫০"></label>';
     h+='<label for="shCat">কী বাবদ<select id="shCat" data-f="cat">'+EXP_CATS.map(c=>'<option'+(c===d.cat?' selected':'')+'>'+esc(c)+'</option>').join('')+'</select></label>';
@@ -986,8 +980,6 @@ function saveSheet(){
     t.name=String(d.name||'').trim();t.gcat=d.gcat||'other';DB.settings.lastCat=t.gcat;
     const c=String(d.cost==null?'':d.cost).trim();
     if(c!==''&&!isNaN(num(toEn(c))))t.cost=r2(Math.max(0,num(toEn(c))));
-  }else if(d.kind==='stock'){
-    t.name='সাপ্লায়ার';
   }else{
     t.cat=d.cat||EXP_CATS[0];
   }
@@ -1257,8 +1249,14 @@ document.addEventListener('click',e=>{
   if(a==='go'){if(S.sheet)closeSheet();go(el.dataset.v);}
   else if(a==='go-todo'){go('todo');}
   else if(a==='go-stock'){go('stock');}
-  else if(a==='ff-save'){const el2=$('ffText');const r=parsePacks(el2?el2.value:'');if(!r.n){toast('তালিকা চেনা যায়নি। বটের পুরো লেখাটি পেস্ট করুন।','err');return;}let ch=0;for(const k in r.packs){if(!DB.ff.packs[k]||DB.ff.packs[k].price!==r.packs[k].price)ch++;DB.ff.packs[k]=r.packs[k];}save();renderAll();toast(toBn(r.n)+' টি প্যাক পাওয়া গেছে, '+toBn(ch)+' টির দাম নতুন।');}
-  else if(a==='ff-copy'){const p=DB.ff.packs[el.dataset.k];if(p){const txt='Gtp UID '+p.cmd;if(A&&A.shareText){A.shareText(txt);}else{try{navigator.clipboard.writeText(txt);toast('কপি হয়েছে।');}catch(e){toast(txt);}}}}
+  else if(a==='pk-new'){S.pk={name:'',parts:[]};renderStock();}
+  else if(a==='pk-cancel'){S.pk=null;renderStock();}
+  else if(a==='pk-add'){const uid2=$('pkU').value,q=Math.max(1,Math.round(num(toEn($('pkQ').value))||1));const ex=S.pk.parts.find(x=>x.u===uid2);if(ex)ex.q+=q;else S.pk.parts.push({u:uid2,q:q});const nm=$('pkName')?$('pkName').value:'';S.pk.name=nm;renderStock();}
+  else if(a==='pk-rm'){S.pk.parts.splice(Number(el.dataset.i),1);renderStock();}
+  else if(a==='pk-save'){if(!S.pk.parts.length){toast('আগে ইউনিট যোগ করুন।','err');return;}const dia=packDia(S.pk);const nm=String(S.pk.name||'').trim()||(dia?dia+' Diamond':packText(S.pk));DB.pl.packs.push({id:'k'+uid(),name:nm,parts:S.pk.parts});S.pk=null;save();renderStock();toast('প্যাক সংরক্ষণ হয়েছে।');}
+  else if(a==='pk-del'){DB.pl.packs=DB.pl.packs.filter(p=>p.id!==el.dataset.id);save();renderStock();}
+  else if(a==='i-add'){const n=String($('itName').value||'').trim(),pr=num(toEn($('itPrice').value));if(!n||!(pr>=0)||isNaN(pr)){toast('নাম আর দাম লিখুন।','err');return;}DB.pl.items.push({id:'i'+uid(),name:n,price:r2(pr)});save();renderStock();toast('আইটেম যোগ হয়েছে।');}
+  else if(a==='i-del'){DB.pl.items=DB.pl.items.filter(x=>x.id!==el.dataset.id);save();renderStock();}
   else if(a==='new'){openSheet(blankDraft(el.dataset.k));}
   else if(a==='edit'){const t=DB.txns.find(x=>x.id===el.dataset.id);if(t)openSheet(draftFromTxn(t));}
   else if(a==='new-product'){openProductSheet({id:'',name:'',buy:'',sell:'',open:'',min:''});}
@@ -1340,7 +1338,12 @@ function onField(e){
 }
 $('sheet').addEventListener('input',onField);
 $('sheet').addEventListener('change',onField);
-document.addEventListener('change',function(e){const t=e.target;if(t&&t.dataset&&t.dataset.g==='openDue'){DB.settings.openDue=Math.max(0,num(toEn(t.value))||0);save();renderAll();}});
+document.addEventListener('change',function(e){
+  const t=e.target,g=t&&t.dataset&&t.dataset.g;if(!g)return;
+  if(g==='u-price'){const u=unitById(t.dataset.id);if(u){u.price=Math.max(0,num(toEn(t.value))||0);save();renderStock();}}
+  else if(g==='i-price'){const it=DB.pl.items.find(x=>x.id===t.dataset.id);if(it){it.price=Math.max(0,num(toEn(t.value))||0);save();renderStock();}}
+});
+document.addEventListener('input',function(e){const t=e.target;if(t&&t.dataset&&t.dataset.g==='pk-name'&&S.pk)S.pk.name=t.value;});
 
 /* ---------- android back and sms hooks ---------- */
 window.__syncSms=function(){syncSms();};
