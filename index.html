@@ -299,12 +299,37 @@ body{background:repeating-linear-gradient(115deg,rgba(255,255,255,.02) 0 2px,tra
 .wk i.zero{background:var(--surface-2)}
 .wk span{font-size:.64rem;color:var(--muted)}
 .wk div.today span{color:#FFC933;font-weight:700}
+
+/* v11: compact premium hero */
+.hero{padding:14px 18px 14px!important;gap:4px!important;border-radius:22px!important}
+.hero-top{font-size:.82rem}
+.hero-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hero-l{display:grid;gap:7px;min-width:0;justify-items:start}
+.hero-val{font-style:normal!important;font-weight:700;font-size:clamp(1.9rem,9.6vw,2.4rem)!important;line-height:1.12!important;letter-spacing:-.01em;text-shadow:none!important;color:#fff;font-variant-numeric:tabular-nums lining-nums}
+.cur{color:#FFD54D;font-size:.6em;font-weight:600;margin-right:5px;vertical-align:.2em}
+.hchip{font-size:.74rem!important;padding:1px 11px!important}
+.dial{width:68px!important;height:68px!important}
+.dial-c b{font-size:.95rem!important}.dial-c small{font-size:.5rem!important;margin-top:2px}
+.hero-split{margin-top:6px!important;padding-top:10px!important;gap:6px!important}
+.hero-split span{font-size:.72rem!important}.hero-split b{font-size:.84rem!important;font-variant-numeric:tabular-nums}
+.hero::after{left:18px;right:18px}
+.month-card .num{font-size:clamp(1.6rem,7.6vw,2rem);letter-spacing:-.01em;font-variant-numeric:tabular-nums lining-nums}
+.month-card .num .cur{color:inherit;opacity:.7}
+.wk{height:50px!important;margin:8px 0 0!important}
+
+.topi{display:grid;gap:12px;margin-top:12px}
+.tn{display:flex;align-items:baseline;gap:10px}
+.tn b{width:22px;height:22px;border-radius:7px;background:var(--accent-soft);color:#FFC933;display:grid;place-items:center;font-size:.78rem;flex:none}
+.tn span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tn em{font-style:normal;color:var(--muted);font-size:.84rem}
+.tbar{height:6px;border-radius:4px;background:var(--surface-2);margin:6px 0 0 32px;overflow:hidden}
+.tbar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#C9971A,#FFD54D)}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ১০</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ১২</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
       </div>
@@ -318,17 +343,7 @@ body{background:repeating-linear-gradient(115deg,rgba(255,255,255,.02) 0 2px,tra
       <button type="button" class="act" data-a="new" data-k="sale"><span class="ico"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>বিক্রি</button>
       <button type="button" class="act" data-a="new" data-k="expense"><span class="ico expense"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>খরচ</button>
     </div>
-    <div class="card pane">
-      <h3>বিকাশ, নগদ বা রকেটের মেসেজ পেস্ট করুন</h3>
-      <label for="sms">মেসেজ
-        <textarea id="sms" placeholder="মেসেজটি কপি করে এখানে পেস্ট করুন"></textarea>
-      </label>
-      <p class="help">একাধিক মেসেজ থাকলে মাঝে একটি ফাঁকা লাইন দিন। টাকা এলে (ক্যাশ ইনসহ) বিক্রি হিসেবে যোগ হবে। টাকা বের হওয়ার মেসেজ ধরা হয় না।</p>
-      <div class="btn-row">
-        <button type="button" class="btn primary" data-a="paste">মেসেজ পড়ে যোগ করুন</button>
-        <button type="button" class="btn" data-a="clear-sms">মুছুন</button>
-      </div>
-    </div>
+    <div id="addBody" class="stack"></div>
   </section>
 
   <section class="view" id="v-days" hidden>
@@ -648,7 +663,7 @@ window.addEventListener('hashchange',()=>{
 function renderAll(){
   const L=dayLabel(S.today);
   $('todayLabel').textContent=L.wd+', '+L.date+' '+toBn(S.today.slice(0,4));
-  renderHome();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderBadge();
+  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderBadge();
 }
 function pendingCount(){return DB.inbox.length+DB.txns.filter(t=>t.kind==='sale'&&!hasCost(t)).length;}
 function renderBadge(){
@@ -671,6 +686,7 @@ function txnRow(t,withProfit){
 function alertHTML(cls,icon,title,sub,action,extra){
   return '<button type="button" class="alert '+cls+'" data-a="'+action+'"'+(extra||'')+'><span class="ai">'+icon+'</span><span><b>'+title+'</b><span class="s">'+sub+'</span></span><span class="go">'+I.go+'</span></button>';
 }
+function curSpan(x){return String(x).replace('৳','<span class="cur">৳</span>');}
 function dialHTML(T){
   const m=T.revA>0?T.profit/T.revA*100:0,pct=Math.max(0,Math.min(100,m)),N=40,lit=Math.round(pct/100*N);
   let ticks='';
@@ -679,7 +695,7 @@ function dialHTML(T){
     ticks+='<line x1="'+(46+c*r1).toFixed(1)+'" y1="'+(46+sn*r1).toFixed(1)+'" x2="'+(46+c*r2).toFixed(1)+'" y2="'+(46+sn*r2).toFixed(1)+'" stroke="'+(k<lit?'#FFD54D':'rgba(255,255,255,.22)')+'" stroke-width="'+(k<lit?2.6:1.8)+'" stroke-linecap="round"/>';
   }
   const txt=T.revA>0?toBn(Math.round(m))+'%':'–';
-  return '<div class="dial" role="img" aria-label="লাভের হার '+txt+'"><svg viewBox="0 0 92 92" width="92" height="92">'+ticks+'</svg><div class="dial-c"><b'+(m<0?' style="color:#FFB0B8"':'')+'>'+txt+'</b><small>লাভের হার</small></div></div>';
+  return '<div class="dial" role="img" aria-label="লাভের হার '+txt+'"><svg viewBox="0 0 92 92" width="68" height="68">'+ticks+'</svg><div class="dial-c"><b'+(m<0?' style="color:#FFB0B8"':'')+'>'+txt+'</b><small>লাভের হার</small></div></div>';
 }
 function weekHTML(){
   const days=[];
@@ -687,6 +703,37 @@ function weekHTML(){
   for(let i=6;i>=0;i--){const d=new Date(base);d.setDate(d.getDate()-i);const ds=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());days.push({ds:ds,day:d.getDate(),p:calc(DB.txns.filter(t=>t.date===ds)).profit,last:i===0});}
   const mx=Math.max(1,...days.map(x=>Math.abs(x.p)));
   return '<div class="wk" aria-label="শেষ ৭ দিনের লাভ">'+days.map(x=>{const h=x.p===0?4:Math.max(8,Math.round(Math.abs(x.p)/mx*44));return '<div'+(x.last?' class="today"':'')+'><i class="'+(x.p<0?'neg':x.p===0?'zero':'')+'" style="height:'+h+'px" title="'+toBn(x.day)+' · '+money(x.p)+'"></i><span>'+toBn(x.day)+'</span></div>';}).join('')+'</div>';
+}
+function itemStats(fromDate){
+  const m=new Map();
+  DB.txns.forEach(t=>{
+    if(t.kind!=='sale'||!t.items||!t.items.length)return;
+    if(fromDate&&t.date<fromDate)return;
+    t.items.forEach(it=>{
+      const n=String(it.name||'').trim();if(!n)return;
+      const q=Math.max(1,Math.round(num(toEn(String(it.qty||1)))||1));
+      const k=n.toLowerCase(),e=m.get(k)||{name:n,q:0,c:0};e.q+=q;e.c++;m.set(k,e);
+    });
+  });
+  return [...m.values()];
+}
+function renderAdd(){
+  const el=$('addBody');if(!el)return;
+  const d60=new Date(S.today+'T12:00:00');d60.setDate(d60.getDate()-60);
+  const from=d60.getFullYear()+'-'+pad(d60.getMonth()+1)+'-'+pad(d60.getDate());
+  let quick=itemStats(from).sort((a,b)=>b.c-a.c||b.q-a.q).map(x=>x.name).slice(0,8);
+  if(quick.length<8){const seen=new Set(quick.map(x=>x.toLowerCase()));ffNames().forEach(n=>{if(quick.length<8&&!seen.has(n.toLowerCase())){seen.add(n.toLowerCase());quick.push(n);}});}
+  window.__quick=quick;
+  let h='<article class="card"><span class="lbl">দ্রুত বিক্রি</span><p class="help" style="margin:4px 0 10px">একটায় চাপলেই ফর্ম খুলবে, নাম ও কেনা দাম বসা থাকবে। আপনার বেশি বিক্রি হওয়া আইটেম আগে আসে।</p><div class="sugg" style="gap:8px">'
+    +quick.map((n,i)=>'<button type="button" class="chip" data-a="quick" data-i="'+i+'">'+esc(n)+'</button>').join('')+'</div></article>';
+  const month=itemStats(S.today.slice(0,7)+'-01').sort((a,b)=>b.q-a.q).slice(0,5);
+  h+='<article class="card"><span class="lbl">এই মাসে সবচেয়ে বেশি বিক্রি</span>';
+  if(month.length){
+    const mx=month[0].q;
+    h+='<div class="topi">'+month.map((x,i)=>'<div class="tr"><div class="tn"><b>'+toBn(i+1)+'</b><span>'+esc(x.name)+'</span><em>'+toBn(x.q)+' টি</em></div><div class="tbar"><i style="width:'+Math.max(6,Math.round(x.q/mx*100))+'%"></i></div></div>').join('')+'</div>';
+  }else h+='<p class="help" style="margin:8px 0 0">এই মাসে আইটেমসহ বিক্রি যোগ হলে এখানে সেরা ৫টি দেখা যাবে।</p>';
+  h+='</article>';
+  el.innerHTML=h;
 }
 function renderHome(){
   const el=$('homeBody');
@@ -702,7 +749,7 @@ function renderHome(){
     h+=alertHTML('blue',I.bell,'মেসেজ পড়ার অনুমতি দিন','অনুমতি দিলে বিকাশ, নগদ, রকেটের টাকা নিজে নিজে হিসাবে আসবে','sms-allow');
   }
   h+='<article class="hero"><div class="hero-top"><b>আজকের লাভ</b><span>'+toBn(T.n)+' টি লেনদেন</span></div>'
-    +'<div class="hero-val">'+profitText(T.profit)+'</div><div class="hero-mid"><span class="hchip '+cls+'">'+chip+'</span>'+dialHTML(T)+'</div>'
+    +'<div class="hero-row"><div class="hero-l"><div class="hero-val">'+curSpan(profitText(T.profit))+'</div><span class="hchip '+cls+'">'+chip+'</span></div>'+dialHTML(T)+'</div>'
     +'<div class="hero-split"><div><span>বিক্রি</span><b>'+money(T.revA)+'</b></div><div><span>মালের দাম</span><b>'+money(T.cogs)+'</b></div><div><span>খরচ</span><b>'+money(T.expAll)+'</b></div></div></article>';
   const pc=pendingCount();
   if(pc>0){
@@ -710,10 +757,10 @@ function renderHome(){
     const sub=(unN?toBn(unN)+' টি বিক্রিতে কেনা দাম বসানো বাকি':'')+(unN&&DB.inbox.length?', ':'')+(DB.inbox.length?toBn(DB.inbox.length)+' টি লেনদেন দেখা দরকার':'');
     h+=alertHTML('',I.warn,'ঠিক করা বাকি আছে',sub,'go-todo');
   }
-  h+='<article class="card month-card"><span class="lbl">এই মাসের লাভ</span><div class="num '+mcls+'">'+profitText(M.profit)+'</div>'+weekHTML()
+  h+='<article class="card month-card"><span class="lbl">এই মাসের লাভ</span><div class="num '+mcls+'">'+curSpan(profitText(M.profit))+'</div>'+weekHTML()
     +'<div class="month-foot"><span>বিক্রি '+money(M.revA)+' · মাল '+money(M.cogs)+' · খরচ '+money(M.expAll)+'</span><button type="button" class="link" data-a="go" data-v="report">রিপোর্ট দেখুন</button></div></article>';
   if(!DB.txns.length){
-    h+='<div class="empty"><p>এখনো কোনো লেনদেন নেই। মেসেজ পেস্ট করুন বা হাতে বিক্রি যোগ করুন।</p><button type="button" class="btn primary" data-a="go" data-v="add">প্রথম এন্ট্রি যোগ করুন</button></div>';
+    h+='<div class="empty"><p>এখনো কোনো লেনদেন নেই। টাকা এলে নিজে নিজে আসবে, চাইলে হাতেও বিক্রি যোগ করুন।</p><button type="button" class="btn primary" data-a="go" data-v="add">প্রথম এন্ট্রি যোগ করুন</button></div>';
   }else{
     const recent=DB.txns.slice().sort((a,b)=>(b.ts||0)-(a.ts||0)).slice(0,5);
     h+='<div class="sec"><h2>সাম্প্রতিক লেনদেন</h2><button type="button" class="link" data-a="go" data-v="days">সব দেখুন</button></div><div class="rlist">'+recent.map(t=>txnRow(t,true)).join('')+'</div>';
@@ -906,12 +953,14 @@ function renderSettings(){
 
 /* ---------- the entry sheet ---------- */
 function nowHM(){const n=new Date();return pad(n.getHours())+':'+pad(n.getMinutes());}
-function allNames(){const seen=new Set(),out=[];ffNames().concat(savedNames()).forEach(n=>{const k=String(n).toLowerCase();if(!seen.has(k)){seen.add(k);out.push(n);}});return out;}
+function allNames(){const seen=new Set(),out=[];ffNames().forEach(n=>{const k=String(n).toLowerCase();if(!seen.has(k)){seen.add(k);out.push(n);}});return out;}
 function suggFor(q){
   q=toEn(String(q||'')).trim().toLowerCase();if(!q)return [];
-  const all=allNames(),st=[],inc=[];
-  all.forEach(n=>{const l=String(n).toLowerCase();if(l===q)return;if(l.indexOf(q)===0)st.push(n);else if(l.indexOf(q)>0)inc.push(n);});
-  return st.concat(inc).slice(0,6);
+  const st=[],wd=[];
+  allNames().forEach(n=>{const l=String(n).toLowerCase();
+    if(l.indexOf(q)===0)st.push(n);
+    else if(l.split(/[\s\-_,]+/).some(w=>w.indexOf(q)===0))wd.push(n);});
+  return st.concat(wd).slice(0,6);
 }
 function showSugg(i){
   const d=S.sheet&&S.sheet.d,box=$('sg'+i);if(!box||!d||!d.items[i])return;
@@ -1352,7 +1401,11 @@ document.addEventListener('click',e=>{
   if(a==='go'){if(S.sheet)closeSheet();go(el.dataset.v);}
   else if(a==='go-todo'){go('todo');}
   else if(a==='go-stock'){go('stock');}
-  else if(a==='sg-pick'){const d=S.sheet.d,i=Number(el.dataset.i),it=d.items[i],nm=(S.sg&&S.sg[i]||[])[Number(el.dataset.k)];if(it&&nm){it.name=nm;it.auto=true;itemLookup(it,d.gcat);refreshSheet();}}
+  else if(a==='sg-pick'){const d=S.sheet.d,i=Number(el.dataset.i),it=d.items[i],nm=(S.sg&&S.sg[i]||[])[Number(el.dataset.k)];if(it&&nm){
+    const inp=document.querySelector('[data-f="i-name"][data-i="'+i+'"]');if(inp)inp.blur();
+    it.name=nm;it.auto=true;it.pk=Date.now();itemLookup(it,d.gcat);refreshSheet();
+    setTimeout(function(){const x=document.querySelector('[data-f="i-name"][data-i="'+i+'"]');if(x&&it.name&&x.value!==it.name){x.value=it.name;}},350);
+  }}
   else if(a==='pk-new'){S.pk={name:'',parts:[]};renderStock();}
   else if(a==='pk-cancel'){S.pk=null;renderStock();}
   else if(a==='pk-add'){const uid2=$('pkU').value,q=Math.max(1,Math.round(num(toEn($('pkQ').value))||1));const ex=S.pk.parts.find(x=>x.u===uid2);if(ex)ex.q+=q;else S.pk.parts.push({u:uid2,q:q});const nm=$('pkName')?$('pkName').value:'';S.pk.name=nm;renderStock();}
@@ -1362,6 +1415,7 @@ document.addEventListener('click',e=>{
   else if(a==='i-add'){const n=String($('itName').value||'').trim(),pr=num(toEn($('itPrice').value));if(!n||!(pr>=0)||isNaN(pr)){toast('নাম আর দাম লিখুন।','err');return;}DB.pl.items.push({id:'i'+uid(),name:n,price:r2(pr)});save();renderStock();toast('আইটেম যোগ হয়েছে।');}
   else if(a==='i-del'){DB.pl.items=DB.pl.items.filter(x=>x.id!==el.dataset.id);save();renderStock();}
   else if(a==='new'){openSheet(blankDraft(el.dataset.k));}
+  else if(a==='quick'){const nm=(window.__quick||[])[Number(el.dataset.i)];if(nm){const d=blankDraft('sale');d.items=[newItem(nm,1)];itemLookup(d.items[0],d.gcat);openSheet(d);}}
   else if(a==='edit'){const t=DB.txns.find(x=>x.id===el.dataset.id);if(t)openSheet(draftFromTxn(t));}
   else if(a==='new-product'){openProductSheet({id:'',name:'',buy:'',sell:'',open:'',min:''});}
   else if(a==='edit-product'){const p=prodById(el.dataset.id);if(p)openProductSheet({id:p.id,name:p.name,buy:p.buy?String(p.buy):'',sell:p.sell?String(p.sell):'',open:p.open?String(p.open):'',min:p.min?String(p.min):''});}
@@ -1413,6 +1467,7 @@ function onField(e){
   else if(f==='qty'){d.qty=toEn(t.value);updPv();}
   else if(f==='i-name'||f==='i-qty'||f==='i-cost'){
     const i=Number(t.dataset.i),it=d.items[i];if(!it)return;
+    if(f==='i-name'&&it.pk&&Date.now()-it.pk<900)return;
     if(f==='i-cost'){it.cost=toEn(t.value);it.auto=false;it.how='';const n=$('in'+i);if(n){n.textContent='';n.className='itnote no';}}
     else{
       if(f==='i-name')it.name=t.value;else it.qty=toEn(t.value);
