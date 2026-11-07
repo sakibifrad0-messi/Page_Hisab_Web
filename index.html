@@ -515,7 +515,7 @@ body{background:repeating-linear-gradient(115deg,rgba(255,255,255,.02) 0 2px,tra
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ২৩</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ২৪</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
@@ -798,9 +798,23 @@ function ffLookup(txt){
   return null;
 }
 let saveFailed=false;
+function nativeOK(){try{return !!(A&&typeof A.nativeVer==='function'&&A.nativeVer()>=5);}catch(e){return false;}}
+let pushT=0;
+function pushNative(){
+  if(!nativeOK())return;
+  try{
+    const today=S.today,T=calc(DB.txns.filter(t=>t.date===today)),M=calc(txnsOfMonth(ymOf(today)));
+    const L=dayLabel(today);
+    A.pushData(JSON.stringify(Object.assign({},DB,{v:2,inbox:[]})),today,profitText(T.profit),
+      toBn(T.n)+' টি লেনদেন · বিক্রি '+money(T.revA),
+      MONTHS[Number(today.slice(5,7))-1]+': '+profitText(M.profit));
+    if(DB.settings.lastBk!==today){const n=A.backupNow();if(n){DB.settings.lastBk=today;DB.settings.lastBkName=n;try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){}}}
+  }catch(e){}
+}
 function save(){
   try{localStorage.setItem(KEY,JSON.stringify(DB));saveFailed=false;}
   catch(e){if(!saveFailed){saveFailed=true;toast('হিসাব সংরক্ষণ করা যায়নি। ফোনের জায়গা দেখুন।','err');}}
+  clearTimeout(pushT);pushT=setTimeout(pushNative,2000);
 }
 
 /* ---------- state ---------- */
@@ -1273,11 +1287,69 @@ function dnPick(i){
   document.querySelectorAll('.dseg').forEach(e=>e.classList.toggle('sel',Number(e.dataset.i)===i));
   document.querySelectorAll('.lg').forEach(e=>e.classList.toggle('sel',Number(e.dataset.i)===i));
 }
+function pdfHTML(kind){
+  const today=S.today,y=today.slice(0,4);
+  let list,title;
+  if(kind==='day'){list=DB.txns.filter(t=>t.date===today);const L=dayLabel(today);title='দৈনিক হিসাব · '+L.date+' '+toBn(y);}
+  else if(kind==='month'){list=txnsOfMonth(S.viewYm);title='মাসিক হিসাব · '+MONTHS[Number(S.viewYm.slice(5,7))-1]+' '+toBn(S.viewYm.slice(0,4));}
+  else{list=DB.txns.filter(t=>t.date.slice(0,4)===y);title='বাৎসরিক হিসাব · '+toBn(y);}
+  const T=calc(list);
+  const row=(a,b,c)=>'<tr><td>'+a+'</td><td class="r">'+b+'</td>'+(c!==undefined?'<td class="r">'+c+'</td>':'')+'</tr>';
+  let h='<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:"Noto Sans Bengali","Hind Siliguri",sans-serif;color:#1b1633;margin:0;padding:8px}'
+   +'.hd{background:#2B2965;color:#fff;border-radius:12px;padding:16px 18px}.hd b{font-size:20px;display:block}.hd span{color:#FFD54D;font-size:13px}'
+   +'h2{font-size:15px;margin:18px 0 6px;color:#2B2965}table{width:100%;border-collapse:collapse;font-size:12.5px}td,th{padding:6px 7px;border-bottom:1px solid #e3e1f3;text-align:left}th{background:#f1f0fb;font-size:12px}.r{text-align:right}'
+   +'.sum td{font-size:14px}.sum tr:last-child td{font-weight:700;border-top:2px solid #2B2965;font-size:15px}.g{color:#14804f}.b{color:#c0364a}.f{margin-top:18px;font-size:10.5px;color:#7a77a0;text-align:center}</style></head><body>'
+   +'<div class="hd"><b>Express Game Store</b><span>'+title+'</span></div>'
+   +'<h2>সারসংক্ষেপ</h2><table class="sum">'+row('মোট বিক্রি (মাল বসানো)',money(T.revA))+row('মালের ক্রয়মূল্য',money(T.cogs))+row('অন্যান্য খরচ',money(T.exp))+row('চার্জ ও ফি',money(T.fees))
+   +row('মোট লাভ','<span class="'+(T.profit>=0?'g':'b')+'">'+profitText(T.profit)+'</span>')+'</table>'
+   +(T.unN?'<p style="font-size:11.5px;color:#b06a00">'+toBn(T.unN)+' টি বিক্রিতে কেনা দাম বসানো হয়নি ('+money(T.unAmt)+'), এগুলো লাভের হিসাবে ধরা হয়নি।</p>':'');
+  if(kind==='day'){
+    h+='<h2>লেনদেন ('+toBn(T.n)+' টি)</h2><table><tr><th>সময়</th><th>বিবরণ</th><th>মাধ্যম</th><th class="r">টাকা</th><th class="r">লাভ</th></tr>';
+    list.slice().sort((a,b)=>(a.time||'').localeCompare(b.time||'')).forEach(t=>{
+      const sale=t.kind==='sale';const pr=sale&&hasCost(t)?profitText(r2(t.amount-saleCost(t)-(t.fee||0))):'';
+      const nm=(t.items&&t.items.length>1)?t.items.map(i=>i.name).join(' + '):(t.name||(sale?'বিক্রি':'খরচ'));
+      h+='<tr><td>'+timeLabel(t.time||'12:00')+'</td><td>'+esc(nm)+'</td><td>'+esc(PROV[t.provider]||'')+'</td><td class="r">'+(sale?'+':'−')+money(t.amount)+'</td><td class="r">'+pr+'</td></tr>';
+    });
+    h+='</table>';
+  }else if(kind==='month'){
+    const days={};list.forEach(t=>{(days[t.date]=days[t.date]||[]).push(t);});
+    h+='<h2>দিন অনুযায়ী</h2><table><tr><th>তারিখ</th><th class="r">লেনদেন</th><th class="r">বিক্রি</th><th class="r">খরচ ও মাল</th><th class="r">লাভ</th></tr>';
+    Object.keys(days).sort().forEach(d=>{const C=calc(days[d]);h+='<tr><td>'+toBn(Number(d.slice(8,10)))+' '+MONTHS[Number(d.slice(5,7))-1]+'</td><td class="r">'+toBn(C.n)+'</td><td class="r">'+money(C.revA)+'</td><td class="r">'+money(r2(C.cogs+C.expAll))+'</td><td class="r '+(C.profit>=0?'g':'b')+'">'+profitText(C.profit)+'</td></tr>';});
+    h+='</table>';
+  }else{
+    h+='<h2>মাস অনুযায়ী</h2><table><tr><th>মাস</th><th class="r">লেনদেন</th><th class="r">বিক্রি</th><th class="r">খরচ ও মাল</th><th class="r">লাভ</th></tr>';
+    for(let m=1;m<=12;m++){const ym=y+'-'+pad(m);const l=list.filter(t=>t.date.slice(0,7)===ym);if(!l.length)continue;const C=calc(l);
+      h+='<tr><td>'+MONTHS[m-1]+'</td><td class="r">'+toBn(C.n)+'</td><td class="r">'+money(C.revA)+'</td><td class="r">'+money(r2(C.cogs+C.expAll))+'</td><td class="r '+(C.profit>=0?'g':'b')+'">'+profitText(C.profit)+'</td></tr>';}
+    h+='</table>';
+  }
+  const st=itemStatsOf(list);
+  if(st.length){h+='<h2>কোন আইটেম কতটা</h2><table><tr><th>আইটেম</th><th class="r">সংখ্যা</th><th class="r">বিক্রি</th></tr>'+st.slice(0,12).map(x=>'<tr><td>'+esc(x.name)+'</td><td class="r">'+toBn(x.q)+'</td><td class="r">'+money(x.amt)+'</td></tr>').join('')+'</table>';}
+  h+='<div class="f">তৈরি: পেজের হিসাব · '+toBn(dateStr(new Date()))+'</div></body></html>';
+  return {title:title,html:h};
+}
+function itemStatsOf(list){
+  const m={};
+  list.filter(t=>t.kind==='sale').forEach(t=>{
+    const its=(t.items&&t.items.length)?t.items:[{name:t.name||'অন্যান্য',qty:1}];
+    const tot=its.reduce((a,i)=>a+(i.qty||1),0)||1;
+    its.forEach(i=>{const n=i.name||'অন্যান্য';const o=m[n]||(m[n]={name:n,q:0,amt:0});o.q+=(i.qty||1);o.amt+=t.amount*(i.qty||1)/tot;});
+  });
+  return Object.keys(m).map(k=>({name:m[k].name,q:m[k].q,amt:r2(m[k].amt)})).sort((a,b)=>b.amt-a.amt);
+}
+function makePdf(kind){
+  const r=pdfHTML(kind);
+  if(nativeOK()){try{A.printHtml(r.title,r.html);toast('"PDF হিসেবে সেভ করুন" বেছে নিন।');return;}catch(e){}}
+  const w=window.open('','_blank');if(w){w.document.write(r.html);w.document.close();setTimeout(function(){w.print();},400);}else toast('PDF বানানো যায়নি।','err');
+}
+function pdfCardHTML(){
+  return '<article class="card"><h3>PDF রিপোর্ট</h3><p class="help">হিসাবের PDF বানিয়ে ফোনে রাখুন বা হোয়াটসঅ্যাপে পাঠান। খুললে নিচের প্রিন্ট পর্দা থেকে "PDF হিসেবে সেভ করুন" বেছে নিন।</p>'
+    +'<div class="btn-row" style="margin-top:12px"><button type="button" class="btn" data-a="pdf" data-k="day">আজকের</button><button type="button" class="btn" data-a="pdf" data-k="month">এই মাসের</button><button type="button" class="btn" data-a="pdf" data-k="year">এই বছরের</button></div></article>';
+}
 function renderReport(){
   const list=txnsOfMonth(S.viewYm);
   let h=monthNavHTML();
   const g=noMonthData(list);
-  if(g){$('reportBody').innerHTML=h+g;return;}
+  if(g){$('reportBody').innerHTML=h+g+pdfCardHTML();return;}
   const T=calc(list);
   const cls=T.profit>0.004?'good':T.profit<-0.004?'bad':'';
   const margin=T.revA>0?Math.round(T.profit/T.revA*100):0;
@@ -1338,7 +1410,7 @@ function renderReport(){
   days.forEach(d=>{const p=calc(list.filter(t=>t.date===d)).profit;if(!best||p>best.p)best={d:d,p:p};});
   h+='<div class="insights"><div class="ins"><span>সক্রিয় দিন</span><b>'+toBn(days.length)+' দিন</b></div><div class="ins"><span>গড় লাভ প্রতি দিন</span><b>'+profitText(days.length?r2(T.profit/days.length):0)+'</b></div>'
     +'<div class="ins"><span>সেরা দিন</span><b>'+(best?dayLabel(best.d).date:'—')+'</b></div><div class="ins"><span>সেরা দিনের লাভ</span><b class="good">'+(best?profitText(best.p):'—')+'</b></div></div>';
-  $('reportBody').innerHTML=h;
+  $('reportBody').innerHTML=h+pdfCardHTML();
   bindCharts();
 }
 function renderTodo(){
@@ -1383,6 +1455,13 @@ function renderSettings(){
   h+='<article class="card"><h3>স্মার্ট মিলান</h3><div class="srow"><div><b>দাম মিললে নিজে মাল বসাও</b><span class="s">টাকার অঙ্ক কোনো মালের বিক্রয়মূল্য বা তার ২ থেকে ১০ গুণের সাথে ঠিক মিললে (শুধু একটি মাল মিললে) মাল নিজে বসবে।</span></div>'
     +'<button type="button" class="switch" role="switch" aria-checked="'+(st.autoMatch?'true':'false')+'" aria-label="স্মার্ট মিলান" data-a="toggle-match"></button></div></article>';
 
+  if(nativeOK()){
+    let canLock=false,lockOn=false;try{canLock=!!A.canLock();lockOn=!!A.lockEnabled();}catch(e){}
+    h+='<article class="card"><h3>অ্যাপ লক</h3><div class="srow"><div><b>ফোনের লক দিয়ে খুলুন</b><span class="s">'+(canLock?'অ্যাপ খুলতে ফিঙ্গারপ্রিন্ট, ফেস, পিন বা প্যাটার্ন লাগবে। ৩০ সেকেন্ডের বেশি বাইরে থাকলে আবার চাইবে।':'আগে ফোনের সেটিংসে স্ক্রিন লক (পিন, প্যাটার্ন বা ফিঙ্গারপ্রিন্ট) চালু করুন।')+'</span></div>'
+      +'<button type="button" class="switch" role="switch" aria-checked="'+(lockOn?'true':'false')+'" aria-label="অ্যাপ লক" data-a="lock-toggle"'+(canLock?'':' disabled')+'></button></div></article>';
+    h+='<article class="card"><h3>অটো ব্যাকআপ</h3><p class="help">প্রতি রাত ১২:১০-এর পর হিসাবের কপি ফোনের "Download/PageHisab" ফোল্ডারে জমা হয় (৩০ দিনের কপি থাকে)। অ্যাপ খুললেও দিনের প্রথমবার নিজে নিজে কপি হয়।'+(DB.settings.lastBk?'<br>সর্বশেষ: '+esc(DB.settings.lastBk)+'':'')+'</p>'
+      +'<div class="btn-row" style="margin-top:12px"><button type="button" class="btn" data-a="bk-now">এখনই ব্যাকআপ নিন</button><button type="button" class="btn" data-a="bk-pick">ফাইল থেকে ফেরত আনুন</button></div></article>';
+  }
   h+='<article class="card"><h3>ব্যাকআপ</h3><p class="help">অ্যাপ মুছে ফেললে বা ফোন বদলালে হিসাব চলে যায়। মাঝে মাঝে ব্যাকআপ পাঠিয়ে রাখুন, যেমন নিজের হোয়াটসঅ্যাপ বা ইমেইলে।</p>'
     +'<div class="btn-row" style="margin:12px 0"><button type="button" class="btn" data-a="bk-share">ব্যাকআপ পাঠান</button></div>'
     +'<label for="bkText">ব্যাকআপ ফেরত আনতে লেখাটি এখানে পেস্ট করুন<textarea id="bkText" placeholder="ব্যাকআপের লেখা পেস্ট করুন"></textarea></label>'
@@ -1797,7 +1876,7 @@ document.addEventListener('visibilitychange',()=>{
 /* ---------- backup ---------- */
 function backupText(){
   const s=Object.assign({},DB.settings);delete s.tgToken;delete s.pin;
-  return JSON.stringify({v:2,products:DB.products,txns:DB.txns,rules:DB.rules,settings:{autoMatch:s.autoMatch}});
+  return JSON.stringify(Object.assign({},DB,{v:2,inbox:[],settings:s}));
 }
 function shareBackup(){
   const txt=backupText();
@@ -1806,6 +1885,7 @@ function shareBackup(){
     navigator.clipboard.writeText(txt).then(()=>toast('ব্যাকআপ কপি হয়েছে। কোথাও পেস্ট করে রাখুন।'),()=>toast('কপি করা যায়নি।','err'));
   }else toast('ব্যাকআপ পাঠানো যায়নি।','err');
 }
+window.__onBackupFile=function(txt){const el=$('bkText');if(el)el.value=txt;restoreBackup();};
 function restoreBackup(){
   const el=$('bkText');
   let o;
@@ -1819,6 +1899,9 @@ function restoreBackup(){
   if(!n&&!o.products.length){toast('এতে কিছু পাওয়া যায়নি।','err');return;}
   DB.products=Array.from(pm.values());DB.txns=Array.from(tm.values());
   if(o.rules&&typeof o.rules==='object')DB.rules=Object.assign({},DB.rules,o.rules);
+  if(o.pl&&Array.isArray(o.pl.units)&&o.pl.units.length)DB.pl=o.pl;
+  if(o.oldPay&&Array.isArray(o.oldPay)&&!DB.oldPay.length)DB.oldPay=o.oldPay;
+  if(o.settings&&typeof o.settings==='object'){const so=Object.assign({},o.settings);delete so.pin;delete so.tgToken;DB.settings=Object.assign({},DB.settings,so);applyPal();}
   save();el.value='';renderAll();
   toast(toBn(n)+' টি লেনদেন ও '+toBn(o.products.length)+' টি মাল ফেরত এসেছে।');
 }
@@ -1901,6 +1984,10 @@ document.addEventListener('click',e=>{
   else if(a==='tg-poll'){tgPoll(true);}
   else if(a==='pin-set'){showLock('set');}
   else if(a==='pin-off'){DB.settings.pin='';save();renderSettings();toast('পিন বন্ধ হয়েছে।');}
+  else if(a==='lock-toggle'){try{A.setLock(!A.lockEnabled());}catch(e){}renderSettings();toast(A.lockEnabled()?'অ্যাপ লক চালু হয়েছে।':'অ্যাপ লক বন্ধ হয়েছে।');}
+  else if(a==='bk-now'){pushNative();let n='';try{n=A.backupNow();}catch(e){}if(n){DB.settings.lastBk=S.today;save();renderSettings();toast('ব্যাকআপ জমা হয়েছে: Download/PageHisab');}else toast('ব্যাকআপ নেওয়া যায়নি।','err');}
+  else if(a==='bk-pick'){try{A.pickBackup();}catch(e){}}
+  else if(a==='pdf'){makePdf(el.dataset.k);}
   else if(a==='bk-share'){shareBackup();}
   else if(a==='bk-restore'){restoreBackup();}
 });
