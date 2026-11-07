@@ -1,6 +1,22 @@
 <!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}.sugg{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}.sugg:empty{display:none}
 .chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;font-size:.88rem}
-</style></head><body><title>পেজের হিসাব</title>
+</style></head><body>
+<div id="splash" aria-hidden="true"><div class="sp-dial"><svg viewBox="0 0 132 132" width="132" height="132" id="spSvg"></svg><span class="sp-cur">৳</span></div><div class="sp-t">পেজের হিসাব</div><div class="sp-c">EXPRESS · GAME · STORE</div><div class="sp-bar"><i></i></div></div>
+<script>
+(function(){
+  var sp=document.getElementById('splash');if(!sp)return;
+  var skip=false;try{if(sessionStorage.getItem('sp1')){skip=true;}else sessionStorage.setItem('sp1','1');}catch(e){}
+  if(skip){sp.parentNode.removeChild(sp);return;}
+  var svg=document.getElementById('spSvg'),N=40,h='';
+  for(var k=0;k<N;k++){var a=k/N*2*Math.PI-Math.PI/2,c=Math.cos(a),s=Math.sin(a);
+    h+='<line x1="'+(66+c*54).toFixed(1)+'" y1="'+(66+s*54).toFixed(1)+'" x2="'+(66+c*64).toFixed(1)+'" y2="'+(66+s*64).toFixed(1)+'" style="animation-delay:'+(k*0.022).toFixed(3)+'s"/>';}
+  svg.innerHTML=h;
+  function done(){sp.classList.add('out');setTimeout(function(){if(sp.parentNode)sp.parentNode.removeChild(sp);},600);}
+  setTimeout(done,2100);
+  sp.addEventListener('click',done);
+})();
+</script>
+<title>পেজের হিসাব</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -324,12 +340,48 @@ body{background:repeating-linear-gradient(115deg,rgba(255,255,255,.02) 0 2px,tra
 .tn em{font-style:normal;color:var(--muted);font-size:.84rem}
 .tbar{height:6px;border-radius:4px;background:var(--surface-2);margin:6px 0 0 32px;overflow:hidden}
 .tbar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#C9971A,#FFD54D)}
+
+/* v13: glassmorphism */
+body::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+  background:radial-gradient(38% 30% at 12% 18%,rgba(124,122,214,.50),transparent 70%),
+             radial-gradient(34% 28% at 92% 44%,rgba(255,201,51,.22),transparent 70%),
+             radial-gradient(40% 32% at 20% 86%,rgba(86,84,170,.45),transparent 70%);
+  filter:blur(18px)}
+.card,.alert,.rlist,.act,.monthnav,.empty{
+  background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.025))!important;
+  -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+  border:1px solid rgba(255,255,255,.10)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 14px 30px -18px rgba(0,0,0,.85)!important}
+.empty{border-style:dashed!important}
+.ritem{border-top-color:rgba(255,255,255,.07)!important}
+.tabbar{background:rgba(18,16,46,.55)!important;-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border-top:1px solid rgba(255,255,255,.10)!important}
+.sheet{background:linear-gradient(160deg,rgba(40,37,86,.82),rgba(20,18,48,.9))!important;-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);border-top:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.hero{box-shadow:inset 0 1px 0 rgba(255,255,255,.28),var(--shadow-hero)!important}
+.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.16),transparent 38%)}
+.sheet input,.sheet select,.sheet textarea{background:rgba(8,7,26,.55)!important}
+
+/* v14: splash */
+#splash{position:fixed;inset:0;z-index:9999;display:grid;place-content:center;justify-items:center;gap:22px;background:radial-gradient(70% 45% at 50% 38%,rgba(109,107,187,.55),transparent 70%),#0C0B1E;transition:opacity .5s ease,visibility .5s}
+#splash.out{opacity:0;visibility:hidden}
+#splash .sp-dial{position:relative;width:132px;height:132px;display:grid;place-items:center}
+#splash svg{position:absolute;inset:0;overflow:visible}
+#splash svg line{stroke:rgba(255,255,255,.18);stroke-width:2.2;stroke-linecap:round;animation:sptick .5s ease forwards}
+@keyframes sptick{to{stroke:#FFD54D;stroke-width:3}}
+#splash .sp-cur{font:700 52px/1 var(--font-display,system-ui);color:#FFD54D;opacity:0;transform:scale(.6);animation:spcur .6s .25s cubic-bezier(.2,1.4,.4,1) forwards;text-shadow:0 0 24px rgba(255,201,51,.55)}
+@keyframes spcur{to{opacity:1;transform:scale(1)}}
+#splash .sp-t{font:700 1.7rem/1.1 var(--font-display,system-ui);color:#fff;opacity:0;transform:translateY(10px);animation:spup .6s .65s ease forwards}
+#splash .sp-c{font:600 10.5px/1 system-ui,sans-serif;letter-spacing:.38em;color:#FFC933;opacity:0;animation:spup .6s .9s ease forwards;margin-top:-12px}
+#splash .sp-bar{width:120px;height:3px;border-radius:3px;background:rgba(255,255,255,.14);overflow:hidden;opacity:0;animation:spup .4s 1s ease forwards}
+#splash .sp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#C9971A,#FFD54D);animation:spbar .9s 1s ease-out forwards}
+@keyframes spup{to{opacity:1;transform:none}}
+@keyframes spbar{to{width:100%}}
+@media (prefers-reduced-motion:reduce){#splash *{animation-duration:.01s!important;animation-delay:0s!important}}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ১২</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ১৪</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
       </div>
