@@ -549,12 +549,33 @@ body{background:repeating-linear-gradient(115deg,rgba(255,255,255,.02) 0 2px,tra
 .hx-t.a span::before{background:#FFC933}.hx-t.r span::before{background:#FF7A8A}
 .hx-t b{font-size:.88rem;font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .sk-hero{border-radius:26px}
+
+/* v28: no sideways wobble, no scrollbar, bin icon */
+html,body{max-width:100%;overflow-x:hidden!important;overscroll-behavior-x:none}
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{width:0;height:0;display:none}
+*{scrollbar-width:none}
+body{position:relative;touch-action:pan-y}
+main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
+.tl-i{grid-template-columns:auto 58px minmax(0,1fr) auto!important}
+.tl-b{min-width:0}
+.tl-b b{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;line-height:1.35}
+.tl-a{white-space:nowrap;text-align:right}
+.tl:before{left:11px}
+.ritem{min-width:0}.ritem *{min-width:0}
+.prow{align-items:center}
+.prow .pr{flex:none;gap:6px}
+.prow .pr>b{white-space:nowrap}
+.prow .pn{flex:1}
+.bin{display:grid;place-items:center;width:36px;height:36px;flex:none;border:0;border-radius:12px;background:rgba(255,122,138,.12);color:#FF7A8A}
+.bin:active{background:rgba(255,122,138,.28)}
+.sw-d{width:92px}.sw-d svg{width:22px;height:22px}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ২৭</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ২৮</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
@@ -971,7 +992,7 @@ function txnRow(t,withProfit){
     else sub='কেনা দাম বসানো বাকি';
   }
   const meta=timeLabel(t.time||'12:00')+' · '+(PROV[t.provider]||PROV.other)+(t.party?' · '+toBn(t.party):'');
-  return '<div class="swr"><div class="sw-bg"><span class="sw-e">এডিট</span><button type="button" class="sw-d" data-a="sw-del" data-id="'+esc(t.id)+'">মুছুন</button></div><button type="button" class="ritem" data-a="edit" data-id="'+esc(t.id)+'"><span class="ico '+t.kind+'">'+ico+'</span>'
+  return '<div class="swr"><div class="sw-bg"><span class="sw-e">এডিট</span><button type="button" class="sw-d" data-a="sw-del" data-id="'+esc(t.id)+'" aria-label="মুছুন"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8c0-.4.3-.8.8-.8h3.4c.5 0 .8.4.8.8V7M6.5 7l.8 12c.1.6.5 1 1.1 1h7.2c.6 0 1-.4 1.1-1l.8-12M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><button type="button" class="ritem" data-a="edit" data-id="'+esc(t.id)+'"><span class="ico '+t.kind+'">'+ico+'</span>'
     +'<div class="rmain"><div class="rtitle">'+txnTitle(t)+'</div><div class="rmeta"><span class="dot '+esc(t.provider)+'"></span>'+esc(meta)+(t.kind==='sale'&&!hasCost(t)?' <span class="chip warn">কেনা দাম বসানো বাকি</span>':'')+'</div></div>'
     +'<div class="ramt '+t.kind+'">'+sign+money(t.amount)+(withProfit&&sub&&hasCost(t)?'<small>'+sub+'</small>':'')+'</div></button></div>';
 }
@@ -1304,7 +1325,7 @@ function renderStock(){
   h+='</div></article>';
   h+='<article class="card"><h3>কাস্টম প্যাক</h3>';
   if(DB.pl.packs.length){
-    h+='<div class="plist">'+DB.pl.packs.map(p=>'<div class="prow"><div class="pn"><b>'+esc(p.name)+'</b><span>'+packText(p)+(packDia(p)?' · '+toBn(packDia(p))+' ডায়মন্ড':'')+'</span></div><div class="pr"><b>'+money(packPrice(p))+'</b><button type="button" class="link" data-a="pk-del" data-id="'+esc(p.id)+'">মুছুন</button></div></div>').join('')+'</div>';
+    h+='<div class="plist">'+DB.pl.packs.map(p=>'<div class="prow"><div class="pn"><b>'+esc(p.name)+'</b><span>'+packText(p)+(packDia(p)?' · '+toBn(packDia(p))+' ডায়মন্ড':'')+'</span></div><div class="pr"><b>'+money(packPrice(p))+'</b><button type="button" class="bin" data-a="pk-del" data-id="'+esc(p.id)+'" aria-label="মুছুন"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8c0-.4.3-.8.8-.8h3.4c.5 0 .8.4.8.8V7M6.5 7l.8 12c.1.6.5 1 1.1 1h7.2c.6 0 1-.4 1.1-1l.8-12M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>').join('')+'</div>';
   }else h+='<p class="help">যেমন 1625 UC × ২ দিলে ৫০৬০ ডায়মন্ডের প্যাক হবে।</p>';
   if(S.pk){
     const tot=packPrice(S.pk),dia=packDia(S.pk);
@@ -1317,7 +1338,7 @@ function renderStock(){
   }else h+='<div class="btn-row" style="margin-top:12px"><button type="button" class="btn primary" data-a="pk-new">+ কাস্টম প্যাক বানান</button></div>';
   h+='</article>';
   h+='<article class="card"><h3>অন্যান্য আইটেম</h3>';
-  if(DB.pl.items.length)h+='<div class="plist">'+DB.pl.items.map(i=>'<div class="prow"><div class="pn"><b>'+esc(i.name)+'</b></div><div class="pr"><input type="text" inputmode="decimal" aria-label="'+esc(i.name)+' দাম" data-g="i-price" data-id="'+esc(i.id)+'" value="'+toBn(r2(i.price))+'"><button type="button" class="link" data-a="i-del" data-id="'+esc(i.id)+'">মুছুন</button></div></div>').join('')+'</div>';
+  if(DB.pl.items.length)h+='<div class="plist">'+DB.pl.items.map(i=>'<div class="prow"><div class="pn"><b>'+esc(i.name)+'</b></div><div class="pr"><input type="text" inputmode="decimal" aria-label="'+esc(i.name)+' দাম" data-g="i-price" data-id="'+esc(i.id)+'" value="'+toBn(r2(i.price))+'"><button type="button" class="bin" data-a="i-del" data-id="'+esc(i.id)+'" aria-label="মুছুন"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8c0-.4.3-.8.8-.8h3.4c.5 0 .8.4.8.8V7M6.5 7l.8 12c.1.6.5 1 1.1 1h7.2c.6 0 1-.4 1.1-1l.8-12M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>').join('')+'</div>';
   h+='<div class="grid2" style="margin-top:12px"><label for="itName">আইটেমের নাম<input id="itName" type="text" placeholder="যেমন: TikTok 1000 coin"></label><label for="itPrice">কেনা দাম<input id="itPrice" type="text" inputmode="decimal" placeholder="যেমন ৯৫০"></label></div>'
     +'<div class="btn-row"><button type="button" class="btn primary" data-a="i-add">আইটেম যোগ করুন</button></div></article>';
   el.innerHTML=h;
