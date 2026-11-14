@@ -570,18 +570,73 @@ main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
 .bin{display:grid;place-items:center;width:36px;height:36px;flex:none;border:0;border-radius:12px;background:rgba(255,122,138,.12);color:#FF7A8A}
 .bin:active{background:rgba(255,122,138,.28)}
 .sw-d{width:92px}.sw-d svg{width:22px;height:22px}
+
+.pdf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.pdf-custom{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+#pdone{position:fixed;inset:0;z-index:60;background:rgba(5,5,18,.62);display:flex;align-items:flex-end;justify-content:center;padding:16px}
+#pdone[hidden]{display:none}
+.pd-card{width:100%;max-width:460px;border-radius:24px;padding:20px;background:var(--surface);border:1px solid var(--line);animation:srin .22s ease;margin-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+.pd-card b{font-size:1.1rem}.pd-card p{margin:6px 0 14px;word-break:break-all}.pd-card small{color:var(--muted)}
+.pd-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+.pg-back{display:flex;align-items:center;gap:6px;margin-left:-8px}.pg-back h1{margin:0}
+#drawer{position:fixed;inset:0;z-index:45}
+.dr-scrim{position:absolute;inset:0;background:rgba(5,5,20,.55);opacity:0;transition:opacity .22s}
+.dr-panel{position:absolute;left:0;top:0;bottom:0;width:min(82vw,318px);background:var(--surface);border-right:1px solid var(--line);padding:max(18px,env(safe-area-inset-top)) 12px 18px;overflow-y:auto;transform:translateX(-100%);transition:transform .26s cubic-bezier(.2,.8,.2,1);box-shadow:8px 0 40px rgba(0,0,0,.35);scrollbar-width:none}
+.dr-panel::-webkit-scrollbar{display:none}
+#drawer.on .dr-scrim{opacity:1}#drawer.on .dr-panel{transform:none}
+.dr-head{display:flex;align-items:center;gap:12px;padding:4px 8px 14px}
+.dr-logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--gold));color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.2rem}
+.dr-head b{display:block;font-size:1.05rem}.dr-head em{font-style:normal;font-size:.78rem;color:var(--muted)}
+.dr-sec{font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding:14px 10px 6px}
+.dr-i{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;color:var(--text);padding:10px;border-radius:14px;font:inherit}
+.dr-i:active{background:var(--gold-soft)}
+.dr-ic{width:38px;height:38px;border-radius:12px;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;flex:none}
+.dr-i b{display:block;font-weight:600;font-size:.95rem}.dr-i em{font-style:normal;font-size:.76rem;color:var(--muted)}
+.cu-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cu-sum .card{padding:14px}.cu-sum b{display:block;font-size:1.5rem;margin-top:4px}
+.cu-row{border-top:1px solid var(--line)}.cu-row:first-child{border-top:0}
+.cu-h{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;color:var(--text);padding:12px 0;text-align:left;font:inherit}
+.cu-av{width:40px;height:40px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;font-weight:700;flex:none}
+.cu-m{flex:1;min-width:0}.cu-m b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cu-m em{font-style:normal;font-size:.78rem;color:var(--muted)}
+.cu-t{text-align:right;font-weight:700}.cu-t small{display:block;font-weight:400;color:var(--muted);font-size:.74rem}
+.vip{display:inline-block;font-size:.66rem;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--gold);color:#fff;margin-left:6px;vertical-align:middle}
+.cu-d{padding:0 0 14px 52px;font-size:.85rem;color:var(--muted)}.cu-d .btn-row{margin-top:8px}
+.cu-d input{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+.gl-ring{display:grid;place-items:center;position:relative;margin:6px auto 10px;width:150px;height:150px}
+.gl-ring svg{transform:rotate(-90deg)}.gl-ring .gl-c{position:absolute;text-align:center}.gl-ring .gl-c b{display:block;font-size:1.6rem}.gl-ring .gl-c span{font-size:.78rem;color:var(--muted)}
+.gl-done{text-align:center;color:var(--gold);font-weight:700;margin:2px 0 6px}
+.gl-in{display:flex;gap:8px;margin-top:10px}.gl-in input{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+.wt-r{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.wt-r:first-child{border-top:0}
+.wt-n{flex:1;min-width:0}.wt-n b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wt-n em{font-style:normal;font-size:.76rem;color:var(--muted)}
+.wt-p{font-weight:700;font-size:.92rem;padding:3px 10px;border-radius:99px}
+.wt-p.bad{background:rgba(220,60,80,.16);color:#E0556A}.wt-p.low{background:rgba(240,170,40,.18);color:#D99A1E}.wt-p.ok{background:rgba(47,168,120,.16);color:#2FA878}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ২৮</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৩১</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
+        <button type="button" class="icon-btn" data-a="menu-open" aria-label="মেনু"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="go" data-v="settings" aria-label="সেটিংস"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.4A7.6 7.6 0 0 0 7 6.4l-2.4-.9-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-.9c.8.7 1.6 1.2 2.6 1.5l.4 2.4h4l.4-2.4c1-.3 1.8-.8 2.6-1.5l2.4.9 2-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
       </div>
     </header>
     <div id="homeBody" class="stack"></div>
+  </section>
+
+  <section class="view" id="v-cust" hidden>
+    <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="home" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>ক্রেতা বই</h1></div><p>কে কতবার কিনেছে, একনজরে।</p></header>
+    <div id="custBody" class="stack"></div>
+  </section>
+  <section class="view" id="v-goal" hidden>
+    <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="home" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>লাভের লক্ষ্য</h1></div><p>দিন ও মাসের টার্গেট ঠিক করুন।</p></header>
+    <div id="goalBody" class="stack"></div>
+  </section>
+  <section class="view" id="v-watch" hidden>
+    <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="home" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>লাভ নজরদারি</h1></div><p>গত ৩০ দিনে কোন আইটেমে লাভ কম।</p></header>
+    <div id="watchBody" class="stack"></div>
   </section>
 
   <section class="view" id="v-add" hidden>
@@ -621,6 +676,7 @@ main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
 
 <div id="pfd" hidden role="dialog" aria-label="লাভের বিস্তারিত"><div class="sr-top"><button type="button" class="icon-btn" data-a="pf-close" aria-label="ফিরুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b style="font-size:1.1rem">লাভের বিস্তারিত</b></div><div id="pfBody" class="sr-body"></div></div>
 <div id="search" hidden role="dialog" aria-label="খুঁজুন"><div class="sr-top"><button type="button" class="icon-btn" data-a="search-close" aria-label="ফিরুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sr-box"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="srInput" type="text" enterkeyhint="search" autocomplete="off" placeholder="আইটেম, টাকা, তারিখ, মাধ্যম..." aria-label="খুঁজুন"><button type="button" id="srClear" class="sr-x" data-a="search-clear" aria-label="মুছুন" hidden>×</button></div></div><div id="srBody" class="sr-body"></div></div>
+<div id="drawer" hidden><div class="dr-scrim" data-a="menu-close"></div><aside class="dr-panel" role="dialog" aria-label="মেনু"><div class="dr-head"><div class="dr-logo">প</div><div><b>পেজের হিসাব</b><em>Express Game Store</em></div></div><div class="dr-sec">প্রধান</div><button type="button" class="dr-i" data-a="go" data-v="home"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হোম</b><em>আজকের সারসংক্ষেপ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="days"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হিসাব</b><em>দিন ও মাসের লেনদেন</em></span></button><button type="button" class="dr-i" data-a="go" data-v="stock"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>দামের তালিকা</b><em>দাম ও কেনা দাম</em></span></button><button type="button" class="dr-i" data-a="go" data-v="report"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>রিপোর্ট</b><em>লাভের বিশ্লেষণ ও PDF</em></span></button><button type="button" class="dr-i" data-a="go" data-v="todo"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>করণীয়</b><em>বাকি কাজ</em></span></button><div class="dr-sec">নতুন</div><button type="button" class="dr-i" data-a="go" data-v="cust"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 19v-1a3 3 0 0 0-2-2.8M16 4.3a3.5 3.5 0 0 1 0 6.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>ক্রেতা বই</b><em>কে কতবার কিনেছে</em></span></button><button type="button" class="dr-i" data-a="go" data-v="goal"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভের লক্ষ্য</b><em>দিন ও মাসের টার্গেট</em></span></button><button type="button" class="dr-i" data-a="go" data-v="watch"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4l9 16H3zM12 10v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভ নজরদারি</b><em>কম লাভের আইটেম</em></span></button><div class="dr-sec">অন্যান্য</div><button type="button" class="dr-i" data-a="go" data-v="settings"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সেটিংস</b><em>থিম, লক, ব্যাকআপ</em></span></button></aside></div>
 <div id="fab" hidden><div class="fab-scrim" data-a="fab-close"></div><div class="fab-menu" role="menu">
   <button type="button" role="menuitem" data-a="fab-sale"><span class="fi g"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>নতুন বিক্রি</button>
   <button type="button" role="menuitem" data-a="fab-expense"><span class="fi r"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>নতুন খরচ</button>
@@ -881,8 +937,8 @@ function save(){
 }
 
 /* ---------- state ---------- */
-const VIEWS=['home','days','add','stock','report','todo','settings'];
-const TABS={home:'home',days:'days',add:'add',stock:'stock',report:'report',todo:'home',settings:'home'};
+const VIEWS=['home','days','add','stock','report','todo','settings','cust','goal','watch'];
+const TABS={home:'home',days:'days',add:'add',stock:'stock',report:'report',todo:'home',settings:'home',cust:'home',goal:'home',watch:'home'};
 const S={view:'home',today:dateStr(new Date()),viewYm:'',open:new Set(),sheet:null,pendingDel:null,toastTimer:null,tgErr:'',tgBusy:false,smsPerm:null,lastSync:0,lock:{buf:'',mode:'check',first:''}};
 S.viewYm=ymOf(S.today);
 S.open.add(S.today);
@@ -976,7 +1032,7 @@ window.addEventListener('hashchange',()=>{
 function renderAll(){
   const L=dayLabel(S.today);
   $('todayLabel').textContent=L.wd+', '+L.date+' '+toBn(S.today.slice(0,4));
-  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderBadge();
+  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderCust();renderGoal();renderWatch();renderBadge();
 }
 function pendingCount(){return DB.inbox.length+DB.txns.filter(t=>t.kind==='sale'&&!hasCost(t)).length;}
 function renderBadge(){
@@ -1427,63 +1483,237 @@ function dnPick(i){
   document.querySelectorAll('.dseg').forEach(e=>e.classList.toggle('sel',Number(e.dataset.i)===i));
   document.querySelectorAll('.lg').forEach(e=>e.classList.toggle('sel',Number(e.dataset.i)===i));
 }
-function pdfHTML(kind){
-  const today=S.today,y=today.slice(0,4);
-  let list,title;
-  if(kind==='day'){list=DB.txns.filter(t=>t.date===today);const L=dayLabel(today);title='দৈনিক হিসাব · '+L.date+' '+toBn(y);}
-  else if(kind==='month'){list=txnsOfMonth(S.viewYm);title='মাসিক হিসাব · '+MONTHS[Number(S.viewYm.slice(5,7))-1]+' '+toBn(S.viewYm.slice(0,4));}
-  else{list=DB.txns.filter(t=>t.date.slice(0,4)===y);title='বাৎসরিক হিসাব · '+toBn(y);}
-  const T=calc(list);
-  const row=(a,b,c)=>'<tr><td>'+a+'</td><td class="r">'+b+'</td>'+(c!==undefined?'<td class="r">'+c+'</td>':'')+'</tr>';
-  let h='<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:"Noto Sans Bengali","Hind Siliguri",sans-serif;color:#1b1633;margin:0;padding:8px}'
-   +'.hd{background:#2B2965;color:#fff;border-radius:12px;padding:16px 18px}.hd b{font-size:20px;display:block}.hd span{color:#FFD54D;font-size:13px}'
-   +'h2{font-size:15px;margin:18px 0 6px;color:#2B2965}table{width:100%;border-collapse:collapse;font-size:12.5px}td,th{padding:6px 7px;border-bottom:1px solid #e3e1f3;text-align:left}th{background:#f1f0fb;font-size:12px}.r{text-align:right}'
-   +'.sum td{font-size:14px}.sum tr:last-child td{font-weight:700;border-top:2px solid #2B2965;font-size:15px}.g{color:#14804f}.b{color:#c0364a}.f{margin-top:18px;font-size:10.5px;color:#7a77a0;text-align:center}</style></head><body>'
-   +'<div class="hd"><b>Express Game Store</b><span>'+title+'</span></div>'
-   +'<h2>সারসংক্ষেপ</h2><table class="sum">'+row('মোট বিক্রি (মাল বসানো)',money(T.revA))+row('মালের ক্রয়মূল্য',money(T.cogs))+row('অন্যান্য খরচ',money(T.exp))+row('চার্জ ও ফি',money(T.fees))
-   +row('মোট লাভ','<span class="'+(T.profit>=0?'g':'b')+'">'+profitText(T.profit)+'</span>')+'</table>'
-   +(T.unN?'<p style="font-size:11.5px;color:#b06a00">'+toBn(T.unN)+' টি বিক্রিতে কেনা দাম বসানো হয়নি ('+money(T.unAmt)+'), এগুলো লাভের হিসাবে ধরা হয়নি।</p>':'');
-  if(kind==='day'){
-    h+='<h2>লেনদেন ('+toBn(T.n)+' টি)</h2><table><tr><th>সময়</th><th>বিবরণ</th><th>মাধ্যম</th><th class="r">টাকা</th><th class="r">লাভ</th></tr>';
-    list.slice().sort((a,b)=>(a.time||'').localeCompare(b.time||'')).forEach(t=>{
-      const sale=t.kind==='sale';const pr=sale&&hasCost(t)?profitText(r2(t.amount-saleCost(t)-(t.fee||0))):'';
-      const nm=(t.items&&t.items.length>1)?t.items.map(i=>i.name).join(' + '):(t.name||(sale?'বিক্রি':'খরচ'));
-      h+='<tr><td>'+timeLabel(t.time||'12:00')+'</td><td>'+esc(nm)+'</td><td>'+esc((PROV[t.provider]||'')+(t.party?' '+toBn(t.party):''))+'</td><td class="r">'+(sale?'+':'−')+money(t.amount)+'</td><td class="r">'+pr+'</td></tr>';
-    });
-    h+='</table>';
-  }else if(kind==='month'){
-    const days={};list.forEach(t=>{(days[t.date]=days[t.date]||[]).push(t);});
-    h+='<h2>দিন অনুযায়ী</h2><table><tr><th>তারিখ</th><th class="r">লেনদেন</th><th class="r">বিক্রি</th><th class="r">খরচ ও মাল</th><th class="r">লাভ</th></tr>';
-    Object.keys(days).sort().forEach(d=>{const C=calc(days[d]);h+='<tr><td>'+toBn(Number(d.slice(8,10)))+' '+MONTHS[Number(d.slice(5,7))-1]+'</td><td class="r">'+toBn(C.n)+'</td><td class="r">'+money(C.revA)+'</td><td class="r">'+money(r2(C.cogs+C.expAll))+'</td><td class="r '+(C.profit>=0?'g':'b')+'">'+profitText(C.profit)+'</td></tr>';});
-    h+='</table>';
-  }else{
-    h+='<h2>মাস অনুযায়ী</h2><table><tr><th>মাস</th><th class="r">লেনদেন</th><th class="r">বিক্রি</th><th class="r">খরচ ও মাল</th><th class="r">লাভ</th></tr>';
-    for(let m=1;m<=12;m++){const ym=y+'-'+pad(m);const l=list.filter(t=>t.date.slice(0,7)===ym);if(!l.length)continue;const C=calc(l);
-      h+='<tr><td>'+MONTHS[m-1]+'</td><td class="r">'+toBn(C.n)+'</td><td class="r">'+money(C.revA)+'</td><td class="r">'+money(r2(C.cogs+C.expAll))+'</td><td class="r '+(C.profit>=0?'g':'b')+'">'+profitText(C.profit)+'</td></tr>';}
-    h+='</table>';
-  }
-  const st=itemStatsOf(list);
-  if(st.length){h+='<h2>কোন আইটেম কতটা</h2><table><tr><th>আইটেম</th><th class="r">সংখ্যা</th><th class="r">বিক্রি</th></tr>'+st.slice(0,12).map(x=>'<tr><td>'+esc(x.name)+'</td><td class="r">'+toBn(x.q)+'</td><td class="r">'+money(x.amt)+'</td></tr>').join('')+'</table>';}
-  h+='<div class="f">তৈরি: পেজের হিসাব · '+toBn(dateStr(new Date()))+'</div></body></html>';
-  return {title:title,html:h};
+/* ---------- premium PDF report ---------- */
+function fmtD(ds){const p=ds.split('-').map(Number);return toBn(p[2])+' '+MONTHS[p[1]-1]+' '+toBn(p[0]);}
+function pdfRange(k){
+  const t=S.today,y=t.slice(0,4),dim=(yy,mm)=>new Date(yy,mm,0).getDate();
+  const dd=Number(t.slice(8,10)),mm=Number(t.slice(5,7)),yy=Number(y);
+  if(k==='day')return {from:t,to:t,title:'দৈনিক রিপোর্ট',sub:fmtD(t),file:t,prev:{from:addDays(t,-1),to:addDays(t,-1)},pl:'গতকালের'};
+  if(k==='yday'){const d=addDays(t,-1);return {from:d,to:d,title:'দৈনিক রিপোর্ট',sub:fmtD(d),file:d,prev:{from:addDays(d,-1),to:addDays(d,-1)},pl:'আগের দিনের'};}
+  if(k==='month'||k==='pmonth'){
+    const r=pfRange('month',k==='pmonth'?1:0),q=pfRange('month',k==='pmonth'?2:1);
+    const pym=q.from.slice(0,7),pdays=dim(Number(pym.slice(0,4)),Number(pym.slice(5,7)));
+    const cur=k==='month';
+    return {from:r.from,to:cur?t:r.from.slice(0,7)+'-'+pad(dim(Number(r.from.slice(0,4)),Number(r.from.slice(5,7)))),title:'মাসিক রিপোর্ট',sub:r.label,file:r.from.slice(0,7),
+      prev:{from:q.from,to:cur?pym+'-'+pad(Math.min(dd,pdays)):pym+'-'+pad(pdays)},pl:cur?'গত মাসের একই সময়ের':'আগের মাসের',proj:cur?{done:dd,total:dim(yy,mm),label:'মাস শেষে'}:null};}
+  if(k==='year'){const doy=Math.round((new Date(yy,mm-1,dd)-new Date(yy,0,1))/86400000)+1,tot=Math.round((new Date(yy+1,0,1)-new Date(yy,0,1))/86400000);
+    return {from:y+'-01-01',to:t,title:'বাৎসরিক রিপোর্ট',sub:toBn(y),file:y,prev:{from:(yy-1)+'-01-01',to:(yy-1)+'-'+pad(mm)+'-'+pad(Math.min(dd,dim(yy-1,mm)))},pl:'গত বছরের একই সময়ের',proj:{done:doy,total:tot,label:'বছর শেষে'}};}
+  const f=($('pdfFrom')||{}).value,e=($('pdfTo')||{}).value;
+  if(!f||!e||f>e)return null;
+  const len=Math.round((new Date(e.slice(0,4),Number(e.slice(5,7))-1,Number(e.slice(8,10)))-new Date(f.slice(0,4),Number(f.slice(5,7))-1,Number(f.slice(8,10))))/86400000)+1;
+  return {from:f,to:e,title:'রিপোর্ট',sub:fmtD(f)+' – '+fmtD(e),file:f+'_'+e,prev:{from:addDays(f,-len),to:addDays(f,-1)},pl:'আগের সমান সময়ের'};
 }
-function itemStatsOf(list){
-  const m={};
-  list.filter(t=>t.kind==='sale').forEach(t=>{
-    const its=(t.items&&t.items.length)?t.items:[{name:t.name||'অন্যান্য',qty:1}];
-    const tot=its.reduce((a,i)=>a+(i.qty||1),0)||1;
-    its.forEach(i=>{const n=i.name||'অন্যান্য';const o=m[n]||(m[n]={name:n,q:0,amt:0});o.q+=(i.qty||1);o.amt+=t.amount*(i.qty||1)/tot;});
+function pdfPages(R){
+  const sale=t=>t.kind==='sale';
+  const list=DB.txns.filter(t=>t.date>=R.from&&t.date<=R.to&&sale(t));
+  const T=calc(list),PT=calc(DB.txns.filter(t=>t.date>=R.prev.from&&t.date<=R.prev.to&&sale(t)));
+  const f0=new Date(R.from.slice(0,4),Number(R.from.slice(5,7))-1,Number(R.from.slice(8,10)));
+  const e0=new Date(R.to.slice(0,4),Number(R.to.slice(5,7))-1,Number(R.to.slice(8,10)));
+  const span=Math.round((e0-f0)/86400000)+1;
+  const mode=R.from===R.to?'tx':(span<=62?'day':'month');
+  const W=595,H=842,M=32;
+  const FF='"Noto Sans Bengali","Noto Sans Bengali UI","Hind Siliguri",system-ui,sans-serif';
+  const INK='#FFFFFF',MUT='#A9A6D6',GOLD='#FFC933',CY='#4FD1E8',GRN='#35D69B',RED='#FF7A8A',GL='rgba(255,255,255,.065)',GB='rgba(255,255,255,.14)';
+  const pages=[];let cx=null,y=0;
+  function bg(x){x.fillStyle='#080717';x.fillRect(0,0,W,H);
+    let g=x.createRadialGradient(W-40,10,0,W-40,10,360);g.addColorStop(0,'rgba(109,107,187,.62)');g.addColorStop(1,'rgba(109,107,187,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+    g=x.createRadialGradient(0,330,0,0,330,300);g.addColorStop(0,'rgba(79,209,232,.14)');g.addColorStop(1,'rgba(79,209,232,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+    g=x.createRadialGradient(W/2,H+20,0,W/2,H+20,380);g.addColorStop(0,'rgba(255,201,51,.16)');g.addColorStop(1,'rgba(255,201,51,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+    x.strokeStyle='rgba(255,255,255,.035)';x.lineWidth=.6;for(let i=-H;i<W;i+=22){x.beginPath();x.moveTo(i,0);x.lineTo(i+H*.42,H);x.stroke();}}
+  function np(first){const c=document.createElement('canvas');c.width=1240;c.height=1754;const x=c.getContext('2d');x.scale(1240/W,1240/W);bg(x);pages.push({c:c,x:x});cx=x;y=M;
+    if(!first){txt(R.title+' · '+R.sub,M,36,{s:10,w:600,c:MUT});cx.fillStyle=GOLD;cx.fillRect(M,44,22,2);y=64;}}
+  function fnt(w,s){return (w||400)+' '+(s||11)+'px '+FF;}
+  function txt(str,px,py,o){o=o||{};cx.font=fnt(o.w,o.s);cx.fillStyle=o.c||INK;cx.textAlign=o.a||'left';try{cx.letterSpacing=o.ls||'0px';}catch(e){}cx.fillText(String(str),px,py);try{cx.letterSpacing='0px';}catch(e){}}
+  function fit(str,maxW,o){o=o||{};cx.font=fnt(o.w,o.s);str=String(str);if(cx.measureText(str).width<=maxW)return str;while(str.length>1&&cx.measureText(str+'…').width>maxW)str=str.slice(0,-1);return str+'…';}
+  function path(px,py,w,h,r){cx.beginPath();cx.moveTo(px+r,py);cx.arcTo(px+w,py,px+w,py+h,r);cx.arcTo(px+w,py+h,px,py+h,r);cx.arcTo(px,py+h,px,py,r);cx.arcTo(px,py,px+w,py,r);cx.closePath();}
+  function rr(px,py,w,h,r,fill){path(px,py,w,h,r);cx.fillStyle=fill;cx.fill();}
+  function glass(px,py,w,h,r){path(px,py,w,h,r);const g=cx.createLinearGradient(px,py,px,py+h);g.addColorStop(0,'rgba(255,255,255,.12)');g.addColorStop(1,'rgba(255,255,255,.04)');cx.fillStyle=g;cx.fill();cx.strokeStyle=GB;cx.lineWidth=.8;cx.stroke();}
+  function need(h){if(y+h>H-44)np(false);}
+  function sec(title,dot){need(44);cx.fillStyle=dot||GOLD;cx.beginPath();cx.arc(M+4,y+8,3,0,7);cx.fill();txt(title,M+14,y+12,{s:12,w:700});y+=26;}
+  const hn=h=>{const hh=h%12||12;return (h<4?'রাত':h<6?'ভোর':h<12?'সকাল':h<15?'দুপুর':h<18?'বিকাল':h<20?'সন্ধ্যা':'রাত')+' '+toBn(hh)+'টা';};
+  let hs=0;const s0=R.from+R.to+T.revA+'|'+T.cogs+'|'+list.length;for(let i=0;i<s0.length;i++)hs=(hs*31+s0.charCodeAt(i))>>>0;
+  const rid='PH-'+hs.toString(36).toUpperCase().padStart(6,'0').slice(0,6);
+  /* ---- page 1 ---- */
+  np(true);
+  cx.strokeStyle=GOLD;cx.lineWidth=2;cx.beginPath();cx.arc(M+9,y+10,8,0,7);cx.stroke();cx.fillStyle=CY;cx.beginPath();cx.arc(M+9,y+10,2.6,0,7);cx.fill();
+  txt('EXPRESS GAME STORE',M+26,y+13,{s:8.5,w:700,c:GOLD,ls:'3px'});
+  txt(rid+'  ·  '+fmtD(S.today),W-M,y+13,{s:8.5,w:500,c:MUT,a:'right',ls:'1px'});
+  y+=44;
+  txt(R.title,M,y+16,{s:27,w:800});txt(R.sub,M,y+40,{s:13,w:500,c:CY});y+=64;
+  /* hero */
+  const hy=y,hh=128;glass(M,hy,W-2*M,hh,22);
+  cx.save();path(M,hy,W-2*M,hh,22);cx.clip();const hg=cx.createRadialGradient(M+60,hy+30,0,M+60,hy+30,220);hg.addColorStop(0,'rgba(255,201,51,.20)');hg.addColorStop(1,'rgba(255,201,51,0)');cx.fillStyle=hg;cx.fillRect(M,hy,W-2*M,hh);cx.restore();
+  const pcol=T.profit>0.004?GOLD:T.profit<-0.004?RED:INK;
+  txt('মোট লাভ',M+22,hy+30,{s:11,w:600,c:MUT});
+  const pv=profitText(T.profit);cx.font=fnt(800,42);const vg=cx.createLinearGradient(M+22,0,M+250,0);vg.addColorStop(0,T.profit<-0.004?'#FFB0B8':'#FFE08A');vg.addColorStop(1,T.profit<-0.004?RED:'#FFFFFF');
+  txt(pv,M+22,hy+78,{s:42,w:800,c:vg});
+  if(PT.n){const dv=r2(T.profit-PT.profit);const up=dv>=0;const lab=(up?'▲ ':'▼ ')+R.pl+' চেয়ে '+money(Math.abs(dv))+(up?' বেশি':' কম');
+    cx.font=fnt(600,10);const cw=cx.measureText(lab).width+20;rr(M+22,hy+92,cw,22,11,up?'rgba(53,214,155,.16)':'rgba(255,122,138,.16)');txt(lab,M+32,hy+107,{s:10,w:600,c:up?GRN:RED});}
+  else txt(T.n?'এই সময়ে '+toBn(T.n)+' টি বিক্রি':'এই সময়ে কোনো বিক্রি নেই',M+22,hy+107,{s:10.5,w:500,c:MUT});
+  /* gauge */
+  const gx=W-M-66,gy=hy+hh/2,gr=40,pct=T.revA>0?Math.max(0,Math.min(1,T.profit/T.revA)):0;
+  cx.lineCap='round';cx.lineWidth=9;cx.strokeStyle='rgba(255,255,255,.12)';cx.beginPath();cx.arc(gx,gy,gr,0,7);cx.stroke();
+  if(pct>0.004){const gg=cx.createLinearGradient(gx-gr,gy,gx+gr,gy);gg.addColorStop(0,GOLD);gg.addColorStop(1,CY);cx.strokeStyle=gg;cx.shadowColor='rgba(255,201,51,.55)';cx.shadowBlur=10;cx.beginPath();cx.arc(gx,gy,gr,-Math.PI/2,-Math.PI/2+Math.PI*2*pct);cx.stroke();cx.shadowBlur=0;}
+  cx.lineCap='butt';txt(T.revA>0?toBn(Math.round(T.profit/T.revA*100))+'%':'—',gx,gy+4,{s:17,w:800,a:'center'});txt('লাভের হার',gx,gy+19,{s:7.5,c:MUT,a:'center'});
+  y=hy+hh+14;
+  /* kpis */
+  const nS=list.length,avg=nS&&T.unN<nS?r2(T.profit/(nS-T.unN)):0;
+  const kw=(W-2*M-24)/4;
+  [['বিক্রি',money(T.revA),GRN],['মালের দাম',money(T.cogs),GOLD],['বিক্রির সংখ্যা',toBn(nS)+' টি',CY],['গড় লাভ/বিক্রি',nS?money(avg):'—','#B28DFF']].forEach((k,i)=>{
+    const px=M+i*(kw+8);glass(px,y,kw,58,16);cx.fillStyle=k[2];cx.shadowColor=k[2];cx.shadowBlur=6;cx.beginPath();cx.arc(px+13,y+17,2.8,0,7);cx.fill();cx.shadowBlur=0;
+    txt(fit(k[0],kw-30,{s:8.5,w:600}),px+22,y+20,{s:8.5,w:600,c:MUT});txt(fit(k[1],kw-16,{s:13.5,w:800}),px+13,y+43,{s:13.5,w:800});});
+  y+=72;
+  if(T.unN){txt(toBn(T.unN)+' টি বিক্রিতে কেনা দাম বসানো নেই, সেগুলো লাভে ধরা হয়নি।',M,y+2,{s:9,w:500,c:'#FFC933'});y+=16;}
+  /* trend */
+  let series=[];
+  if(mode==='day'){for(let d=R.from;d<=R.to;d=addDays(d,1))series.push({k:toBn(Number(d.slice(8,10))),d:d,v:calc(list.filter(t=>t.date===d)).profit});}
+  else if(mode==='month'){let cur=R.from.slice(0,7);const last=R.to.slice(0,7);while(cur<=last){series.push({k:MONTHS[Number(cur.slice(5,7))-1].slice(0,3),d:cur,v:calc(list.filter(t=>t.date.slice(0,7)===cur)).profit});let yy=Number(cur.slice(0,4)),m2=Number(cur.slice(5,7))+1;if(m2>12){m2=1;yy++;}cur=yy+'-'+pad(m2);}}
+  let best=null;series.forEach(s=>{if(!best||s.v>best.v)best=s;});
+  if(series.length>1&&list.length){
+    sec(mode==='day'?'লাভের গতি · দিন অনুযায়ী':'লাভের গতি · মাস অনুযায়ী',CY);
+    const ch=112,top=y;glass(M,top,W-2*M,ch+30,18);
+    const mx=Math.max.apply(null,series.map(s=>s.v).concat([1])),mn=Math.min.apply(null,series.map(s=>s.v).concat([0])),rg=(mx-mn)||1;
+    const X=i=>M+22+(W-2*M-44)*(series.length>1?i/(series.length-1):.5),Y=v=>top+14+(ch-24)*(1-(v-mn)/rg);
+    cx.strokeStyle='rgba(255,255,255,.1)';cx.lineWidth=.6;cx.setLineDash([2,4]);[0,.5,1].forEach(f=>{const yy=top+14+(ch-24)*f;cx.beginPath();cx.moveTo(M+14,yy);cx.lineTo(W-M-14,yy);cx.stroke();});cx.setLineDash([]);
+    const pts=series.map((s,i)=>[X(i),Y(s.v)]);
+    function curve(){cx.beginPath();cx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++){const cxm=(pts[i-1][0]+pts[i][0])/2;cx.bezierCurveTo(cxm,pts[i-1][1],cxm,pts[i][1],pts[i][0],pts[i][1]);}}
+    curve();cx.lineTo(pts[pts.length-1][0],top+ch-6);cx.lineTo(pts[0][0],top+ch-6);cx.closePath();const ag=cx.createLinearGradient(0,top,0,top+ch);ag.addColorStop(0,'rgba(255,201,51,.38)');ag.addColorStop(1,'rgba(255,201,51,0)');cx.fillStyle=ag;cx.fill();
+    curve();cx.lineWidth=2.2;cx.lineJoin='round';cx.strokeStyle=GOLD;cx.shadowColor='rgba(255,201,51,.7)';cx.shadowBlur=9;cx.stroke();cx.shadowBlur=0;
+    const bi=series.indexOf(best);if(best&&best.v>0){cx.fillStyle='rgba(255,255,255,.22)';cx.beginPath();cx.arc(pts[bi][0],pts[bi][1],7,0,7);cx.fill();cx.fillStyle='#fff';cx.beginPath();cx.arc(pts[bi][0],pts[bi][1],3.2,0,7);cx.fill();}
+    const step=Math.ceil(series.length/10);series.forEach((s,i)=>{if(i%step===0||i===series.length-1)txt(s.k,X(i),top+ch+18,{s:8,w:500,c:MUT,a:'center'});});
+    y=top+ch+46;
+  }
+  /* insights */
+  const its=pfItems(list);
+  const hrs=new Array(24).fill(0);list.forEach(t=>{const h=parseInt(String(t.time||'12:00').slice(0,2),10);if(h>=0&&h<24)hrs[h]++;});
+  let bh=0;hrs.forEach((c,h)=>{if(c>hrs[bh])bh=h;});
+  const cards=[];
+  if(mode!=='tx'&&best&&best.v>0)cards.push(['সেরা '+(mode==='day'?'দিন':'মাস'),mode==='day'?dayLabel(best.d).date:MONTHS[Number(best.d.slice(5,7))-1],profitText(best.v)+' লাভ',GOLD]);
+  if(its.length)cards.push(['সেরা আইটেম',its[0].name,profitText(r2(its[0].pr))+' লাভ',GRN]);
+  if(nS)cards.push(['ব্যস্ততম সময়',hn(bh)+'–'+hn((bh+1)%24).replace(/^[^ ]+ /,''),toBn(hrs[bh])+' টি বিক্রি',CY]);
+  if(cards.length){
+    sec('স্মার্ট ইনসাইট','#B28DFF');const cw=(W-2*M-8*(cards.length-1))/cards.length;
+    cards.forEach((c,i)=>{const px=M+i*(cw+8);glass(px,y,cw,62,16);txt(c[0],px+13,y+19,{s:8.5,w:600,c:c[3]});txt(fit(c[1],cw-22,{s:12,w:700}),px+13,y+39,{s:12,w:700});txt(fit(c[2],cw-22,{s:9}),px+13,y+54,{s:9,c:MUT});});
+    y+=76;
+  }
+  /* forecast */
+  if(R.proj&&R.proj.done>=3&&R.proj.done<R.proj.total&&T.profit>0){
+    const fc=r2(T.profit/R.proj.done*R.proj.total);need(54);
+    glass(M,y,W-2*M,46,16);cx.save();path(M,y,W-2*M,46,16);cx.clip();const fg=cx.createLinearGradient(M,0,W-M,0);fg.addColorStop(0,'rgba(179,141,255,.26)');fg.addColorStop(1,'rgba(79,209,232,.08)');cx.fillStyle=fg;cx.fillRect(M,y,W-2*M,46);cx.restore();
+    rr(M+14,y+13,50,20,10,'rgba(179,141,255,.35)');txt('অনুমান',M+39,y+27,{s:9,w:700,a:'center'});
+    txt('এই গতিতে '+R.proj.label+' লাভ হতে পারে',M+74,y+19,{s:9.5,w:500,c:MUT});txt('≈ '+money(fc),M+74,y+37,{s:14,w:800});
+    y+=60;
+  }
+  /* hour strip */
+  if(nS>2){
+    sec('কোন সময়ে বিক্রি বেশি',GOLD);const mxh=Math.max.apply(null,hrs)||1,cw=(W-2*M)/24;glass(M,y,W-2*M,50,14);
+    hrs.forEach((c,h)=>{const a=c?(.18+.82*c/mxh):.05;rr(M+8+h*((W-2*M-16)/24),y+9,(W-2*M-16)/24-2.4,22,4,c?'rgba(255,201,51,'+a.toFixed(2)+')':'rgba(255,255,255,.06)');});
+    [[0,'রাত ১২'],[6,'সকাল ৬'],[12,'দুপুর ১২'],[18,'সন্ধ্যা ৬']].forEach(l=>txt(l[1],M+8+l[0]*((W-2*M-16)/24),y+44,{s:7.5,c:MUT}));
+    y+=64;
+  }
+  /* items */
+  const top5=its.slice(0,5);
+  if(top5.length){
+    const mxp=Math.max.apply(null,top5.map(x=>Math.abs(x.pr)))||1,hgt=top5.length*26+14;need(hgt+40);sec('আইটেম অনুযায়ী লাভ',GRN);glass(M,y,W-2*M,hgt,18);
+    top5.forEach((x,i)=>{const ry=y+14+i*26;txt(fit(x.name,138,{s:10.5,w:600}),M+16,ry+9,{s:10.5,w:600});txt('×'+qtyText(x.q),M+160,ry+9,{s:9,c:MUT});
+      const bx=M+196,bw=W-M-128-bx;rr(bx,ry+2,bw,8,4,'rgba(255,255,255,.1)');const g2=cx.createLinearGradient(bx,0,bx+bw,0);g2.addColorStop(0,GOLD);g2.addColorStop(1,CY);rr(bx,ry+2,Math.max(6,bw*Math.abs(x.pr)/mxp),8,4,x.pr>=0?g2:RED);
+      txt(profitText(r2(x.pr)),W-M-16,ry+9,{s:10.5,w:700,a:'right',c:x.pr>=0?INK:RED});});
+    y+=hgt+16;
+  }
+  /* mediums */
+  const pm={};list.forEach(t=>{const k=t.provider||'other';pm[k]=(pm[k]||0)+t.amount;});
+  const pk=Object.keys(pm).sort((a,b)=>pm[b]-pm[a]);const tot=pk.reduce((a,k)=>a+pm[k],0)||1;
+  if(pk.length){
+    const COL={bkash:'#E2136E',nagad:'#F6921E',rocket:'#A855C8',upay:'#4FC3F7',tally:'#B28DFF',cash:'#35D69B',other:'#8E8CB8'};
+    need(120);sec('কোন মাধ্যমে কত এসেছে',CY);const bw=W-2*M;glass(M,y,bw,pk.length>4?84:66,18);
+    let px=M+14;const iw=bw-28;cx.save();path(px,y+14,iw,10,5);cx.clip();pk.forEach(k=>{const w=iw*pm[k]/tot;cx.fillStyle=COL[k]||COL.other;cx.fillRect(px,y+14,w,10);px+=w;});cx.restore();
+    pk.forEach((k,i)=>{const col=i%4,row=Math.floor(i/4),lx=M+14+col*(iw/4),ly=y+44+row*20;cx.fillStyle=COL[k]||COL.other;cx.beginPath();cx.arc(lx+3,ly-3,3,0,7);cx.fill();txt((PROV[k]||'অন্য')+' '+toBn(Math.round(pm[k]/tot*100))+'%',lx+11,ly,{s:8.5,w:600});txt(money(r2(pm[k])),lx+11,ly+11,{s:8,c:MUT});});
+    y+=(pk.length>4?84:66)+16;
+  }
+  /* table */
+  if(list.length){
+    need(150);
+    const TH=(cols,labels)=>{path(M,y,W-2*M,22,9);const g=cx.createLinearGradient(M,0,W-M,0);g.addColorStop(0,'rgba(109,107,187,.85)');g.addColorStop(1,'rgba(79,209,232,.45)');cx.fillStyle=g;cx.fill();labels.forEach((l,i)=>txt(l[0],cols[i]+(l[1]==='left'?6:0),y+15,{s:9,w:700,a:l[1]}));y+=28;};
+    if(mode==='tx'){
+      sec('লেনদেনের তালিকা',GOLD);const cols=[M,M+66,W-M-150,W-M-66,W-M-8];
+      const head=()=>TH(cols,[['সময়','left'],['বিবরণ','left'],['মাধ্যম','left'],['টাকা','right'],['লাভ','right']]);head();
+      list.slice().sort((a,b)=>(a.time||'').localeCompare(b.time||'')).forEach((t,i)=>{
+        if(y+26>H-44){np(false);head();}
+        const nm=(t.items&&t.items.length>1)?t.items.map(q=>q.name).join(' + '):(t.name||'বিক্রি');const pr=hasCost(t)?r2(t.amount-saleCost(t)-(t.fee||0)):null;
+        if(i%2)rr(M,y-5,W-2*M,24,8,'rgba(255,255,255,.04)');
+        txt(timeLabel(t.time||'12:00'),M+6,y+10,{s:9,c:MUT});txt(fit(nm,cols[2]-cols[1]-10,{s:10,w:600}),cols[1],y+10,{s:10,w:600});
+        txt(fit((PROV[t.provider]||'')+(t.party?' '+toBn(t.party):''),cols[3]-cols[2]-46,{s:8.5}),cols[2],y+10,{s:8.5,c:MUT});
+        txt(money(t.amount),cols[3],y+10,{s:10,w:700,a:'right'});
+        txt(pr===null?'বাকি':profitText(pr),cols[4],y+10,{s:10,w:700,a:'right',c:pr===null?GOLD:(pr>=0?GRN:RED)});
+        y+=24;});
+    }else{
+      sec(mode==='day'?'দিনের হিসাব':'মাসের হিসাব',GOLD);const cols=[M,M+200,W-M-120,W-M-8];
+      const head=()=>TH(cols,[[mode==='day'?'তারিখ':'মাস','left'],['বিক্রি','right'],['মোট টাকা','right'],['লাভ','right']]);head();
+      const ks=Array.from(new Set(list.map(t=>mode==='day'?t.date:t.date.slice(0,7)))).sort();
+      ks.forEach((k,i)=>{
+        if(y+26>H-44){np(false);head();}
+        const C=calc(list.filter(t=>(mode==='day'?t.date:t.date.slice(0,7))===k));
+        if(i%2)rr(M,y-5,W-2*M,24,8,'rgba(255,255,255,.04)');
+        txt(mode==='day'?dayLabel(k).date+' · '+dayLabel(k).wd:MONTHS[Number(k.slice(5,7))-1]+' '+toBn(k.slice(0,4)),M+6,y+10,{s:10,w:600});
+        txt(toBn(C.n)+' টি',cols[1],y+10,{s:10,a:'right',c:MUT});txt(money(C.rev),cols[2],y+10,{s:10,a:'right'});
+        txt(profitText(C.profit),cols[3],y+10,{s:10,w:700,a:'right',c:C.profit>=0?GRN:RED});y+=24;});
+      need(34);glass(M,y,W-2*M,28,12);txt('মোট',M+10,y+18,{s:11,w:700,c:GOLD});txt(toBn(T.n)+' টি',cols[1],y+18,{s:10,w:700,a:'right'});txt(money(T.rev),cols[2],y+18,{s:10,w:700,a:'right'});txt(profitText(T.profit),cols[3],y+18,{s:11.5,w:800,a:'right',c:pcol});y+=40;
+    }
+  }
+  if(!list.length){glass(M,y,W-2*M,70,18);txt('এই সময়ে কোনো বিক্রি নেই।',W/2,y+40,{s:12,w:600,c:MUT,a:'center'});}
+  pages.forEach((p,i)=>{cx=p.x;cx.strokeStyle='rgba(255,255,255,.14)';cx.lineWidth=.6;cx.beginPath();cx.moveTo(M,H-32);cx.lineTo(W-M,H-32);cx.stroke();
+    txt('পেজের হিসাব · Express Game Store',M,H-16,{s:8,w:500,c:MUT});txt(rid,W/2,H-16,{s:8,w:500,c:MUT,a:'center',ls:'1px'});txt(toBn(i+1)+' / '+toBn(pages.length),W-M,H-16,{s:8,w:600,c:MUT,a:'right'});});
+  return pages.map(p=>p.c);
+}
+function buildPdf(jpgs){
+  const enc=new TextEncoder();const parts=[],offs={};let len=0;
+  function push(b){if(typeof b==='string')b=enc.encode(b);parts.push(b);len+=b.length;}
+  function obj(id,fn){offs[id]=len;push(id+' 0 obj\n');fn();push('\nendobj\n');}
+  push('%PDF-1.4\n');
+  obj(1,function(){push('<< /Type /Catalog /Pages 2 0 R >>');});
+  obj(2,function(){push('<< /Type /Pages /Kids ['+jpgs.map(function(_,i){return (5+3*i)+' 0 R';}).join(' ')+'] /Count '+jpgs.length+' >>');});
+  jpgs.forEach(function(j,i){
+    obj(3+3*i,function(){push('<< /Type /XObject /Subtype /Image /Width 1240 /Height 1754 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+j.length+' >>\nstream\n');push(j);push('\nendstream');});
+    const cs='q 595.28 0 0 841.89 0 0 cm /Im0 Do Q';
+    obj(4+3*i,function(){push('<< /Length '+cs.length+' >>\nstream\n'+cs+'\nendstream');});
+    obj(5+3*i,function(){push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /XObject << /Im0 '+(3+3*i)+' 0 R >> >> /Contents '+(4+3*i)+' 0 R >>');});
   });
-  return Object.keys(m).map(k=>({name:m[k].name,q:m[k].q,amt:r2(m[k].amt)})).sort((a,b)=>b.amt-a.amt);
+  const total=3*jpgs.length+3,xr=len;let x='xref\n0 '+total+'\n0000000000 65535 f \n';
+  for(let id=1;id<total;id++)x+=String(offs[id]).padStart(10,'0')+' 00000 n \n';
+  push(x+'trailer\n<< /Size '+total+' /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF');
+  const out=new Uint8Array(len);let p=0;parts.forEach(function(b){out.set(b,p);p+=b.length;});return out;
+}
+function u8ToB64(u8){let s='';const ch=0x8000;for(let i=0;i<u8.length;i+=ch)s+=String.fromCharCode.apply(null,u8.subarray(i,i+ch));return btoa(s);}
+function pdfDoneCard(name,uri){
+  let el=$('pdone');if(!el){el=document.createElement('div');el.id='pdone';document.body.appendChild(el);}
+  S.pdfUri=uri;
+  el.innerHTML='<div class="pd-card"><b>PDF তৈরি হয়েছে</b><p>'+esc(name)+'<br><small>ফোনের Download/PageHisab ফোল্ডারে জমা আছে</small></p><div class="pd-btns"><button type="button" class="btn primary" data-a="pdf-view">দেখুন</button><button type="button" class="btn" data-a="pdf-share">পাঠান</button><button type="button" class="btn" data-a="pdf-close">বন্ধ</button></div></div>';
+  el.hidden=false;
 }
 function makePdf(kind){
-  const r=pdfHTML(kind);
-  if(nativeOK()){try{A.printHtml(r.title,r.html);toast('"PDF হিসেবে সেভ করুন" বেছে নিন।');return;}catch(e){}}
-  const w=window.open('','_blank');if(w){w.document.write(r.html);w.document.close();setTimeout(function(){w.print();},400);}else toast('PDF বানানো যায়নি।','err');
+  const R=pdfRange(kind);
+  if(!R){toast('শুরু আর শেষের তারিখ ঠিক করে দিন।','err');return;}
+  toast('PDF বানানো হচ্ছে…');
+  setTimeout(function(){
+    try{
+      const cs=pdfPages(R);
+      const jp=cs.map(function(c){const b=atob(c.toDataURL('image/jpeg',0.94).split(',')[1]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;});
+      const pdf=buildPdf(jp),name='PageHisab-'+R.file+'.pdf';
+      if(nativeOK()&&typeof A.savePdf==='function'){
+        const uri=A.savePdf(name,u8ToB64(pdf));
+        if(uri){pdfDoneCard(name,uri);return;}
+        toast('PDF সেভ করা যায়নি।','err');return;
+      }
+      const url=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);
+    }catch(e){toast('PDF বানানো যায়নি।','err');}
+  },60);
 }
 function pdfCardHTML(){
-  return '<article class="card"><h3>PDF রিপোর্ট</h3><p class="help">হিসাবের PDF বানিয়ে ফোনে রাখুন বা হোয়াটসঅ্যাপে পাঠান। খুললে নিচের প্রিন্ট পর্দা থেকে "PDF হিসেবে সেভ করুন" বেছে নিন।</p>'
-    +'<div class="btn-row" style="margin-top:12px"><button type="button" class="btn" data-a="pdf" data-k="day">আজকের</button><button type="button" class="btn" data-a="pdf" data-k="month">এই মাসের</button><button type="button" class="btn" data-a="pdf" data-k="year">এই বছরের</button></div></article>';
+  const mStart=ymOf(S.today)+'-01';
+  return '<article class="card"><h3>PDF রিপোর্ট</h3><p class="help">দরকারি হিসাব নিয়ে সাজানো PDF, ফোনে সেভ হবে এবং সরাসরি পাঠানো যাবে।</p>'
+    +'<div class="pdf-grid"><button type="button" class="btn" data-a="pdf" data-k="day">আজ</button><button type="button" class="btn" data-a="pdf" data-k="yday">গতকাল</button><button type="button" class="btn" data-a="pdf" data-k="month">এই মাস</button><button type="button" class="btn" data-a="pdf" data-k="pmonth">গত মাস</button><button type="button" class="btn" data-a="pdf" data-k="year">এই বছর</button></div>'
+    +'<div class="pdf-custom"><span class="lbl">নিজের পছন্দের সময়</span><div class="grid2"><label for="pdfFrom">শুরু<input id="pdfFrom" type="date" value="'+mStart+'" max="'+S.today+'"></label><label for="pdfTo">শেষ<input id="pdfTo" type="date" value="'+S.today+'" max="'+S.today+'"></label></div>'
+    +'<button type="button" class="btn primary" data-a="pdf" data-k="custom" style="width:100%;margin-top:10px">এই সময়ের PDF বানান</button></div></article>';
 }
 function renderReport(){
   const list=txnsOfMonth(S.viewYm);
@@ -2060,7 +2290,12 @@ document.addEventListener('click',e=>{
   if(pk){lockKey(pk.dataset.pk);return;}
   const el=e.target.closest('[data-a]');if(!el)return;
   const a=el.dataset.a;
-  if(a==='go'){if(S.sheet)closeSheet();go(el.dataset.v);}
+  if(a==='menu-open'){openMenu();}
+  else if(a==='menu-close'){closeMenu();}
+  else if(a==='cust-t'){const k='cu'+el.dataset.p;if(S.open.has(k))S.open.delete(k);else S.open.add(k);renderCust();}
+  else if(a==='cust-name'){const v=($('cuName'+el.dataset.i)||{}).value||'';const nm=custNames();if(v.trim())nm[el.dataset.p]=v.trim();else delete nm[el.dataset.p];save();S.open.delete('cu'+el.dataset.p);renderCust();}
+  else if(a==='goal-save'){const v=Math.max(0,Math.round(num(toEn(($('gl-'+el.dataset.k)||{}).value||'0'))||0));if(!DB.settings.goals)DB.settings.goals={};DB.settings.goals[el.dataset.k]=v;save();renderGoal();}
+  else if(a==='go'){closeMenu();if(S.sheet)closeSheet();go(el.dataset.v);}
   else if(a==='go-todo'){go('todo');}
   else if(a==='pal'){DB.settings.pal=el.dataset.id;save();applyPal();renderAll();}
   else if(a==='sw-del'){const t=DB.txns.find(x=>x.id===el.dataset.id);if(t){DB.txns=DB.txns.filter(x=>x.id!==t.id);save();renderAll();if(!$('search').hidden)srRender();undoToast('এন্ট্রি মুছে গেছে।',t);}}
@@ -2132,6 +2367,9 @@ document.addEventListener('click',e=>{
   else if(a==='bk-now'){pushNative();let n='';try{n=A.backupNow();}catch(e){}if(n){DB.settings.lastBk=S.today;save();renderSettings();toast('ব্যাকআপ জমা হয়েছে: Download/PageHisab');}else toast('ব্যাকআপ নেওয়া যায়নি।','err');}
   else if(a==='bk-pick'){try{A.pickBackup();}catch(e){}}
   else if(a==='pdf'){makePdf(el.dataset.k);}
+  else if(a==='pdf-view'){try{A.openPdf(S.pdfUri,false);}catch(e){}}
+  else if(a==='pdf-share'){try{A.openPdf(S.pdfUri,true);}catch(e){}}
+  else if(a==='pdf-close'){const d=$('pdone');if(d)d.hidden=true;}
   else if(a==='bk-share'){shareBackup();}
   else if(a==='bk-restore'){restoreBackup();}
 });
@@ -2206,6 +2444,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target&&e.
 function closeFab(){const f=$('fab');if(f&&!f.hidden){f.hidden=true;}document.querySelectorAll('.tb.add').forEach(b=>b.classList.remove('open'));}
 function openFab(){const f=$('fab');f.hidden=false;document.querySelectorAll('.tb.add').forEach(b=>b.classList.add('open'));try{if(navigator.vibrate)navigator.vibrate(10);}catch(e){}}
 window.__back=function(){
+  if($('drawer')&&!$('drawer').hidden){closeMenu();return true;}
   if($('pfd')&&!$('pfd').hidden){closePf();return true;}
   if($('search')&&!$('search').hidden){closeSearch();return true;}
   if($('fab')&&!$('fab').hidden){closeFab();return true;}
@@ -2214,6 +2453,84 @@ window.__back=function(){
   if(S.view!=='home'){go('home');return true;}
   return false;
 };
+
+
+/* ---------- sidebar + new pages (v31) ---------- */
+function openMenu(){const d=$('drawer');d.hidden=false;void d.offsetWidth;d.classList.add('on');}
+function closeMenu(){const d=$('drawer');if(!d||d.hidden)return;d.classList.remove('on');setTimeout(function(){d.hidden=true;},240);}
+function ago(n){const d=new Date(S.today+'T12:00:00');d.setDate(d.getDate()-n);return dateStr(d);}
+function custList(){
+  const m=new Map();
+  DB.txns.forEach(t=>{
+    if(t.kind!=='sale'||!t.party)return;
+    const k=String(t.party).trim();if(!k)return;
+    const e=m.get(k)||{p:k,n:0,total:0,last:'',items:new Map(),prov:t.provider};
+    e.n++;e.total+=t.amount;if(t.date>=e.last){e.last=t.date;e.prov=t.provider;}
+    const nm=t.name||(t.lines&&t.lines.length?t.lines[0].name:'')||(t.items&&t.items.length?t.items[0].name:'');
+    if(nm)e.items.set(nm,(e.items.get(nm)||0)+1);
+    m.set(k,e);
+  });
+  return [...m.values()].sort((a,b)=>b.total-a.total);
+}
+function custNames(){if(!DB.settings.custNames)DB.settings.custNames={};return DB.settings.custNames;}
+function renderCust(){
+  const el=$('custBody');if(!el)return;
+  const L=custList();
+  if(!L.length){el.innerHTML=emptyHTML('check','এখনও কোনো ক্রেতা নেই','যে নম্বর থেকে টাকা আসবে, সেটা এখানে নিজে থেকেই জমা হবে।','');return;}
+  const rep=L.filter(x=>x.n>=2).length;
+  let h='<div class="cu-sum"><article class="card"><span class="lbl">মোট ক্রেতা</span><b>'+toBn(L.length)+'</b></article><article class="card"><span class="lbl">বারবার কেনে</span><b>'+toBn(rep)+'</b></article></div>';
+  h+='<article class="card" style="padding-top:6px;padding-bottom:6px">';
+  const nm=custNames();
+  h+=L.slice(0,60).map((x,i)=>{
+    let fav='',mx=0;x.items.forEach((c,k)=>{if(c>mx){mx=c;fav=k;}});
+    const tag=nm[x.p],open=S.open.has('cu'+x.p);
+    const ini=tag?tag.trim().charAt(0):'#';
+    return '<div class="cu-row"><button type="button" class="cu-h" data-a="cust-t" data-p="'+esc(x.p)+'"><span class="cu-av">'+esc(ini)+'</span><span class="cu-m"><b>'+(tag?esc(tag):esc(toBn(x.p)))+(x.n>=5?'<span class="vip">VIP</span>':'')+'</b><em>'+(tag?esc(toBn(x.p))+' · ':'')+toBn(x.n)+' বার · শেষ '+fmtD(x.last)+'</em></span><span class="cu-t">'+money(x.total)+'<small>'+(PROV[x.prov]||'')+'</small></span></button>'
+      +(open?'<div class="cu-d">'+(fav?'<div>সবচেয়ে বেশি: <b style="color:var(--text)">'+esc(fav)+'</b></div>':'')+'<div style="margin-top:8px"><input type="text" id="cuName'+i+'" placeholder="নাম লিখে রাখুন" value="'+esc(tag||'')+'" maxlength="30"></div><div class="btn-row"><button type="button" class="btn primary" data-a="cust-name" data-p="'+esc(x.p)+'" data-i="'+i+'">সংরক্ষণ</button></div></div>':'')+'</div>';
+  }).join('');
+  h+='</article><p class="help" style="text-align:center">৫ বা তার বেশি বার কিনলে VIP চিহ্ন বসে।</p>';
+  el.innerHTML=h;
+}
+function ringSvg(pct,col){
+  const r=62,c=2*Math.PI*r,v=Math.min(1,Math.max(0,pct));
+  return '<svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="'+r+'" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="75" cy="75" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+(c*(1-v)).toFixed(1)+'"/></svg>';
+}
+function goalCard(title,have,goal,key,extra){
+  const pct=goal>0?have/goal:0,done=goal>0&&have>=goal;
+  let h='<article class="card"><span class="lbl">'+title+'</span><div class="gl-ring">'+ringSvg(pct,done?'var(--gold)':'var(--accent)')+'<div class="gl-c"><b>'+toBn(Math.round(pct*100))+'%</b><span>'+(goal>0?money(Math.max(0,have))+' / '+money(goal):'লক্ষ্য ঠিক করা নেই')+'</span></div></div>';
+  if(done)h+='<div class="gl-done">✓ অভিনন্দন! লক্ষ্য পূরণ হয়েছে</div>';
+  else if(goal>0)h+='<p class="help" style="text-align:center;margin:0">আর '+money(goal-have)+' বাকি</p>';
+  if(extra)h+='<p class="help" style="text-align:center;margin:6px 0 0">'+extra+'</p>';
+  h+='<div class="gl-in"><input type="number" inputmode="numeric" id="gl-'+key+'" placeholder="টার্গেট (৳)" value="'+(goal>0?goal:'')+'"><button type="button" class="btn primary" data-a="goal-save" data-k="'+key+'">ঠিক করুন</button></div></article>';
+  return h;
+}
+function renderGoal(){
+  const el=$('goalBody');if(!el)return;
+  const g=DB.settings.goals||{};
+  const day=calc(DB.txns.filter(t=>t.date===S.today)).profit;
+  const ym=ymOf(S.today),mo=calc(DB.txns.filter(t=>t.date&&t.date.slice(0,7)===ym)).profit;
+  const dn=Number(S.today.slice(8,10)),dim=new Date(Number(ym.slice(0,4)),Number(ym.slice(5,7)),0).getDate();
+  const proj=Math.round(mo/Math.max(1,dn)*dim);
+  el.innerHTML=goalCard('আজকের লক্ষ্য',day,g.day||0,'day','')
+    +goalCard('এই মাসের লক্ষ্য',mo,g.month||0,'month','এই গতিতে মাস শেষে আনুমানিক '+money(proj));
+}
+function renderWatch(){
+  const el=$('watchBody');if(!el)return;
+  const from=ago(30),m=new Map();
+  DB.txns.forEach(t=>{
+    if(t.kind!=='sale'||!hasCost(t)||t.date<from)return;
+    const nm=t.name||(t.lines&&t.lines.length===1?t.lines[0].name:'');
+    if(!nm)return;const k=nm.toLowerCase();
+    const e=m.get(k)||{name:nm,rev:0,cost:0,n:0};e.rev+=t.amount;e.cost+=saleCost(t);e.n++;m.set(k,e);
+  });
+  const L=[...m.values()].filter(x=>x.rev>0).map(x=>({name:x.name,n:x.n,pr:x.rev-x.cost,pc:(x.rev-x.cost)/x.rev*100})).sort((a,b)=>a.pc-b.pc);
+  if(!L.length){el.innerHTML=emptyHTML('check','দেখার মতো তথ্য নেই','গত ৩০ দিনে কেনা দামসহ আইটেম বিক্রি হলে এখানে লাভের হার দেখা যাবে।','');return;}
+  const bad=L.filter(x=>x.pc<0).length,low=L.filter(x=>x.pc>=0&&x.pc<5).length;
+  let h='<article class="card"><span class="lbl">সারসংক্ষেপ</span><p style="margin:6px 0 0">'+(bad?'<b style="color:#E0556A">'+toBn(bad)+'টি আইটেমে লোকসান</b> · ':'')+(low?toBn(low)+'টিতে লাভ খুব কম · ':'')+toBn(L.length-bad-low)+'টি ঠিক আছে</p></article><article class="card" style="padding-top:6px;padding-bottom:6px">';
+  h+=L.slice(0,40).map(x=>{const cls=x.pc<0?'bad':x.pc<5?'low':'ok';return '<div class="wt-r"><div class="wt-n"><b>'+esc(x.name)+'</b><em>'+toBn(x.n)+' বার বিক্রি · লাভ '+profitText(r2(x.pr))+'</em></div><span class="wt-p '+cls+'">'+toBn((Math.round(x.pc*10)/10).toString())+'%</span></div>';}).join('');
+  h+='</article><p class="help" style="text-align:center">৫%-এর কম হলে দাম আবার দেখে নিন।</p>';
+  el.innerHTML=h;
+}
 
 /* ---------- boot ---------- */
 function boot(){
