@@ -703,7 +703,7 @@ html[data-pal="light"] .gp{background:#fff}
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৩৯</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৪০</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="menu-open" aria-label="মেনু"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -2512,7 +2512,7 @@ $('sheet').addEventListener('change',onField);
 document.addEventListener('change',function(e){
   const t=e.target,g=t&&t.dataset&&t.dataset.g;if(!g)return;
   if(g==='u-price'){const u=unitById(t.dataset.id);if(u){u.price=Math.max(0,num(toEn(t.value))||0);save();renderStock();}}
-  else if(g==='i-price'){const it=DB.pl.items.find(x=>x.id===t.dataset.id);if(it){it.price=Math.max(0,num(toEn(t.value))||0);save();renderStock();}}
+  else if(g==='i-price'){const it=DB.pl.items.find(x=>x.id===t.dataset.id);if(it){it.price=Math.max(0,num(toEn(t.value))||0);syncLvlSet();save();renderStock();}}
 });
 document.addEventListener('input',function(e){const t=e.target;if(t&&t.dataset&&t.dataset.g==='pk-name'&&S.pk)S.pk.name=t.value;});
 
@@ -2725,8 +2725,22 @@ document.addEventListener('change',function(e){
 
 /* ---------- supplier price paste (v38) ---------- */
 function ppNorm(x){return String(x||'').toLowerCase().replace(/[^a-z0-9ঀ-৿]+/g,'');}
+function ppClean(t){
+  t=String(t||'').replace(/[︀-️​-‏⁠﻿]/g,'');
+  try{t=t.normalize('NFKC');}catch(e){}
+  t=t.replace(/[\u{1F130}-\u{1F189}]/gu,function(c){const cp=c.codePointAt(0),b=cp>=0x1F170?0x1F170:cp>=0x1F150?0x1F150:0x1F130;const n=cp-b;return n<26?String.fromCharCode(65+n):c;});
+  t=t.replace(/[Ͳͳ]/g,'T').replace(/[  -   　]/g,' ');
+  return t;
+}
+const PP_L6=['lvl6','lvl10','lvl15','lvl20','lvl25','lvl30'];
+function ppSetItem(){return DB.pl.items.find(x=>{const n=ppNorm(x.name);return n.indexOf('levelup')>=0&&n.indexOf('set')>=0;});}
+function syncLvlSet(){
+  const pr={};DB.pl.items.forEach(i=>{pr[ppNorm(i.name)]=i.price;});
+  if(!PP_L6.every(k=>pr[k]!=null))return;
+  const ex=ppSetItem();if(ex)ex.price=r2(PP_L6.reduce((a,k)=>a+pr[k],0));
+}
 function ppParse(text){
-  const t=toEn(String(text||'')),lines=t.split(/\r?\n/);
+  const t=toEn(ppClean(text)),lines=t.split(/\r?\n/);
   const found=new Map(),order=[];let ign=0;
   lines.forEach(raw=>{
     const L=raw.replace(/[​-‍﻿]/g,'').trim();if(!L)return;
@@ -2754,6 +2768,14 @@ function ppParse(text){
       else r={t:'n',name:f.left,sub:'নতুন আইটেম',old:null,nw:f.price};}
     if(r){r.same=r.old!=null&&Math.abs(r.old-r.nw)<0.0005;if(r.def==null)r.def=!r.same;r.sel=r.def;rows.push(r);}
   });
+  const pr={};DB.pl.items.forEach(i=>{pr[ppNorm(i.name)]=i.price;});
+  rows.forEach(r=>{if(r.t==='i'||r.t==='n')pr[ppNorm(r.name)]=r.nw;});
+  if(PP_L6.every(k=>pr[k]!=null)){
+    for(let i=rows.length-1;i>=0;i--){const n=ppNorm(rows[i].name);if(n.indexOf('levelup')>=0&&n.indexOf('set')>=0)rows.splice(i,1);}
+    const ex=ppSetItem(),total=r2(PP_L6.reduce((a,k)=>a+pr[k],0));
+    const row={t:ex?'i':'n',id:ex?ex.id:undefined,name:ex?ex.name:'Level Up Pass Complete Set',sub:'লেভেল ৬ থেকে ৩০ সবগুলোর যোগফল',old:ex?ex.price:null,nw:total};
+    row.same=row.old!=null&&Math.abs(row.old-row.nw)<0.0005;row.def=!row.same;row.sel=row.def;rows.push(row);
+  }
   return {rows:rows,ign:ign};
 }
 function ppRender(){
@@ -2789,6 +2811,7 @@ function ppApply(){
     else if(r.t==='i'){const it=DB.pl.items.find(x=>x.id===r.id);if(it){it.price=r.nw;n++;}}
     else{DB.pl.items.push({id:'i'+Date.now().toString(36)+i,name:r.name,price:r.nw});n++;}
   });
+  syncLvlSet();
   const d=new Date();DB.settings.ppLast=fmtD(S.today)+' · '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
   save();ppClose();renderStock();
   S.ppUndo=snap;
