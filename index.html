@@ -250,7 +250,7 @@ details.how ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:
 .lines{display:grid;gap:10px}
 .line{display:grid;grid-template-columns:minmax(0,1fr) 5.2rem auto;gap:8px;align-items:end}
 .line .rm{width:42px;height:48px;border:0;background:transparent;color:var(--muted);border-radius:10px}
-.itrow{display:grid;grid-template-columns:1fr 56px 84px 38px;gap:8px;align-items:end}
+.itrow{display:grid;grid-template-columns:1fr 78px 84px 38px;gap:8px;align-items:end}
 .itrow label{font-size:.78rem}
 .itrow .icon-btn{width:38px;height:48px;border-radius:var(--r-sm)}
 .itwrap{display:grid;gap:10px}
@@ -611,12 +611,29 @@ main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
 .wt-n{flex:1;min-width:0}.wt-n b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wt-n em{font-style:normal;font-size:.76rem;color:var(--muted)}
 .wt-p{font-weight:700;font-size:.92rem;padding:3px 10px;border-radius:99px}
 .wt-p.bad{background:rgba(220,60,80,.16);color:#E0556A}.wt-p.low{background:rgba(240,170,40,.18);color:#D99A1E}.wt-p.ok{background:rgba(47,168,120,.16);color:#2FA878}
+
+.qtyw{position:relative;display:block}.qtyw input{width:100%;padding-right:28px}
+.qs{position:absolute;right:3px;top:3px;bottom:3px;width:24px;display:flex;flex-direction:column;gap:2px}
+.qs button{display:grid;place-items:center;flex:1;border:0;border-radius:8px;background:var(--gold-soft);color:var(--gold);font-size:.7rem;line-height:1;padding:0;touch-action:manipulation}
+.qs button:active{background:var(--gold);color:#fff}
+.gm-tot{display:flex;justify-content:space-between;align-items:flex-end}.gm-tot b{font-size:1.7rem}
+.gm-row{border-top:1px solid var(--line)}.gm-row:first-child{border-top:0}
+.gm-h{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;color:var(--text);padding:13px 0;text-align:left;font:inherit}
+.gm-dot{width:12px;height:12px;border-radius:50%;flex:none}
+.gm-m{flex:1;min-width:0}.gm-m b{display:block}.gm-m em{font-style:normal;font-size:.76rem;color:var(--muted)}
+.gm-bar{display:block;height:6px;border-radius:9px;background:var(--line);margin-top:7px;overflow:hidden}.gm-bar i{display:block;height:100%;border-radius:9px}
+.gm-d{padding:0 0 14px;font-size:.86rem}
+.gm-d h4{margin:12px 0 6px;font-size:.78rem;color:var(--muted);font-weight:600}
+.gm-it{display:flex;justify-content:space-between;gap:8px;padding:4px 0}
+.gm-d input,.gm-d textarea,.gm-d select{width:100%;padding:9px 11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:.88rem}
+.gm-sale{padding:8px 0;border-top:1px dashed var(--line)}.gm-sale .t{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px}
+.gm-sale .t span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৩১</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৩২</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="menu-open" aria-label="মেনু"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -626,6 +643,10 @@ main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
     <div id="homeBody" class="stack"></div>
   </section>
 
+  <section class="view" id="v-games" hidden>
+    <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="home" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>গেম অনুযায়ী লাভ</h1></div><p>মাসে কোন গেম বা অ্যাপ থেকে কত লাভ।</p></header>
+    <div id="gamesBody" class="stack"></div>
+  </section>
   <section class="view" id="v-cust" hidden>
     <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="home" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>ক্রেতা বই</h1></div><p>কে কতবার কিনেছে, একনজরে।</p></header>
     <div id="custBody" class="stack"></div>
@@ -676,7 +697,7 @@ main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
 
 <div id="pfd" hidden role="dialog" aria-label="লাভের বিস্তারিত"><div class="sr-top"><button type="button" class="icon-btn" data-a="pf-close" aria-label="ফিরুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b style="font-size:1.1rem">লাভের বিস্তারিত</b></div><div id="pfBody" class="sr-body"></div></div>
 <div id="search" hidden role="dialog" aria-label="খুঁজুন"><div class="sr-top"><button type="button" class="icon-btn" data-a="search-close" aria-label="ফিরুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sr-box"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="srInput" type="text" enterkeyhint="search" autocomplete="off" placeholder="আইটেম, টাকা, তারিখ, মাধ্যম..." aria-label="খুঁজুন"><button type="button" id="srClear" class="sr-x" data-a="search-clear" aria-label="মুছুন" hidden>×</button></div></div><div id="srBody" class="sr-body"></div></div>
-<div id="drawer" hidden><div class="dr-scrim" data-a="menu-close"></div><aside class="dr-panel" role="dialog" aria-label="মেনু"><div class="dr-head"><div class="dr-logo">প</div><div><b>পেজের হিসাব</b><em>Express Game Store</em></div></div><div class="dr-sec">প্রধান</div><button type="button" class="dr-i" data-a="go" data-v="home"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হোম</b><em>আজকের সারসংক্ষেপ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="days"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হিসাব</b><em>দিন ও মাসের লেনদেন</em></span></button><button type="button" class="dr-i" data-a="go" data-v="stock"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>দামের তালিকা</b><em>দাম ও কেনা দাম</em></span></button><button type="button" class="dr-i" data-a="go" data-v="report"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>রিপোর্ট</b><em>লাভের বিশ্লেষণ ও PDF</em></span></button><button type="button" class="dr-i" data-a="go" data-v="todo"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>করণীয়</b><em>বাকি কাজ</em></span></button><div class="dr-sec">নতুন</div><button type="button" class="dr-i" data-a="go" data-v="cust"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 19v-1a3 3 0 0 0-2-2.8M16 4.3a3.5 3.5 0 0 1 0 6.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>ক্রেতা বই</b><em>কে কতবার কিনেছে</em></span></button><button type="button" class="dr-i" data-a="go" data-v="goal"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভের লক্ষ্য</b><em>দিন ও মাসের টার্গেট</em></span></button><button type="button" class="dr-i" data-a="go" data-v="watch"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4l9 16H3zM12 10v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভ নজরদারি</b><em>কম লাভের আইটেম</em></span></button><div class="dr-sec">অন্যান্য</div><button type="button" class="dr-i" data-a="go" data-v="settings"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সেটিংস</b><em>থিম, লক, ব্যাকআপ</em></span></button></aside></div>
+<div id="drawer" hidden><div class="dr-scrim" data-a="menu-close"></div><aside class="dr-panel" role="dialog" aria-label="মেনু"><div class="dr-head"><div class="dr-logo">প</div><div><b>পেজের হিসাব</b><em>Express Game Store</em></div></div><div class="dr-sec">প্রধান</div><button type="button" class="dr-i" data-a="go" data-v="home"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হোম</b><em>আজকের সারসংক্ষেপ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="days"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হিসাব</b><em>দিন ও মাসের লেনদেন</em></span></button><button type="button" class="dr-i" data-a="go" data-v="stock"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>দামের তালিকা</b><em>দাম ও কেনা দাম</em></span></button><button type="button" class="dr-i" data-a="go" data-v="report"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>রিপোর্ট</b><em>লাভের বিশ্লেষণ ও PDF</em></span></button><button type="button" class="dr-i" data-a="go" data-v="todo"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>করণীয়</b><em>বাকি কাজ</em></span></button><div class="dr-sec">নতুন</div><button type="button" class="dr-i" data-a="go" data-v="games"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3a9 9 0 1 0 9 9h-9zM15 3.5A9 9 0 0 1 20.5 9H15z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>গেম অনুযায়ী লাভ</b><em>কোন গেম থেকে কত লাভ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="cust"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 19v-1a3 3 0 0 0-2-2.8M16 4.3a3.5 3.5 0 0 1 0 6.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>ক্রেতা বই</b><em>কে কতবার কিনেছে</em></span></button><button type="button" class="dr-i" data-a="go" data-v="goal"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভের লক্ষ্য</b><em>দিন ও মাসের টার্গেট</em></span></button><button type="button" class="dr-i" data-a="go" data-v="watch"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4l9 16H3zM12 10v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভ নজরদারি</b><em>কম লাভের আইটেম</em></span></button><div class="dr-sec">অন্যান্য</div><button type="button" class="dr-i" data-a="go" data-v="settings"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সেটিংস</b><em>থিম, লক, ব্যাকআপ</em></span></button></aside></div>
 <div id="fab" hidden><div class="fab-scrim" data-a="fab-close"></div><div class="fab-menu" role="menu">
   <button type="button" role="menuitem" data-a="fab-sale"><span class="fi g"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>নতুন বিক্রি</button>
   <button type="button" role="menuitem" data-a="fab-expense"><span class="fi r"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>নতুন খরচ</button>
@@ -937,8 +958,8 @@ function save(){
 }
 
 /* ---------- state ---------- */
-const VIEWS=['home','days','add','stock','report','todo','settings','cust','goal','watch'];
-const TABS={home:'home',days:'days',add:'add',stock:'stock',report:'report',todo:'home',settings:'home',cust:'home',goal:'home',watch:'home'};
+const VIEWS=['home','days','add','stock','report','todo','settings','cust','goal','watch','games'];
+const TABS={home:'home',days:'days',add:'add',stock:'stock',report:'report',todo:'home',settings:'home',cust:'home',goal:'home',watch:'home',games:'home'};
 const S={view:'home',today:dateStr(new Date()),viewYm:'',open:new Set(),sheet:null,pendingDel:null,toastTimer:null,tgErr:'',tgBusy:false,smsPerm:null,lastSync:0,lock:{buf:'',mode:'check',first:''}};
 S.viewYm=ymOf(S.today);
 S.open.add(S.today);
@@ -1032,7 +1053,7 @@ window.addEventListener('hashchange',()=>{
 function renderAll(){
   const L=dayLabel(S.today);
   $('todayLabel').textContent=L.wd+', '+L.date+' '+toBn(S.today.slice(0,4));
-  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderCust();renderGoal();renderWatch();renderBadge();
+  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderCust();renderGoal();renderWatch();renderGames();renderBadge();
 }
 function pendingCount(){return DB.inbox.length+DB.txns.filter(t=>t.kind==='sale'&&!hasCost(t)).length;}
 function renderBadge(){
@@ -1868,13 +1889,13 @@ function itemsTotal(d){
 function itemsLabel(items){return items.filter(i=>String(i.name||'').trim()).map(i=>{const q=num(toEn(String(i.qty)))||1;return i.name.trim()+(q!==1?' ×'+q:'');}).join(', ');}
 function blankDraft(kind){
   return {mode:'new',kind,amount:'',amtAuto:true,fee:'',provider:'bkash',party:'',note:'',date:S.today,time:nowHM(),trx:'',src:'manual',cat:EXP_CATS[0],
-    name:'',cost:'',costAuto:true,ffHow:'',items:[newItem()],gcat:DB.settings.lastCat||'ff',lines:[],pid:'',qty:'',newName:'',newSell:'',updBuy:true,remember:true,id:null,inboxId:null,confirmDel:false};
+    name:'',cost:'',costAuto:true,ffHow:'',items:[newItem()],gc:'',gcat:DB.settings.lastCat||'ff',lines:[],pid:'',qty:'',newName:'',newSell:'',updBuy:true,remember:true,id:null,inboxId:null,confirmDel:false};
 }
 function draftFromTxn(t){
   const d=blankDraft(t.kind);
   d.mode='edit';d.id=t.id;d.amount=String(t.amount);d.amtAuto=false;d.fee=t.fee?String(t.fee):'';
   d.provider=t.provider||'other';d.party=t.party||'';d.note=t.note||'';d.date=t.date;d.time=t.time||'12:00';d.trx=t.trx||'';d.src=t.src||'manual';
-  if(t.kind==='sale'){d.name=t.name||(t.lines&&t.lines.length?t.lines.map(l=>l.name).join(', '):'');d.cost=hasCost(t)?String(r2(saleCost(t))):'';d.gcat=t.gcat||'other';d.costAuto=false;
+  if(t.kind==='sale'){d.gc=t.gc||'';d.name=t.name||(t.lines&&t.lines.length?t.lines.map(l=>l.name).join(', '):'');d.cost=hasCost(t)?String(r2(saleCost(t))):'';d.gcat=t.gcat||'other';d.costAuto=false;
     if(t.items&&t.items.length){d.items=t.items.map(i=>({name:i.name,qty:String(i.qty||1),cost:i.cost==null?'':String(i.cost),auto:false,how:''}));}
     else if(hasCost(t)){d.items=[{name:d.name,qty:'1',cost:d.cost,auto:false,how:''}];}
     else{const parts=d.name.split(',').map(x=>x.trim()).filter(Boolean);d.items=(parts.length?parts:['']).map(n=>{const it=newItem(n);itemLookup(it,d.gcat);return it;});}
@@ -1937,12 +1958,13 @@ function sheetHTML(){
     h+='<div class="itwrap"><span class="mlabel">কী কী বিক্রি করলেন</span>';
     d.items.forEach((it,i)=>{
       h+='<div class="itrow"><label>নাম<input type="text" autocomplete="off" data-f="i-name" data-i="'+i+'" value="'+esc(it.name)+'" placeholder="যেমন: 1010 Diamond"></label>'
-        +'<label>সংখ্যা<input type="text" inputmode="numeric" data-f="i-qty" data-i="'+i+'" value="'+esc(toBn(it.qty))+'"></label>'
+        +'<label>সংখ্যা<span class="qtyw"><input type="text" inputmode="numeric" data-f="i-qty" data-i="'+i+'" value="'+esc(toBn(it.qty))+'"><span class="qs"><button type="button" data-a="qty-up" data-i="'+i+'" aria-label="বাড়ান"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-a="qty-dn" data-i="'+i+'" aria-label="কমান"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span></span></label>'
         +'<label>কেনা দাম<input type="text" inputmode="decimal" data-f="i-cost" data-i="'+i+'" id="ic'+i+'" value="'+esc(it.cost!==''&&it.cost!=null?toBn(it.cost):'')+'" placeholder="০"></label>'
         +(d.items.length>1?'<button type="button" class="icon-btn" data-a="it-rm" data-i="'+i+'" aria-label="মুছুন">'+I.x+'</button>':'<span></span>')+'</div>'
         +'<p class="itnote'+(it.how?'':' no')+'" id="in'+i+'">'+(it.how?'দাম মিলেছে: '+esc(it.how)+' (হাতে বদলানো যাবে)':'')+'</p><div class="sugg" id="sg'+i+'"></div>';
     });
     h+='<button type="button" class="btn ghost" data-a="it-add">+ আরেকটা আইটেম যোগ করুন</button></div>';
+    h+='<label for="shGc">ক্যাটাগরি<select id="shGc" data-f="gc">'+gcOptions(d.gc,'অটো ('+catName(autoCatOf(d))+')')+'</select></label>';
     h+='<label for="shAmount">বিক্রির টাকা (মোট)<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ১০০০"></label>';
   }else{
     h+='<label for="shAmount">টাকার পরিমাণ<input id="shAmount" type="text" inputmode="decimal" data-f="amount" value="'+esc(d.amount?toBn(d.amount):'')+'" placeholder="যেমন ১৫০"></label>';
@@ -2015,7 +2037,7 @@ function saveSheet(){
   const t={id:d.id||('m_'+uid()),kind:d.kind,amount:r2(amount),fee:r2(fee),provider:d.provider,trx:d.trx||'',party:d.party||'',note:String(d.note||'').trim(),date:d.date,time:d.time||'12:00',ts:ts,src:d.src||'manual'};
   
   if(d.kind==='sale'){
-    t.gcat=d.gcat||'other';DB.settings.lastCat=t.gcat;
+    t.gcat=d.gcat||'other';DB.settings.lastCat=t.gcat;t.gc=d.gc||'';
     const T=itemsTotal(d);
     t.name=itemsLabel(d.items);
     t.items=d.items.filter(i=>String(i.name||'').trim()).map(i=>({name:i.name.trim(),qty:num(toEn(String(i.qty)))||1,cost:(String(i.cost).trim()===''||isNaN(num(toEn(String(i.cost)))))?null:r2(Math.max(0,num(toEn(String(i.cost)))))}));
@@ -2283,14 +2305,19 @@ function shiftMonth(delta){
   const ym=d.getFullYear()+'-'+pad(d.getMonth()+1);
   if(ym>ymOf(S.today))return;
   S.viewYm=ym;S.open=new Set(ym===ymOf(S.today)?[S.today]:[]);
-  renderDays();renderReport();
+  renderDays();renderReport();renderGames();
 }
 document.addEventListener('click',e=>{
   const pk=e.target.closest('[data-pk]');
   if(pk){lockKey(pk.dataset.pk);return;}
   const el=e.target.closest('[data-a]');if(!el)return;
   const a=el.dataset.a;
-  if(a==='menu-open'){openMenu();}
+  if(a==='qty-up'||a==='qty-dn'){const inp=document.querySelector('[data-f=i-qty][data-i="'+el.dataset.i+'"]');if(inp){let n=Math.round(num(toEn(inp.value))||1);n=a==='qty-up'?n+1:Math.max(1,n-1);inp.value=toBn(n);inp.dispatchEvent(new Event('input',{bubbles:true}));}}
+  else if(a==='gm-t'){const k='gm'+el.dataset.c;if(S.open.has(k))S.open.delete(k);else S.open.add(k);S.gmDel=null;renderGames();}
+  else if(a==='gm-save'){const c=catList().find(x=>x.id===el.dataset.c);if(c){const n=($('gmN'+c.id)||{}).value||'';if(n.trim())c.name=n.trim();c.kw=kwParse(($('gmK'+c.id)||{}).value);save();renderGames();toast('সংরক্ষণ হয়েছে','ok');}}
+  else if(a==='gm-del'){if(S.gmDel!==el.dataset.c){S.gmDel=el.dataset.c;renderGames();}else{DB.settings.cats2=catList().filter(x=>x.id!==el.dataset.c);DB.txns.forEach(x=>{if(x.gc===el.dataset.c)x.gc='';});S.gmDel=null;save();renderGames();}}
+  else if(a==='gm-add'){const n=(($('gmNewN')||{}).value||'').trim();if(!n){toast('নাম লিখুন।','err');return;}catList().push({id:'c'+Date.now().toString(36),name:n,kw:kwParse(($('gmNewK')||{}).value)});S.open.delete('gm-new');save();renderGames();}
+  else if(a==='menu-open'){openMenu();}
   else if(a==='menu-close'){closeMenu();}
   else if(a==='cust-t'){const k='cu'+el.dataset.p;if(S.open.has(k))S.open.delete(k);else S.open.add(k);renderCust();}
   else if(a==='cust-name'){const v=($('cuName'+el.dataset.i)||{}).value||'';const nm=custNames();if(v.trim())nm[el.dataset.p]=v.trim();else delete nm[el.dataset.p];save();S.open.delete('cu'+el.dataset.p);renderCust();}
@@ -2403,9 +2430,10 @@ function onField(e){
         const n=$('in'+i);if(n){n.textContent=it.how?'দাম মিলেছে: '+it.how+' (হাতে বদলানো যাবে)':'';n.className='itnote'+(it.how?'':' no');}
       }
     }
-    if(f==='i-name'){if(e.type==='input')showSugg(i);}else{const b=$('sg'+i);if(b)b.innerHTML='';}
+    if(f==='i-name'){if(e.type==='input')showSugg(i);updGc();}else{const b=$('sg'+i);if(b)b.innerHTML='';}
     updPv();
   }
+  else if(f==='gc'){d.gc=t.value;}
   else if(f==='gcat'){d.gcat=t.value;d.items.forEach(it=>{if(it.auto!==false)itemLookup(it,d.gcat);});refreshSheet();}
     else if(f==='newName')d.newName=t.value;
   else if(f==='newSell')d.newSell=toEn(t.value);
@@ -2531,6 +2559,95 @@ function renderWatch(){
   h+='</article><p class="help" style="text-align:center">৫%-এর কম হলে দাম আবার দেখে নিন।</p>';
   el.innerHTML=h;
 }
+
+
+/* ---------- game categories (v32) ---------- */
+const DEFCATS=[
+ {id:'ff',name:'Free Fire',kw:['free fire','freefire','ফ্রি ফায়ার','diamond','ডায়মন্ড','weekly','monthly','উইকলি','মান্থলি','lvl','level','লেভেল','membership','💎']},
+ {id:'efootball',name:'eFootball',kw:['efootball','e-football','e football','ই ফুটবল','ইফুটবল','football','ফুটবল','coin','কয়েন','🪙','card','কার্ড']},
+ {id:'coc',name:'COC',kw:['coc','clash','ক্ল্যাশ','gold pass','gem','জেম','গোল্ড পাস']},
+ {id:'tiktok',name:'TikTok',kw:['tiktok','টিকটক','tik tok']}];
+const CCOL=['#FFC933','#6D6BBB','#2FA878','#E0556A','#2F80D8','#B28DFF','#F08A3C','#4FC3C3'];
+function catList(){if(!Array.isArray(DB.settings.cats2))DB.settings.cats2=JSON.parse(JSON.stringify(DEFCATS));return DB.settings.cats2;}
+function catName(id){if(!id||id==='other')return 'অন্যান্য';const c=catList().find(x=>x.id===id);return c?c.name:'অন্যান্য';}
+function catOk(id){return id==='other'||catList().some(x=>x.id===id);}
+function catOfName(nm){
+  const t=String(nm||'').toLowerCase();if(!t)return 'other';
+  let best='other',sc=0;
+  catList().forEach(c=>{(c.kw||[]).forEach(k=>{k=String(k).toLowerCase().trim();if(k&&t.indexOf(k)>=0&&k.length>sc){sc=k.length;best=c.id;}});});
+  return best;
+}
+function saleParts(t){
+  const forced=t.gc&&catOk(t.gc)?t.gc:'';
+  let its;
+  if(t.items&&t.items.length)its=t.items.map(i=>({name:String(i.name||''),q:Number(i.qty)||1,w:Number(i.cost)||0}));
+  else if(t.lines&&t.lines.length)its=t.lines.map(l=>({name:String(l.name||''),q:l.qty||1,w:(l.qty||1)*(l.cost||0)}));
+  else its=[{name:String(t.name||''),q:1,w:0}];
+  const sw=its.reduce((a,x)=>a+x.w,0);
+  its.forEach(x=>{x.w=sw>0?x.w/sw:1/its.length;x.cat=forced||catOfName(x.name);});
+  return its;
+}
+function autoCatOf(d){
+  const cnt={};let best='other',mx=0;
+  d.items.forEach(it=>{const c=catOfName(it.name);if(String(it.name||'').trim()){cnt[c]=(cnt[c]||0)+1;if(cnt[c]>mx||(cnt[c]===mx&&c!=='other'&&best==='other')){mx=cnt[c];best=c;}}});
+  return best;
+}
+function gcOptions(sel,autoLabel){
+  return '<option value=""'+(!sel?' selected':'')+'>'+esc(autoLabel)+'</option>'+catList().concat([{id:'other',name:'অন্যান্য'}]).map(c=>'<option value="'+esc(c.id)+'"'+(sel===c.id?' selected':'')+'>'+esc(c.name)+'</option>').join('');
+}
+function updGc(){const o=document.querySelector('#shGc option[value=""]');if(o&&S.sheet&&S.sheet.d)o.textContent='অটো ('+catName(autoCatOf(S.sheet.d))+')';}
+function gmAgg(ym){
+  const map=new Map();let tot=0,totRev=0,ns=0;
+  const get=id=>{let e=map.get(id);if(!e){e={id:id,rev:0,profit:0,unAmt:0,n:0,items:new Map(),sales:[]};map.set(id,e);}return e;};
+  DB.txns.forEach(t=>{
+    if(t.kind!=='sale'||!t.date||t.date.slice(0,7)!==ym)return;
+    const parts=saleParts(t),known=hasCost(t),p=known?r2(t.amount-saleCost(t)-(t.fee||0)):0;
+    let main=parts[0];parts.forEach(x=>{if(x.w>main.w)main=x;});
+    parts.forEach(x=>{const e=get(x.cat);e.rev+=t.amount*x.w;if(known)e.profit+=p*x.w;else e.unAmt+=t.amount*x.w;
+      const k=(x.name||'—').toLowerCase(),it=e.items.get(k)||{name:x.name||'—',q:0,p:0};it.q+=x.q;if(known)it.p+=p*x.w;e.items.set(k,it);});
+    const m=get(main.cat);m.n++;m.sales.push(t);
+    totRev+=t.amount;ns++;if(known)tot+=p;
+  });
+  return {map,tot:r2(tot),totRev,ns};
+}
+function renderGames(){
+  const el=$('gamesBody');if(!el)return;
+  if(!S.viewYm)S.viewYm=ymOf(S.today);
+  const A_=gmAgg(S.viewYm);
+  let h=monthNavHTML();
+  if(!A_.ns){el.innerHTML=h+emptyHTML('check','এই মাসে বিক্রি নেই','বিক্রি যোগ হলে গেম অনুযায়ী লাভ এখানে দেখা যাবে।','');return;}
+  h+='<article class="card"><span class="lbl">মোট লাভ</span><div class="gm-tot"><b>'+money(A_.tot)+'</b><span class="help" style="margin:0">'+toBn(A_.ns)+'টি বিক্রি</span></div></article>';
+  const cl=catList(),order=cl.map(c=>c.id).concat(['other']);
+  const rows=[...A_.map.values()].sort((a,b)=>b.profit-a.profit);
+  const mx=Math.max.apply(null,rows.map(r=>r.profit).concat([1]));
+  h+='<article class="card" style="padding-top:6px;padding-bottom:6px">';
+  rows.forEach(r=>{
+    const col=CCOL[Math.max(0,order.indexOf(r.id))%CCOL.length],open=S.open.has('gm'+r.id),pct=A_.tot>0?Math.round(r.profit/A_.tot*100):0;
+    h+='<div class="gm-row"><button type="button" class="gm-h" data-a="gm-t" data-c="'+esc(r.id)+'"><span class="gm-dot" style="background:'+col+'"></span><span class="gm-m"><b>'+esc(catName(r.id))+'</b><em>'+toBn(r.n)+' বিক্রি · বিক্রি '+money(r2(r.rev))+'</em><span class="gm-bar"><i style="width:'+Math.max(3,Math.round(Math.max(0,r.profit)/mx*100))+'%;background:'+col+'"></i></span></span><span class="cu-t">'+profitText(r2(r.profit))+'<small>'+toBn(pct)+'%</small></span></button>';
+    if(open){
+      h+='<div class="gm-d">';
+      if(r.unAmt>0)h+='<p class="help" style="margin:0 0 4px">কেনা দাম বাকি: '+money(r2(r.unAmt))+' (লাভে ধরা হয়নি)</p>';
+      h+='<h4>আইটেম</h4>'+[...r.items.values()].sort((a,b)=>b.p-a.p).slice(0,8).map(x=>'<div class="gm-it"><span>'+esc(x.name)+' ×'+toBn(x.q)+'</span><b>'+profitText(r2(x.p))+'</b></div>').join('');
+      if(r.id!=='other'){const c=cl.find(x=>x.id===r.id);
+        h+='<h4>নাম ও কীওয়ার্ড (কমা দিয়ে আলাদা)</h4><input type="text" id="gmN'+esc(r.id)+'" value="'+esc(c.name)+'" maxlength="24"><textarea id="gmK'+esc(r.id)+'" rows="3" style="margin-top:6px">'+esc((c.kw||[]).join(', '))+'</textarea><div class="btn-row"><button type="button" class="btn primary" data-a="gm-save" data-c="'+esc(r.id)+'">সংরক্ষণ</button><button type="button" class="btn danger" data-a="gm-del" data-c="'+esc(r.id)+'">'+(S.gmDel===r.id?'আবার চাপুন':'মুছুন')+'</button></div>';}
+      h+='<h4>বিক্রি (ভুল হলে ক্যাটাগরি বদলান)</h4>'+r.sales.sort((a,b)=>(b.ts||0)-(a.ts||0)).slice(0,25).map(t=>'<div class="gm-sale"><div class="t"><span>'+fmtD(t.date)+' · '+txnTitle(t)+'</span><b>'+money(t.amount)+'</b></div><select data-cc="'+esc(t.id)+'">'+gcOptions(t.gc||'','অটো')+'</select></div>').join('');
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  h+='</article>';
+  h+='<article class="card"><span class="lbl">নতুন ক্যাটাগরি</span>';
+  if(S.open.has('gm-new'))h+='<div class="gm-d"><input type="text" id="gmNewN" placeholder="নাম (যেমন: PUBG)" maxlength="24"><textarea id="gmNewK" rows="2" placeholder="কীওয়ার্ড, কমা দিয়ে (যেমন: pubg, uc)" style="margin-top:6px"></textarea><div class="btn-row"><button type="button" class="btn primary" data-a="gm-add">যোগ করুন</button><button type="button" class="btn" data-a="gm-t" data-c="-new">বাতিল</button></div></div>';
+  else h+='<p class="help" style="margin:6px 0 10px">বিক্রির নামে কীওয়ার্ড মিললে নিজে থেকে এই ক্যাটাগরিতে যাবে।</p><button type="button" class="btn ghost" data-a="gm-t" data-c="-new">+ ক্যাটাগরি যোগ করুন</button>';
+  h+='</article>';
+  el.innerHTML=h;
+}
+function kwParse(v){return String(v||'').split(/[,،\n]/).map(x=>x.trim()).filter(Boolean);}
+document.addEventListener('change',function(e){
+  const t=e.target;if(!t||!t.dataset||t.dataset.cc==null)return;
+  const x=DB.txns.find(y=>y.id===t.dataset.cc);if(!x)return;
+  x.gc=t.value||'';save();renderGames();
+});
 
 /* ---------- boot ---------- */
 function boot(){
