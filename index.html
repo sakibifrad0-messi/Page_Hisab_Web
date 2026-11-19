@@ -18,7 +18,7 @@
 
 img{max-width:100%}[hidden]{display:none!important}.sugg{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}.sugg:empty{display:none}
 .chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;font-size:.88rem}
-html[data-pal=emerald],html[data-pal=emerald] body{background:#06150F}html[data-pal=rose],html[data-pal=rose] body{background:#1A0A14}html[data-pal=ocean],html[data-pal=ocean] body{background:#06121F}html[data-pal=mono],html[data-pal=mono] body{background:#0B0B0D}</style><script>try{var __o=JSON.parse(localStorage.getItem("pej-v2")||"null");if(__o&&__o.settings&&__o.settings.pal)document.documentElement.setAttribute("data-pal",__o.settings.pal);}catch(e){}</script></head><body>
+html[data-pal=emerald],html[data-pal=emerald] body{background:#06150F}html[data-pal=rose],html[data-pal=rose] body{background:#1A0A14}html[data-pal=ocean],html[data-pal=ocean] body{background:#06121F}html[data-pal=mono],html[data-pal=mono] body{background:#0B0B0D}</style><script>try{var __o=JSON.parse(localStorage.getItem("pej-v2")||"null");if(__o&&__o.settings&&__o.settings.pal)document.documentElement.setAttribute("data-pal",__o.settings.pal);document.documentElement.setAttribute("data-look",(__o&&__o.settings&&__o.settings.look==="classic")?"classic":"neo");}catch(e){document.documentElement.setAttribute("data-look","neo");}</script></head><body>
 <div id="splash" aria-hidden="true"><div class="sp-dial"><svg viewBox="0 0 132 132" width="132" height="132" id="spSvg"></svg><span class="sp-cur">৳</span></div><div class="sp-t">পেজের হিসাব</div><div class="sp-c">EXPRESS · GAME · STORE</div><div class="sp-bar"><i></i></div></div>
 <script>
 (function(){
@@ -628,12 +628,66 @@ main,.view,section,article,.card,.rlist,.plist,.tl{max-width:100%;min-width:0}
 .gm-d input,.gm-d textarea,.gm-d select{width:100%;padding:9px 11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:.88rem}
 .gm-sale{padding:8px 0;border-top:1px dashed var(--line)}.gm-sale .t{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px}
 .gm-sale .t span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.gm-mini{margin-top:12px}.gm-mt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.92rem}
+.gm-mt .gm-dot{display:inline-block;margin-right:8px;vertical-align:middle}.gm-mini .gm-bar{margin-top:6px}
+html[data-pal="light"]:root:root:root{color-scheme:light;--bg:#F4F4FB;--surface:#FFFFFF;--surface-2:#ECECF7;--ink:#1B1A33;--muted:#6B6A8C;--line:#E0E0EE;--accent:#4B49A8;--accent-ink:#FFFFFF;--accent-soft:#E5E4F7;--gold:#A87700;--gold-soft:#FBF1D4;--good:#0E8A5A;--good-soft:#DDF4E9;--bad:#C4384A;--bad-soft:#FBE3E7;--warn:#9A5B00;--warn-soft:#FBEBCF;--on-bad:#FFFFFF;--bar-bg:rgba(255,255,255,.95);--scrim:rgba(20,18,50,.4);--shadow:0 1px 2px rgba(30,30,80,.06),0 10px 24px -16px rgba(30,30,80,.25);--ring-off:rgba(27,26,51,.12);--gold-rgb:168,119,0}
+html[data-pal="light"],html[data-pal="light"] body{background:#F4F4FB}
+html[data-pal="light"] body{background:radial-gradient(90% 40% at 50% 0%,rgba(109,107,187,.14),transparent 70%),#F4F4FB!important}
+html[data-pal="light"] body::before{display:none}
+html[data-pal="light"] #search,html[data-pal="light"] #pfd{background:var(--bg)}
+html[data-pal="light"] .tl-dot{background:#fff}
+html[data-pal="light"] .tabbar{border-top:1px solid var(--line)}
+html[data-pal="light"] .dr-scrim{background:rgba(20,18,50,.4)}
+html[data-pal="light"] .dr-panel{box-shadow:8px 0 40px rgba(30,30,80,.2)}
+html[data-pal="light"] .tb.add,html[data-pal="light"] .btn.primary{color:#fff}
+.ctip:empty{display:none}
+html[data-pal="light"] .card,html[data-pal="light"] .alert,html[data-pal="light"] .rlist,html[data-pal="light"] .act,html[data-pal="light"] .monthnav,html[data-pal="light"] .empty{background:#fff!important;border:1px solid var(--line);box-shadow:var(--shadow)!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+html[data-pal="light"] .tabbar{background:rgba(255,255,255,.94)!important;border-top:1px solid var(--line)!important}
+html[data-pal="light"] .ritem,html[data-pal="light"] .swr+.swr{border-top-color:var(--line)!important}
+html[data-pal="light"] .sw{background:#D9D9EA;border-color:#C9C9E0}html[data-pal="light"] .sw i{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+html[data-pal="light"] .segmini,html[data-pal="light"] .sr-box,html[data-pal="light"] .sr-sum,html[data-pal="light"] .lg.sel{background:var(--surface-2)!important;border-color:var(--line)!important}
+html[data-pal="light"] .sk{background:linear-gradient(100deg,rgba(30,30,80,.06) 30%,rgba(30,30,80,.14) 50%,rgba(30,30,80,.06) 70%);background-size:220% 100%}
+html[data-pal="light"] .cg{stroke:rgba(27,26,51,.35)}
+html[data-pal="light"] .wk i.zero{background:#E4E4F2}
+html[data-pal="light"] .ctip{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 8px 20px -10px rgba(30,30,80,.35)}
+html[data-pal="light"] .sw.on{background:rgba(168,119,0,.28);border-color:rgba(168,119,0,.6)}html[data-pal="light"] .sw.on i{background:var(--gold)}
+
+/* ===== নতুন লুক (neo) v36 ===== */
+html[data-look="neo"] body{background-color:var(--bg)!important;background-image:radial-gradient(rgba(var(--gold-rgb),.16) 1.3px,transparent 1.7px)!important;background-size:22px 22px!important;background-attachment:fixed!important}
+html[data-look="neo"] body::before,html[data-look="neo"] body::after{display:none!important}
+html[data-look="neo"] .vhead h1{font-size:2rem;font-weight:800;letter-spacing:-.02em}
+html[data-look="neo"] .card,html[data-look="neo"] .alert,html[data-look="neo"] .rlist,html[data-look="neo"] .act,html[data-look="neo"] .empty{background:var(--surface)!important;border:1.5px solid var(--line)!important;border-radius:20px!important;box-shadow:0 3px 0 var(--line)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html[data-look="neo"] .monthnav{background:var(--surface)!important;border:1.5px solid var(--line)!important;border-radius:999px!important;box-shadow:0 3px 0 var(--line)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html[data-look="neo"] .card h3{font-weight:800;font-size:1.02rem}
+html[data-look="neo"] .alert{border-left:6px solid var(--warn)!important}
+html[data-look="neo"] .hero.hero2{background:var(--hero-b)!important;border:2px solid var(--gold)!important;border-radius:22px!important;box-shadow:6px 6px 0 var(--gold)!important;margin-right:6px;margin-bottom:6px}
+html[data-look="neo"] .hero::before,html[data-look="neo"] .hero::after{display:none!important}
+html[data-look="neo"] .hx-t{background:transparent!important;border:0!important;border-left:3px solid var(--gold)!important;border-radius:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:2px 0 2px 10px}
+html[data-look="neo"] .hx-n{border-radius:8px;background:rgba(255,255,255,.1)}
+html[data-look="neo"] .hero-val{font-weight:800!important}
+html[data-look="neo"] .tabbar{left:12px!important;right:12px!important;bottom:max(10px,env(safe-area-inset-bottom))!important;border-radius:30px;border:1.5px solid var(--line)!important;background:var(--surface)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:6px 8px!important;box-shadow:0 12px 28px -10px rgba(0,0,0,.55),0 3px 0 var(--line)}
+html[data-look="neo"] .tb[aria-current="page"] .tb-ico{background:var(--surface-2);color:var(--ink);box-shadow:inset 0 -3px 0 var(--gold)}
+html[data-look="neo"] .tb[aria-current="page"]{color:var(--ink);font-weight:700}
+html[data-look="neo"] .tb.add .tb-ico{border-radius:16px;background:var(--gold);color:var(--accent-ink)}
+html[data-look="neo"] .btn{border-radius:14px;border:1.5px solid var(--line);font-weight:700}
+html[data-look="neo"] .btn.primary{border:0;box-shadow:0 4px 0 rgba(0,0,0,.35)}
+html[data-look="neo"] .btn.primary:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+html[data-look="neo"] input,html[data-look="neo"] select,html[data-look="neo"] textarea{border-radius:14px!important;border-width:1.5px!important}
+html[data-look="neo"] .sheet{background:var(--surface)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-top:3px solid var(--gold)!important;border-radius:28px 28px 0 0!important;box-shadow:none!important}
+html[data-look="neo"] .seg,html[data-look="neo"] .segmini{border-radius:14px}N .seg button,html[data-look="neo"] .segmini button{border-radius:11px}
+html[data-look="neo"] .chip{border-radius:10px;font-weight:600}
+html[data-look="neo"] .ico{border-radius:50%}
+html[data-look="neo"] .icon-btn{border-radius:14px;border:1.5px solid var(--line)}
+html[data-look="neo"] .dr-panel{border-radius:0 28px 28px 0;border-right:2px solid var(--gold)}
+html[data-look="neo"] .pcard,html[data-look="neo"] .ritem{border-top-color:var(--line)!important}
+html[data-look="neo"] .brandrow .logo{border-radius:14px}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৩২</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৩৬</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="menu-open" aria-label="মেনু"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -1143,16 +1197,16 @@ function renderAdd(){
   h+='</article>';
   el.innerHTML=h;
 }
-const HOME_ITEMS={hero:'আজকের লাভ কার্ড',month:'এই মাসের লাভ কার্ড',timeline:'আজকের টাইমলাইন'};
+const HOME_ITEMS={hero:'আজকের লাভ কার্ড',month:'এই মাসের লাভ কার্ড',games:'গেম অনুযায়ী লাভ কার্ড',timeline:'আজকের টাইমলাইন'};
 function homeCfg(){const st=DB.settings;if(!st.home)st.home={order:['hero','month','timeline'],off:{}};
-  ['hero','month','timeline'].forEach(k=>{if(st.home.order.indexOf(k)<0)st.home.order.push(k);});return st.home;}
+  ['hero','month','games','timeline'].forEach(k=>{if(st.home.order.indexOf(k)<0)st.home.order.splice(Math.min(st.home.order.length,2),0,k);});return st.home;}
 function homeOrder(){return homeCfg().order.filter(k=>HOME_ITEMS[k]);}
 function homeOn(k){return !homeCfg().off[k];}
-const PALS=[['indigo','ইন্ডিগো','#6D6BBB'],['emerald','পান্না','#2FA878'],['rose','গোলাপি','#C2467E'],['ocean','সমুদ্র','#2F80D8'],['mono','কালো','#8A8A99']];
-function applyPal(){const p=DB.settings.pal||'indigo';if(p==='indigo')document.documentElement.removeAttribute('data-pal');else document.documentElement.setAttribute('data-pal',p);
+const PALS=[['indigo','ইন্ডিগো','#6D6BBB'],['light','সাদা','#F4F4FB'],['emerald','পান্না','#2FA878'],['rose','গোলাপি','#C2467E'],['ocean','সমুদ্র','#2F80D8'],['mono','কালো','#8A8A99']];
+function applyPal(){document.documentElement.setAttribute('data-look',DB.settings.look==='classic'?'classic':'neo');const p=DB.settings.pal||'indigo';if(p==='indigo')document.documentElement.removeAttribute('data-pal');else document.documentElement.setAttribute('data-pal',p);
   try{const bg=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();const m=document.querySelector('meta[name=theme-color]');if(m&&bg)m.setAttribute('content',bg);}catch(e){}}
-function palSettingsHTML(){const cur=DB.settings.pal||'indigo';
-  return '<article class="card"><h3>থিমের রং</h3><p class="help">পছন্দের রং বেছে নিন, পুরো অ্যাপ বদলে যাবে।</p><div class="pal">'+PALS.map(p=>'<button type="button" data-a="pal" data-id="'+p[0]+'" class="'+(cur===p[0]?'on':'')+'"><i style="background:'+p[2]+'"></i>'+p[1]+'</button>').join('')+'</div></article>';}
+function palSettingsHTML(){const cur=DB.settings.pal||'indigo',lk=DB.settings.look==='classic'?'classic':'neo';
+  return '<article class="card"><h3>অ্যাপের লুক</h3><p class="help">নতুন লুক বা আগের লুক, যেটা ভালো লাগে।</p><div class="seg" role="group"><button type="button" data-a="look" data-id="neo" aria-pressed="'+(lk==='neo')+'">নতুন</button><button type="button" data-a="look" data-id="classic" aria-pressed="'+(lk==='classic')+'">আগের</button></div></article>'+'<article class="card"><h3>থিমের রং</h3><p class="help">পছন্দের রং বেছে নিন, পুরো অ্যাপ বদলে যাবে।</p><div class="pal">'+PALS.map(p=>'<button type="button" data-a="pal" data-id="'+p[0]+'" class="'+(cur===p[0]?'on':'')+'"><i style="background:'+p[2]+'"></i>'+p[1]+'</button>').join('')+'</div></article>';}
 function homeSettingsHTML(){
   const ord=homeOrder();
   let h='<article class="card"><h3>হোম সাজান</h3><p class="help">কোন কার্ড দেখাবে আর কোনটা আগে থাকবে, নিজের মতো ঠিক করুন।</p><div class="plist">';
@@ -1266,9 +1320,6 @@ function pfHTML(p){
   h+='<div class="pf-grid"><div><small>বিক্রি</small><b>'+toBn(sales.length)+' টি</b></div><div><small>গড় লাভ/বিক্রি</small><b>'+(ps.length?money(r2(ps.reduce((a,x)=>a+x.pr,0)/ps.length)):'−')+'</b></div>'
     +'<div><small>সেরা বিক্রি</small><b>'+(ps.length?money(ps[0].pr):'−')+'</b></div><div><small>সেরা দিন</small><b>'+(dk.length&&p!=='day'?dayLabel(dk[0].d).date:'−')+'</b></div></div>';
   if(T.unN)h+='<article class="card pf-warn"><b>'+toBn(T.unN)+' টি বিক্রিতে কেনা দাম বসানো বাকি</b><p class="help">এই '+money(T.unAmt)+' লাভের হিসাবে ধরা হয়নি। দাম বসালে লাভ বদলাবে।</p><button type="button" class="btn" data-a="pf-todo">কেনা দাম বসান</button></article>';
-  const it=pfItems(list);
-  if(it.length){const mx=Math.max.apply(null,it.map(x=>Math.abs(x.pr)))||1;
-    h+='<article class="card"><h3>আইটেম অনুযায়ী লাভ</h3>'+it.slice(0,10).map(x=>'<div class="pf-it"><div class="pf-r"><span>'+esc(x.name)+' <small>×'+qtyText(x.q)+'</small></span><b class="'+(x.pr>=0?'good':'bad')+'">'+profitText(r2(x.pr))+'</b></div><div class="bar" style="margin:4px 0 0"><i class="'+(x.pr>=0?'good':'bad')+'" style="width:'+Math.max(4,Math.round(Math.abs(x.pr)/mx*100))+'%"></i></div></div>').join('')+'</article>';}
   const pv={};priced.forEach(t=>{const k=PROV[t.provider]||PROV.other;const o=pv[k]||(pv[k]={rev:0,pr:0});o.rev+=t.amount;o.pr+=t.amount-saleCost(t)-(t.fee||0);});
   const pk=Object.keys(pv);
   if(pk.length)h+='<article class="card"><h3>মাধ্যম অনুযায়ী</h3>'+pk.map(k=>'<div class="cmp-row"><span>'+esc(k)+' <small style="color:var(--muted)">বিক্রি '+money(r2(pv[k].rev))+'</small></span><b>'+profitText(r2(pv[k].pr))+'</b></div>').join('')+'</article>';
@@ -1346,7 +1397,7 @@ function renderHome(){
     h+='<div class="sec"><h2>সাম্প্রতিক লেনদেন</h2><button type="button" class="link" data-a="go" data-v="days">সব দেখুন</button></div><div class="rlist">'+recent.map(t=>txnRow(t,true)).join('')+'</div>';
   }
   const recentHTML=h.slice(M1);h=h.slice(0,M1);
-  const blocks={hero:heroHTML,month:monthHTML,timeline:timelineHTML()};
+  const blocks={hero:heroHTML,month:monthHTML,games:gamesCardHTML(),timeline:timelineHTML()};
   homeOrder().forEach(id=>{if(homeOn(id))h+=blocks[id];});
   h+='<div class="btn-row" style="justify-content:center;margin-top:4px"><button type="button" class="link" data-a="go" data-v="settings">হোম সাজান</button></div>';
   el.innerHTML=h;
@@ -1534,23 +1585,21 @@ function pdfPages(R){
   const mode=R.from===R.to?'tx':(span<=62?'day':'month');
   const W=595,H=842,M=32;
   const FF='"Noto Sans Bengali","Noto Sans Bengali UI","Hind Siliguri",system-ui,sans-serif';
-  const INK='#FFFFFF',MUT='#A9A6D6',GOLD='#FFC933',CY='#4FD1E8',GRN='#35D69B',RED='#FF7A8A',GL='rgba(255,255,255,.065)',GB='rgba(255,255,255,.14)';
+  const INK='#1B1A33',MUT='#6B6A8C',GOLD='#B7860B',CY='#1E88C8',GRN='#0E8A5A',RED='#C4384A',GB='#E2E2F0';
   const pages=[];let cx=null,y=0;
-  function bg(x){x.fillStyle='#080717';x.fillRect(0,0,W,H);
-    let g=x.createRadialGradient(W-40,10,0,W-40,10,360);g.addColorStop(0,'rgba(109,107,187,.62)');g.addColorStop(1,'rgba(109,107,187,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
-    g=x.createRadialGradient(0,330,0,0,330,300);g.addColorStop(0,'rgba(79,209,232,.14)');g.addColorStop(1,'rgba(79,209,232,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
-    g=x.createRadialGradient(W/2,H+20,0,W/2,H+20,380);g.addColorStop(0,'rgba(255,201,51,.16)');g.addColorStop(1,'rgba(255,201,51,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
-    x.strokeStyle='rgba(255,255,255,.035)';x.lineWidth=.6;for(let i=-H;i<W;i+=22){x.beginPath();x.moveTo(i,0);x.lineTo(i+H*.42,H);x.stroke();}}
+  function bg(x){x.fillStyle='#F6F6FC';x.fillRect(0,0,W,H);
+    const g=x.createRadialGradient(W-40,0,0,W-40,0,360);g.addColorStop(0,'rgba(109,107,187,.16)');g.addColorStop(1,'rgba(109,107,187,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+    x.fillStyle='#6D6BBB';x.fillRect(0,0,W,5);}
   function np(first){const c=document.createElement('canvas');c.width=1240;c.height=1754;const x=c.getContext('2d');x.scale(1240/W,1240/W);bg(x);pages.push({c:c,x:x});cx=x;y=M;
     if(!first){txt(R.title+' · '+R.sub,M,36,{s:10,w:600,c:MUT});cx.fillStyle=GOLD;cx.fillRect(M,44,22,2);y=64;}}
-  function fnt(w,s){return (w||400)+' '+(s||11)+'px '+FF;}
+  function fnt(w,s){s=s||11;const z=s<=8.5?12:s<=10?13:s<=11?13.5:s<=12?14.5:s<=20?s+2:s;return (w===800?700:(w||400))+' '+z+'px '+FF;}
   function txt(str,px,py,o){o=o||{};cx.font=fnt(o.w,o.s);cx.fillStyle=o.c||INK;cx.textAlign=o.a||'left';try{cx.letterSpacing=o.ls||'0px';}catch(e){}cx.fillText(String(str),px,py);try{cx.letterSpacing='0px';}catch(e){}}
   function fit(str,maxW,o){o=o||{};cx.font=fnt(o.w,o.s);str=String(str);if(cx.measureText(str).width<=maxW)return str;while(str.length>1&&cx.measureText(str+'…').width>maxW)str=str.slice(0,-1);return str+'…';}
   function path(px,py,w,h,r){cx.beginPath();cx.moveTo(px+r,py);cx.arcTo(px+w,py,px+w,py+h,r);cx.arcTo(px+w,py+h,px,py+h,r);cx.arcTo(px,py+h,px,py,r);cx.arcTo(px,py,px+w,py,r);cx.closePath();}
   function rr(px,py,w,h,r,fill){path(px,py,w,h,r);cx.fillStyle=fill;cx.fill();}
-  function glass(px,py,w,h,r){path(px,py,w,h,r);const g=cx.createLinearGradient(px,py,px,py+h);g.addColorStop(0,'rgba(255,255,255,.12)');g.addColorStop(1,'rgba(255,255,255,.04)');cx.fillStyle=g;cx.fill();cx.strokeStyle=GB;cx.lineWidth=.8;cx.stroke();}
+  function glass(px,py,w,h,r){cx.save();cx.shadowColor='rgba(40,40,100,.10)';cx.shadowBlur=10;cx.shadowOffsetY=3;path(px,py,w,h,r);cx.fillStyle='#FFFFFF';cx.fill();cx.restore();path(px,py,w,h,r);cx.strokeStyle=GB;cx.lineWidth=.8;cx.stroke();}
   function need(h){if(y+h>H-44)np(false);}
-  function sec(title,dot){need(44);cx.fillStyle=dot||GOLD;cx.beginPath();cx.arc(M+4,y+8,3,0,7);cx.fill();txt(title,M+14,y+12,{s:12,w:700});y+=26;}
+  function sec(title,dot){need(44);cx.fillStyle=dot||GOLD;cx.beginPath();cx.arc(M+4,y+8,3,0,7);cx.fill();txt(title,M+14,y+13,{s:12,w:700});y+=30;}
   const hn=h=>{const hh=h%12||12;return (h<4?'রাত':h<6?'ভোর':h<12?'সকাল':h<15?'দুপুর':h<18?'বিকাল':h<20?'সন্ধ্যা':'রাত')+' '+toBn(hh)+'টা';};
   let hs=0;const s0=R.from+R.to+T.revA+'|'+T.cogs+'|'+list.length;for(let i=0;i<s0.length;i++)hs=(hs*31+s0.charCodeAt(i))>>>0;
   const rid='PH-'+hs.toString(36).toUpperCase().padStart(6,'0').slice(0,6);
@@ -1562,29 +1611,30 @@ function pdfPages(R){
   y+=44;
   txt(R.title,M,y+16,{s:27,w:800});txt(R.sub,M,y+40,{s:13,w:500,c:CY});y+=64;
   /* hero */
-  const hy=y,hh=128;glass(M,hy,W-2*M,hh,22);
-  cx.save();path(M,hy,W-2*M,hh,22);cx.clip();const hg=cx.createRadialGradient(M+60,hy+30,0,M+60,hy+30,220);hg.addColorStop(0,'rgba(255,201,51,.20)');hg.addColorStop(1,'rgba(255,201,51,0)');cx.fillStyle=hg;cx.fillRect(M,hy,W-2*M,hh);cx.restore();
+  const hy=y,hh=128;
+  cx.save();cx.shadowColor='rgba(60,58,140,.35)';cx.shadowBlur=16;cx.shadowOffsetY=6;path(M,hy,W-2*M,hh,22);const hg0=cx.createLinearGradient(M,hy,W-M,hy+hh);hg0.addColorStop(0,'#6D6BBB');hg0.addColorStop(1,'#2B2965');cx.fillStyle=hg0;cx.fill();cx.restore();
+  cx.save();path(M,hy,W-2*M,hh,22);cx.clip();const hg=cx.createRadialGradient(M+60,hy+20,0,M+60,hy+20,230);hg.addColorStop(0,'rgba(255,255,255,.22)');hg.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=hg;cx.fillRect(M,hy,W-2*M,hh);cx.restore();
+  const HM='#D6D4F6';
   const pcol=T.profit>0.004?GOLD:T.profit<-0.004?RED:INK;
-  txt('মোট লাভ',M+22,hy+30,{s:11,w:600,c:MUT});
-  const pv=profitText(T.profit);cx.font=fnt(800,42);const vg=cx.createLinearGradient(M+22,0,M+250,0);vg.addColorStop(0,T.profit<-0.004?'#FFB0B8':'#FFE08A');vg.addColorStop(1,T.profit<-0.004?RED:'#FFFFFF');
-  txt(pv,M+22,hy+78,{s:42,w:800,c:vg});
+  txt('মোট লাভ',M+22,hy+30,{s:11,w:600,c:HM});
+  const pv=profitText(T.profit);
+  txt(pv,M+22,hy+78,{s:42,w:800,c:T.profit<-0.004?'#FFB0B8':'#FFFFFF'});
   if(PT.n){const dv=r2(T.profit-PT.profit);const up=dv>=0;const lab=(up?'▲ ':'▼ ')+R.pl+' চেয়ে '+money(Math.abs(dv))+(up?' বেশি':' কম');
-    cx.font=fnt(600,10);const cw=cx.measureText(lab).width+20;rr(M+22,hy+92,cw,22,11,up?'rgba(53,214,155,.16)':'rgba(255,122,138,.16)');txt(lab,M+32,hy+107,{s:10,w:600,c:up?GRN:RED});}
-  else txt(T.n?'এই সময়ে '+toBn(T.n)+' টি বিক্রি':'এই সময়ে কোনো বিক্রি নেই',M+22,hy+107,{s:10.5,w:500,c:MUT});
-  /* gauge */
+    cx.font=fnt(600,10);const cw=cx.measureText(lab).width+20;rr(M+22,hy+92,cw,22,11,'rgba(255,255,255,.18)');txt(lab,M+32,hy+107,{s:10,w:600,c:up?'#9DF5C8':'#FFC2C8'});}
+  else txt(T.n?'এই সময়ে '+toBn(T.n)+' টি বিক্রি':'এই সময়ে কোনো বিক্রি নেই',M+22,hy+107,{s:10.5,w:500,c:HM});
   const gx=W-M-66,gy=hy+hh/2,gr=40,pct=T.revA>0?Math.max(0,Math.min(1,T.profit/T.revA)):0;
-  cx.lineCap='round';cx.lineWidth=9;cx.strokeStyle='rgba(255,255,255,.12)';cx.beginPath();cx.arc(gx,gy,gr,0,7);cx.stroke();
-  if(pct>0.004){const gg=cx.createLinearGradient(gx-gr,gy,gx+gr,gy);gg.addColorStop(0,GOLD);gg.addColorStop(1,CY);cx.strokeStyle=gg;cx.shadowColor='rgba(255,201,51,.55)';cx.shadowBlur=10;cx.beginPath();cx.arc(gx,gy,gr,-Math.PI/2,-Math.PI/2+Math.PI*2*pct);cx.stroke();cx.shadowBlur=0;}
-  cx.lineCap='butt';txt(T.revA>0?toBn(Math.round(T.profit/T.revA*100))+'%':'—',gx,gy+4,{s:17,w:800,a:'center'});txt('লাভের হার',gx,gy+19,{s:7.5,c:MUT,a:'center'});
+  cx.lineCap='round';cx.lineWidth=9;cx.strokeStyle='rgba(255,255,255,.2)';cx.beginPath();cx.arc(gx,gy,gr,0,7);cx.stroke();
+  if(pct>0.004){cx.strokeStyle='#FFD54D';cx.beginPath();cx.arc(gx,gy,gr,-Math.PI/2,-Math.PI/2+Math.PI*2*pct);cx.stroke();}
+  cx.lineCap='butt';txt(T.revA>0?toBn(Math.round(T.profit/T.revA*100))+'%':'—',gx,gy+4,{s:17,w:800,a:'center',c:'#FFFFFF'});txt('লাভের হার',gx,gy+19,{s:7.5,c:HM,a:'center'});
   y=hy+hh+14;
   /* kpis */
   const nS=list.length,avg=nS&&T.unN<nS?r2(T.profit/(nS-T.unN)):0;
-  const kw=(W-2*M-24)/4;
-  [['বিক্রি',money(T.revA),GRN],['মালের দাম',money(T.cogs),GOLD],['বিক্রির সংখ্যা',toBn(nS)+' টি',CY],['গড় লাভ/বিক্রি',nS?money(avg):'—','#B28DFF']].forEach((k,i)=>{
-    const px=M+i*(kw+8);glass(px,y,kw,58,16);cx.fillStyle=k[2];cx.shadowColor=k[2];cx.shadowBlur=6;cx.beginPath();cx.arc(px+13,y+17,2.8,0,7);cx.fill();cx.shadowBlur=0;
-    txt(fit(k[0],kw-30,{s:8.5,w:600}),px+22,y+20,{s:8.5,w:600,c:MUT});txt(fit(k[1],kw-16,{s:13.5,w:800}),px+13,y+43,{s:13.5,w:800});});
-  y+=72;
-  if(T.unN){txt(toBn(T.unN)+' টি বিক্রিতে কেনা দাম বসানো নেই, সেগুলো লাভে ধরা হয়নি।',M,y+2,{s:9,w:500,c:'#FFC933'});y+=16;}
+  const kw=(W-2*M-16)/3;
+  [['বিক্রি',money(T.revA),GRN],['মালের দাম',money(T.cogs),GOLD],['বিক্রির সংখ্যা',toBn(nS)+' টি',CY]].forEach((k,i)=>{
+    const px=M+i*(kw+8);glass(px,y,kw,70,16);cx.fillStyle=k[2];cx.shadowColor=k[2];cx.shadowBlur=6;cx.beginPath();cx.arc(px+14,y+21,3.2,0,7);cx.fill();cx.shadowBlur=0;
+    txt(fit(k[0],kw-34,{s:8.5,w:600}),px+24,y+25,{s:8.5,w:600,c:MUT});txt(fit(k[1],kw-20,{s:13.5,w:800}),px+14,y+54,{s:13.5,w:800});});
+  y+=84;
+  if(T.unN){txt(toBn(T.unN)+' টি বিক্রিতে কেনা দাম বসানো নেই, সেগুলো লাভে ধরা হয়নি।',M,y+2,{s:9,w:500,c:GOLD});y+=20;}
   /* trend */
   let series=[];
   if(mode==='day'){for(let d=R.from;d<=R.to;d=addDays(d,1))series.push({k:toBn(Number(d.slice(8,10))),d:d,v:calc(list.filter(t=>t.date===d)).profit});}
@@ -1595,94 +1645,69 @@ function pdfPages(R){
     const ch=112,top=y;glass(M,top,W-2*M,ch+30,18);
     const mx=Math.max.apply(null,series.map(s=>s.v).concat([1])),mn=Math.min.apply(null,series.map(s=>s.v).concat([0])),rg=(mx-mn)||1;
     const X=i=>M+22+(W-2*M-44)*(series.length>1?i/(series.length-1):.5),Y=v=>top+14+(ch-24)*(1-(v-mn)/rg);
-    cx.strokeStyle='rgba(255,255,255,.1)';cx.lineWidth=.6;cx.setLineDash([2,4]);[0,.5,1].forEach(f=>{const yy=top+14+(ch-24)*f;cx.beginPath();cx.moveTo(M+14,yy);cx.lineTo(W-M-14,yy);cx.stroke();});cx.setLineDash([]);
+    cx.strokeStyle='rgba(30,30,80,.12)';cx.lineWidth=.6;cx.setLineDash([2,4]);[0,.5,1].forEach(f=>{const yy=top+14+(ch-24)*f;cx.beginPath();cx.moveTo(M+14,yy);cx.lineTo(W-M-14,yy);cx.stroke();});cx.setLineDash([]);
     const pts=series.map((s,i)=>[X(i),Y(s.v)]);
     function curve(){cx.beginPath();cx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++){const cxm=(pts[i-1][0]+pts[i][0])/2;cx.bezierCurveTo(cxm,pts[i-1][1],cxm,pts[i][1],pts[i][0],pts[i][1]);}}
-    curve();cx.lineTo(pts[pts.length-1][0],top+ch-6);cx.lineTo(pts[0][0],top+ch-6);cx.closePath();const ag=cx.createLinearGradient(0,top,0,top+ch);ag.addColorStop(0,'rgba(255,201,51,.38)');ag.addColorStop(1,'rgba(255,201,51,0)');cx.fillStyle=ag;cx.fill();
-    curve();cx.lineWidth=2.2;cx.lineJoin='round';cx.strokeStyle=GOLD;cx.shadowColor='rgba(255,201,51,.7)';cx.shadowBlur=9;cx.stroke();cx.shadowBlur=0;
-    const bi=series.indexOf(best);if(best&&best.v>0){cx.fillStyle='rgba(255,255,255,.22)';cx.beginPath();cx.arc(pts[bi][0],pts[bi][1],7,0,7);cx.fill();cx.fillStyle='#fff';cx.beginPath();cx.arc(pts[bi][0],pts[bi][1],3.2,0,7);cx.fill();}
-    const step=Math.ceil(series.length/10);series.forEach((s,i)=>{if(i%step===0||i===series.length-1)txt(s.k,X(i),top+ch+18,{s:8,w:500,c:MUT,a:'center'});});
+    curve();cx.lineTo(pts[pts.length-1][0],top+ch-6);cx.lineTo(pts[0][0],top+ch-6);cx.closePath();const ag=cx.createLinearGradient(0,top,0,top+ch);ag.addColorStop(0,'rgba(109,107,187,.32)');ag.addColorStop(1,'rgba(109,107,187,0)');cx.fillStyle=ag;cx.fill();
+    curve();cx.lineWidth=2.2;cx.lineJoin='round';cx.strokeStyle='#4B49A8';cx.stroke();
+    const bi=series.indexOf(best);if(best&&best.v>0){cx.fillStyle='rgba(109,107,187,.25)';cx.beginPath();cx.arc(pts[bi][0],pts[bi][1],7,0,7);cx.fill();cx.fillStyle='#4B49A8';cx.beginPath();cx.arc(pts[bi][0],pts[bi][1],3.2,0,7);cx.fill();}
+    const step=Math.ceil(series.length/10);series.forEach((s,i)=>{if(i%step===0||i===series.length-1)txt(s.k,X(i),top+ch+20,{s:8,w:500,c:MUT,a:'center'});});
     y=top+ch+46;
   }
-  /* insights */
-  const its=pfItems(list);
-  const hrs=new Array(24).fill(0);list.forEach(t=>{const h=parseInt(String(t.time||'12:00').slice(0,2),10);if(h>=0&&h<24)hrs[h]++;});
-  let bh=0;hrs.forEach((c,h)=>{if(c>hrs[bh])bh=h;});
-  const cards=[];
-  if(mode!=='tx'&&best&&best.v>0)cards.push(['সেরা '+(mode==='day'?'দিন':'মাস'),mode==='day'?dayLabel(best.d).date:MONTHS[Number(best.d.slice(5,7))-1],profitText(best.v)+' লাভ',GOLD]);
-  if(its.length)cards.push(['সেরা আইটেম',its[0].name,profitText(r2(its[0].pr))+' লাভ',GRN]);
-  if(nS)cards.push(['ব্যস্ততম সময়',hn(bh)+'–'+hn((bh+1)%24).replace(/^[^ ]+ /,''),toBn(hrs[bh])+' টি বিক্রি',CY]);
-  if(cards.length){
-    sec('স্মার্ট ইনসাইট','#B28DFF');const cw=(W-2*M-8*(cards.length-1))/cards.length;
-    cards.forEach((c,i)=>{const px=M+i*(cw+8);glass(px,y,cw,62,16);txt(c[0],px+13,y+19,{s:8.5,w:600,c:c[3]});txt(fit(c[1],cw-22,{s:12,w:700}),px+13,y+39,{s:12,w:700});txt(fit(c[2],cw-22,{s:9}),px+13,y+54,{s:9,c:MUT});});
-    y+=76;
-  }
-  /* forecast */
-  if(R.proj&&R.proj.done>=3&&R.proj.done<R.proj.total&&T.profit>0){
-    const fc=r2(T.profit/R.proj.done*R.proj.total);need(54);
-    glass(M,y,W-2*M,46,16);cx.save();path(M,y,W-2*M,46,16);cx.clip();const fg=cx.createLinearGradient(M,0,W-M,0);fg.addColorStop(0,'rgba(179,141,255,.26)');fg.addColorStop(1,'rgba(79,209,232,.08)');cx.fillStyle=fg;cx.fillRect(M,y,W-2*M,46);cx.restore();
-    rr(M+14,y+13,50,20,10,'rgba(179,141,255,.35)');txt('অনুমান',M+39,y+27,{s:9,w:700,a:'center'});
-    txt('এই গতিতে '+R.proj.label+' লাভ হতে পারে',M+74,y+19,{s:9.5,w:500,c:MUT});txt('≈ '+money(fc),M+74,y+37,{s:14,w:800});
-    y+=60;
-  }
-  /* hour strip */
-  if(nS>2){
-    sec('কোন সময়ে বিক্রি বেশি',GOLD);const mxh=Math.max.apply(null,hrs)||1,cw=(W-2*M)/24;glass(M,y,W-2*M,50,14);
-    hrs.forEach((c,h)=>{const a=c?(.18+.82*c/mxh):.05;rr(M+8+h*((W-2*M-16)/24),y+9,(W-2*M-16)/24-2.4,22,4,c?'rgba(255,201,51,'+a.toFixed(2)+')':'rgba(255,255,255,.06)');});
-    [[0,'রাত ১২'],[6,'সকাল ৬'],[12,'দুপুর ১২'],[18,'সন্ধ্যা ৬']].forEach(l=>txt(l[1],M+8+l[0]*((W-2*M-16)/24),y+44,{s:7.5,c:MUT}));
-    y+=64;
-  }
-  /* items */
-  const top5=its.slice(0,5);
-  if(top5.length){
-    const mxp=Math.max.apply(null,top5.map(x=>Math.abs(x.pr)))||1,hgt=top5.length*26+14;need(hgt+40);sec('আইটেম অনুযায়ী লাভ',GRN);glass(M,y,W-2*M,hgt,18);
-    top5.forEach((x,i)=>{const ry=y+14+i*26;txt(fit(x.name,138,{s:10.5,w:600}),M+16,ry+9,{s:10.5,w:600});txt('×'+qtyText(x.q),M+160,ry+9,{s:9,c:MUT});
-      const bx=M+196,bw=W-M-128-bx;rr(bx,ry+2,bw,8,4,'rgba(255,255,255,.1)');const g2=cx.createLinearGradient(bx,0,bx+bw,0);g2.addColorStop(0,GOLD);g2.addColorStop(1,CY);rr(bx,ry+2,Math.max(6,bw*Math.abs(x.pr)/mxp),8,4,x.pr>=0?g2:RED);
-      txt(profitText(r2(x.pr)),W-M-16,ry+9,{s:10.5,w:700,a:'right',c:x.pr>=0?INK:RED});});
-    y+=hgt+16;
+  /* games */
+  const GA=gmAggList(list),GR=[...GA.map.values()].sort((x,z)=>z.profit-x.profit);
+  if(GR.length&&mode!=='tx'||GR.length>1){
+    const gh=GR.length*38+22,order=catList().map(c=>c.id).concat(['other']);need(gh+40);sec('গেম অনুযায়ী লাভ',GRN);glass(M,y,W-2*M,gh,18);
+    const gmx=Math.max.apply(null,GR.map(r=>r.profit).concat([1]));
+    GR.forEach((r,i)=>{const ry=y+18+i*38,col=CCOL[Math.max(0,order.indexOf(r.id))%CCOL.length];
+      cx.fillStyle=col;cx.beginPath();cx.arc(M+20,ry+5,4.5,0,7);cx.fill();txt(fit(catName(r.id),108,{s:10.5,w:600}),M+32,ry+10,{s:10.5,w:600});txt(toBn(r.n)+' টি',M+146,ry+10,{s:9,c:MUT});
+      const bx=M+196,bw=W-M-150-bx;rr(bx,ry,bw,10,5,'rgba(30,30,80,.08)');rr(bx,ry,Math.max(6,bw*Math.max(0,r.profit)/gmx),10,5,col);
+      txt(profitText(r2(r.profit)),W-M-16,ry+10,{s:10.5,w:700,a:'right',c:r.profit>=0?INK:RED});
+      if(GA.tot>0)txt(toBn(Math.round(Math.max(0,r.profit)/GA.tot*100))+'%',bx+bw+8,ry+10,{s:8.5,c:MUT});});
+    y+=gh+16;
   }
   /* mediums */
   const pm={};list.forEach(t=>{const k=t.provider||'other';pm[k]=(pm[k]||0)+t.amount;});
   const pk=Object.keys(pm).sort((a,b)=>pm[b]-pm[a]);const tot=pk.reduce((a,k)=>a+pm[k],0)||1;
   if(pk.length){
     const COL={bkash:'#E2136E',nagad:'#F6921E',rocket:'#A855C8',upay:'#4FC3F7',tally:'#B28DFF',cash:'#35D69B',other:'#8E8CB8'};
-    need(120);sec('কোন মাধ্যমে কত এসেছে',CY);const bw=W-2*M;glass(M,y,bw,pk.length>4?84:66,18);
+    need(120);sec('কোন মাধ্যমে কত এসেছে',CY);const bw=W-2*M;glass(M,y,bw,pk.length>4?112:84,18);
     let px=M+14;const iw=bw-28;cx.save();path(px,y+14,iw,10,5);cx.clip();pk.forEach(k=>{const w=iw*pm[k]/tot;cx.fillStyle=COL[k]||COL.other;cx.fillRect(px,y+14,w,10);px+=w;});cx.restore();
-    pk.forEach((k,i)=>{const col=i%4,row=Math.floor(i/4),lx=M+14+col*(iw/4),ly=y+44+row*20;cx.fillStyle=COL[k]||COL.other;cx.beginPath();cx.arc(lx+3,ly-3,3,0,7);cx.fill();txt((PROV[k]||'অন্য')+' '+toBn(Math.round(pm[k]/tot*100))+'%',lx+11,ly,{s:8.5,w:600});txt(money(r2(pm[k])),lx+11,ly+11,{s:8,c:MUT});});
-    y+=(pk.length>4?84:66)+16;
+    pk.forEach((k,i)=>{const col=i%4,row=Math.floor(i/4),lx=M+14+col*(iw/4),ly=y+46+row*34;cx.fillStyle=COL[k]||COL.other;cx.beginPath();cx.arc(lx+3,ly-3,3,0,7);cx.fill();txt((PROV[k]||'অন্য')+' '+toBn(Math.round(pm[k]/tot*100))+'%',lx+11,ly,{s:8.5,w:600});txt(money(r2(pm[k])),lx+11,ly+14,{s:8,c:MUT});});
+    y+=(pk.length>4?112:84)+18;
   }
   /* table */
   if(list.length){
     need(150);
-    const TH=(cols,labels)=>{path(M,y,W-2*M,22,9);const g=cx.createLinearGradient(M,0,W-M,0);g.addColorStop(0,'rgba(109,107,187,.85)');g.addColorStop(1,'rgba(79,209,232,.45)');cx.fillStyle=g;cx.fill();labels.forEach((l,i)=>txt(l[0],cols[i]+(l[1]==='left'?6:0),y+15,{s:9,w:700,a:l[1]}));y+=28;};
+    const TH=(cols,labels)=>{path(M,y,W-2*M,28,10);const g=cx.createLinearGradient(M,0,W-M,0);g.addColorStop(0,'#6D6BBB');g.addColorStop(1,'#4B49A8');cx.fillStyle=g;cx.fill();labels.forEach((l,i)=>txt(l[0],cols[i]+(l[1]==='left'?6:0),y+18,{s:9,w:700,a:l[1],c:'#FFFFFF'}));y+=36;};
     if(mode==='tx'){
-      sec('লেনদেনের তালিকা',GOLD);const cols=[M,M+66,W-M-150,W-M-66,W-M-8];
+      sec('লেনদেনের তালিকা',GOLD);const cols=[M,M+80,W-M-176,W-M-76,W-M-8];
       const head=()=>TH(cols,[['সময়','left'],['বিবরণ','left'],['মাধ্যম','left'],['টাকা','right'],['লাভ','right']]);head();
       list.slice().sort((a,b)=>(a.time||'').localeCompare(b.time||'')).forEach((t,i)=>{
-        if(y+26>H-44){np(false);head();}
+        if(y+34>H-44){np(false);head();}
         const nm=(t.items&&t.items.length>1)?t.items.map(q=>q.name).join(' + '):(t.name||'বিক্রি');const pr=hasCost(t)?r2(t.amount-saleCost(t)-(t.fee||0)):null;
-        if(i%2)rr(M,y-5,W-2*M,24,8,'rgba(255,255,255,.04)');
-        txt(timeLabel(t.time||'12:00'),M+6,y+10,{s:9,c:MUT});txt(fit(nm,cols[2]-cols[1]-10,{s:10,w:600}),cols[1],y+10,{s:10,w:600});
-        txt(fit((PROV[t.provider]||'')+(t.party?' '+toBn(t.party):''),cols[3]-cols[2]-46,{s:8.5}),cols[2],y+10,{s:8.5,c:MUT});
-        txt(money(t.amount),cols[3],y+10,{s:10,w:700,a:'right'});
-        txt(pr===null?'বাকি':profitText(pr),cols[4],y+10,{s:10,w:700,a:'right',c:pr===null?GOLD:(pr>=0?GRN:RED)});
-        y+=24;});
+        if(i%2)rr(M,y-7,W-2*M,32,8,'rgba(109,107,187,.07)');
+        txt(timeLabel(t.time||'12:00'),M+6,y+14,{s:9,c:MUT});txt(fit(nm,cols[2]-cols[1]-10,{s:10,w:600}),cols[1],y+14,{s:10,w:600});
+        txt(fit((PROV[t.provider]||'')+(t.party?' '+toBn(t.party):''),cols[3]-cols[2]-46,{s:8.5}),cols[2],y+14,{s:8.5,c:MUT});
+        txt(money(t.amount),cols[3],y+14,{s:10,w:700,a:'right'});
+        txt(pr===null?'বাকি':profitText(pr),cols[4],y+14,{s:10,w:700,a:'right',c:pr===null?GOLD:(pr>=0?GRN:RED)});
+        y+=32;});
     }else{
       sec(mode==='day'?'দিনের হিসাব':'মাসের হিসাব',GOLD);const cols=[M,M+200,W-M-120,W-M-8];
       const head=()=>TH(cols,[[mode==='day'?'তারিখ':'মাস','left'],['বিক্রি','right'],['মোট টাকা','right'],['লাভ','right']]);head();
       const ks=Array.from(new Set(list.map(t=>mode==='day'?t.date:t.date.slice(0,7)))).sort();
       ks.forEach((k,i)=>{
-        if(y+26>H-44){np(false);head();}
+        if(y+34>H-44){np(false);head();}
         const C=calc(list.filter(t=>(mode==='day'?t.date:t.date.slice(0,7))===k));
-        if(i%2)rr(M,y-5,W-2*M,24,8,'rgba(255,255,255,.04)');
-        txt(mode==='day'?dayLabel(k).date+' · '+dayLabel(k).wd:MONTHS[Number(k.slice(5,7))-1]+' '+toBn(k.slice(0,4)),M+6,y+10,{s:10,w:600});
-        txt(toBn(C.n)+' টি',cols[1],y+10,{s:10,a:'right',c:MUT});txt(money(C.rev),cols[2],y+10,{s:10,a:'right'});
-        txt(profitText(C.profit),cols[3],y+10,{s:10,w:700,a:'right',c:C.profit>=0?GRN:RED});y+=24;});
-      need(34);glass(M,y,W-2*M,28,12);txt('মোট',M+10,y+18,{s:11,w:700,c:GOLD});txt(toBn(T.n)+' টি',cols[1],y+18,{s:10,w:700,a:'right'});txt(money(T.rev),cols[2],y+18,{s:10,w:700,a:'right'});txt(profitText(T.profit),cols[3],y+18,{s:11.5,w:800,a:'right',c:pcol});y+=40;
+        if(i%2)rr(M,y-7,W-2*M,32,8,'rgba(109,107,187,.07)');
+        txt(mode==='day'?dayLabel(k).date+' · '+dayLabel(k).wd:MONTHS[Number(k.slice(5,7))-1]+' '+toBn(k.slice(0,4)),M+6,y+14,{s:10,w:600});
+        txt(toBn(C.n)+' টি',cols[1],y+14,{s:10,a:'right',c:MUT});txt(money(C.rev),cols[2],y+14,{s:10,a:'right'});
+        txt(profitText(C.profit),cols[3],y+14,{s:10,w:700,a:'right',c:C.profit>=0?GRN:RED});y+=32;});
+      need(40);glass(M,y,W-2*M,34,12);txt('মোট',M+10,y+22,{s:11,w:700,c:GOLD});txt(toBn(T.n)+' টি',cols[1],y+22,{s:10,w:700,a:'right'});txt(money(T.rev),cols[2],y+22,{s:10,w:700,a:'right'});txt(profitText(T.profit),cols[3],y+22,{s:11.5,w:800,a:'right',c:pcol});y+=40;
     }
   }
   if(!list.length){glass(M,y,W-2*M,70,18);txt('এই সময়ে কোনো বিক্রি নেই।',W/2,y+40,{s:12,w:600,c:MUT,a:'center'});}
-  pages.forEach((p,i)=>{cx=p.x;cx.strokeStyle='rgba(255,255,255,.14)';cx.lineWidth=.6;cx.beginPath();cx.moveTo(M,H-32);cx.lineTo(W-M,H-32);cx.stroke();
+  pages.forEach((p,i)=>{cx=p.x;cx.strokeStyle='rgba(30,30,80,.16)';cx.lineWidth=.6;cx.beginPath();cx.moveTo(M,H-32);cx.lineTo(W-M,H-32);cx.stroke();
     txt('পেজের হিসাব · Express Game Store',M,H-16,{s:8,w:500,c:MUT});txt(rid,W/2,H-16,{s:8,w:500,c:MUT,a:'center',ls:'1px'});txt(toBn(i+1)+' / '+toBn(pages.length),W-M,H-16,{s:8,w:600,c:MUT,a:'right'});});
   return pages.map(p=>p.c);
 }
@@ -1711,11 +1736,12 @@ function pdfDoneCard(name,uri){
   el.innerHTML='<div class="pd-card"><b>PDF তৈরি হয়েছে</b><p>'+esc(name)+'<br><small>ফোনের Download/PageHisab ফোল্ডারে জমা আছে</small></p><div class="pd-btns"><button type="button" class="btn primary" data-a="pdf-view">দেখুন</button><button type="button" class="btn" data-a="pdf-share">পাঠান</button><button type="button" class="btn" data-a="pdf-close">বন্ধ</button></div></div>';
   el.hidden=false;
 }
+function pdfFonts(){try{const F=['400','600','700'].map(w=>document.fonts.load(w+' 14px "Noto Sans Bengali"','অআকখ ৳১২৩'));return Promise.race([Promise.all(F),new Promise(r=>setTimeout(r,3000))]).catch(function(){});}catch(e){return Promise.resolve();}}
 function makePdf(kind){
   const R=pdfRange(kind);
   if(!R){toast('শুরু আর শেষের তারিখ ঠিক করে দিন।','err');return;}
   toast('PDF বানানো হচ্ছে…');
-  setTimeout(function(){
+  pdfFonts().then(function(){
     try{
       const cs=pdfPages(R);
       const jp=cs.map(function(c){const b=atob(c.toDataURL('image/jpeg',0.94).split(',')[1]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;});
@@ -1727,7 +1753,7 @@ function makePdf(kind){
       }
       const url=URL.createObjectURL(new Blob([pdf],{type:'application/pdf'}));const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);
     }catch(e){toast('PDF বানানো যায়নি।','err');}
-  },60);
+  });
 }
 function pdfCardHTML(){
   const mStart=ymOf(S.today)+'-01';
@@ -2325,6 +2351,7 @@ document.addEventListener('click',e=>{
   else if(a==='go'){closeMenu();if(S.sheet)closeSheet();go(el.dataset.v);}
   else if(a==='go-todo'){go('todo');}
   else if(a==='pal'){DB.settings.pal=el.dataset.id;save();applyPal();renderAll();}
+  else if(a==='look'){DB.settings.look=el.dataset.id;save();applyPal();renderAll();}
   else if(a==='sw-del'){const t=DB.txns.find(x=>x.id===el.dataset.id);if(t){DB.txns=DB.txns.filter(x=>x.id!==t.id);save();renderAll();if(!$('search').hidden)srRender();undoToast('এন্ট্রি মুছে গেছে।',t);}}
   else if(a==='undo'){if(S.undo){DB.txns.push(S.undo);S.undo=null;save();renderAll();if(!$('search').hidden)srRender();$('toast').hidden=true;}}
   else if(a==='pf-open'){openPf(el.dataset.p);}
@@ -2596,11 +2623,12 @@ function gcOptions(sel,autoLabel){
   return '<option value=""'+(!sel?' selected':'')+'>'+esc(autoLabel)+'</option>'+catList().concat([{id:'other',name:'অন্যান্য'}]).map(c=>'<option value="'+esc(c.id)+'"'+(sel===c.id?' selected':'')+'>'+esc(c.name)+'</option>').join('');
 }
 function updGc(){const o=document.querySelector('#shGc option[value=""]');if(o&&S.sheet&&S.sheet.d)o.textContent='অটো ('+catName(autoCatOf(S.sheet.d))+')';}
-function gmAgg(ym){
+function gmAgg(ym){return gmAggList(DB.txns.filter(t=>t.date&&t.date.slice(0,7)===ym));}
+function gmAggList(list){
   const map=new Map();let tot=0,totRev=0,ns=0;
   const get=id=>{let e=map.get(id);if(!e){e={id:id,rev:0,profit:0,unAmt:0,n:0,items:new Map(),sales:[]};map.set(id,e);}return e;};
-  DB.txns.forEach(t=>{
-    if(t.kind!=='sale'||!t.date||t.date.slice(0,7)!==ym)return;
+  list.forEach(t=>{
+    if(t.kind!=='sale')return;
     const parts=saleParts(t),known=hasCost(t),p=known?r2(t.amount-saleCost(t)-(t.fee||0)):0;
     let main=parts[0];parts.forEach(x=>{if(x.w>main.w)main=x;});
     parts.forEach(x=>{const e=get(x.cat);e.rev+=t.amount*x.w;if(known)e.profit+=p*x.w;else e.unAmt+=t.amount*x.w;
@@ -2609,6 +2637,17 @@ function gmAgg(ym){
     totRev+=t.amount;ns++;if(known)tot+=p;
   });
   return {map,tot:r2(tot),totRev,ns};
+}
+
+function gamesCardHTML(){
+  const ym=ymOf(S.today),A_=gmAgg(ym);
+  if(!A_.ns)return '';
+  const order=catList().map(c=>c.id).concat(['other']);
+  const rows=[...A_.map.values()].filter(r=>r.profit>0||r.n>0).sort((a,b)=>b.profit-a.profit).slice(0,4);
+  const mx=Math.max.apply(null,rows.map(r=>r.profit).concat([1]));
+  return '<article class="card"><div class="sec"><h3>এই মাসে গেম অনুযায়ী লাভ</h3><button type="button" class="link" data-a="go" data-v="games">সব দেখুন</button></div>'
+   +rows.map(r=>{const col=CCOL[Math.max(0,order.indexOf(r.id))%CCOL.length];
+     return '<div class="gm-mini"><div class="gm-mt"><span><i class="gm-dot" style="background:'+col+'"></i>'+esc(catName(r.id))+'</span><b>'+profitText(r2(r.profit))+'</b></div><span class="gm-bar"><i style="width:'+Math.max(3,Math.round(Math.max(0,r.profit)/mx*100))+'%;background:'+col+'"></i></span></div>';}).join('')+'</article>';
 }
 function renderGames(){
   const el=$('gamesBody');if(!el)return;
@@ -2627,7 +2666,7 @@ function renderGames(){
     if(open){
       h+='<div class="gm-d">';
       if(r.unAmt>0)h+='<p class="help" style="margin:0 0 4px">কেনা দাম বাকি: '+money(r2(r.unAmt))+' (লাভে ধরা হয়নি)</p>';
-      h+='<h4>আইটেম</h4>'+[...r.items.values()].sort((a,b)=>b.p-a.p).slice(0,8).map(x=>'<div class="gm-it"><span>'+esc(x.name)+' ×'+toBn(x.q)+'</span><b>'+profitText(r2(x.p))+'</b></div>').join('');
+      h+='<h4>আইটেম</h4>'+[...r.items.values()].sort((a,b)=>b.q-a.q).slice(0,8).map(x=>'<div class="gm-it"><span>'+esc(x.name)+'</span><b>×'+toBn(x.q)+'</b></div>').join('');
       if(r.id!=='other'){const c=cl.find(x=>x.id===r.id);
         h+='<h4>নাম ও কীওয়ার্ড (কমা দিয়ে আলাদা)</h4><input type="text" id="gmN'+esc(r.id)+'" value="'+esc(c.name)+'" maxlength="24"><textarea id="gmK'+esc(r.id)+'" rows="3" style="margin-top:6px">'+esc((c.kw||[]).join(', '))+'</textarea><div class="btn-row"><button type="button" class="btn primary" data-a="gm-save" data-c="'+esc(r.id)+'">সংরক্ষণ</button><button type="button" class="btn danger" data-a="gm-del" data-c="'+esc(r.id)+'">'+(S.gmDel===r.id?'আবার চাপুন':'মুছুন')+'</button></div>';}
       h+='<h4>বিক্রি (ভুল হলে ক্যাটাগরি বদলান)</h4>'+r.sales.sort((a,b)=>(b.ts||0)-(a.ts||0)).slice(0,25).map(t=>'<div class="gm-sale"><div class="t"><span>'+fmtD(t.date)+' · '+txnTitle(t)+'</span><b>'+money(t.amount)+'</b></div><select data-cc="'+esc(t.id)+'">'+gcOptions(t.gc||'','অটো')+'</select></div>').join('');
