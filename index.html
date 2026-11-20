@@ -698,12 +698,34 @@ html[data-pal="light"] #pp{background:var(--bg)}
 .gp-b i{display:block;height:7px;border-radius:9px;flex:none;max-width:calc(100% - 38px);transition:width .6s ease}
 .gp-b small{font-size:.72rem;color:var(--muted);flex:none}
 html[data-pal="light"] .gp{background:#fff}
+
+.cr-sum{display:grid;gap:12px}
+.cr-big{display:flex;align-items:center;gap:12px}.cr-big .cr-ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;flex:none;font-weight:800;font-size:1.2rem}
+.cr-big .cr-ic.warn{background:rgba(255,143,155,.18);color:var(--bad)}.cr-big .cr-ic.ok{background:rgba(94,230,164,.16);color:var(--good)}
+.cr-big b{display:block;font-size:1.05rem}.cr-big em{font-style:normal;font-size:.8rem;color:var(--muted)}
+.cr-step{display:flex;gap:8px;align-items:center;font-size:.82rem;color:var(--muted)}
+.cr-step button{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2,rgba(255,255,255,.06));color:var(--ink);font:inherit;font-weight:700}
+.cr-step button[aria-pressed="true"]{background:var(--gold);color:#1B1A33;border-color:var(--gold)}
+.cr-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cr-row{border-top:1px solid var(--line)}.cr-row:first-child{border-top:0}
+.cr-h{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;color:var(--ink);padding:12px 0;text-align:left;font:inherit}
+.cr-n{flex:1;min-width:0}.cr-n b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cr-n em{font-style:normal;font-size:.76rem;color:var(--muted)}
+.cr-n em.bad{color:var(--bad)}
+.cr-p{text-align:right;display:grid;gap:1px;flex:none}.cr-p s{font-size:.76rem;color:var(--muted)}.cr-p b{font-size:1.05rem}.cr-p b.chg{color:var(--gold)}
+.cr-p i{font-style:normal;font-size:.72rem;font-weight:700;color:var(--bad)}.cr-p i.dn{color:var(--good)}
+.cr-d{padding:2px 0 14px;display:grid;gap:10px}
+.cr-d .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cr-d label{font-size:.78rem;color:var(--muted);display:grid;gap:4px}
+.cr-d input,.cr-d select,.cr-box textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.cr-box textarea{min-height:170px;line-height:1.5}
+.cr-pre{white-space:pre-wrap;word-break:break-word;user-select:text;-webkit-user-select:text;font-size:.86rem;line-height:1.55;margin:10px 0;padding:12px;border-radius:16px;background:var(--bg);border:1px dashed rgba(var(--gold-rgb),.45);max-height:340px;overflow:auto;color:var(--ink)}
+.cr-tag{display:inline-block;margin-left:6px;font-size:.66rem;font-weight:800;padding:1px 7px;border-radius:99px;background:rgba(255,143,155,.18);color:var(--bad)}
 </style>
 
 <main class="app">
   <section class="view" id="v-home">
     <header class="vhead row">
-      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৪০</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
+      <div class="brandrow"><div><p class="eyebrow" id="todayLabel"></p><h1>পেজের হিসাব <small style="font-size:11px;opacity:.6;font-weight:500">সংস্করণ ৪১</small></h1><span class="brandcap">EXPRESS · GAME · STORE</span></div></div>
       <div class="hdr-actions">
         <button type="button" class="icon-btn" data-a="menu-open" aria-label="মেনু"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button type="button" class="icon-btn" data-a="search-open" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -713,6 +735,10 @@ html[data-pal="light"] .gp{background:#fff}
     <div id="homeBody" class="stack"></div>
   </section>
 
+  <section class="view" id="v-rates" hidden>
+    <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="stock" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>কাস্টমার রেট</h1></div><p>কেনা দাম বাড়লে বিক্রির রেট কত হবে, কপি করে দিন।</p></header>
+    <div id="ratesBody" class="stack"></div>
+  </section>
   <section class="view" id="v-games" hidden>
     <header class="vhead"><div class="pg-back"><button type="button" class="icon-btn" data-a="go" data-v="home" aria-label="ফিরে যান"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h1>গেম অনুযায়ী লাভ</h1></div><p>মাসে কোন গেম বা অ্যাপ থেকে কত লাভ।</p></header>
     <div id="gamesBody" class="stack"></div>
@@ -769,7 +795,7 @@ html[data-pal="light"] .gp{background:#fff}
 <div class="sr-body pp-body"><div class="pp-box"><textarea id="ppTxt" rows="6" placeholder="এখানে সাপ্লায়ারের প্রাইস লিস্ট পেস্ট করুন&#10;&#10;☞ 20 UC ➪ 19.111 Tk&#10;☞ 161 UC ➪ 149.9884 Tk&#10;☞ Lvl-10 ➪ 57.0 Tk" spellcheck="false"></textarea><div class="pp-acts"><button type="button" class="btn primary" data-a="pp-paste">ক্লিপবোর্ড থেকে পেস্ট</button><button type="button" class="btn" data-a="pp-clear">মুছুন</button></div></div><div id="ppRes"></div></div><div class="pp-bar" id="ppBar" hidden></div></div>
 <div id="pfd" hidden role="dialog" aria-label="লাভের বিস্তারিত"><div class="sr-top"><button type="button" class="icon-btn" data-a="pf-close" aria-label="ফিরুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b style="font-size:1.1rem">লাভের বিস্তারিত</b></div><div id="pfBody" class="sr-body"></div></div>
 <div id="search" hidden role="dialog" aria-label="খুঁজুন"><div class="sr-top"><button type="button" class="icon-btn" data-a="search-close" aria-label="ফিরুন"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sr-box"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="srInput" type="text" enterkeyhint="search" autocomplete="off" placeholder="আইটেম, টাকা, তারিখ, মাধ্যম..." aria-label="খুঁজুন"><button type="button" id="srClear" class="sr-x" data-a="search-clear" aria-label="মুছুন" hidden>×</button></div></div><div id="srBody" class="sr-body"></div></div>
-<div id="drawer" hidden><div class="dr-scrim" data-a="menu-close"></div><aside class="dr-panel" role="dialog" aria-label="মেনু"><div class="dr-head"><div class="dr-logo">প</div><div><b>পেজের হিসাব</b><em>Express Game Store</em></div></div><div class="dr-sec">প্রধান</div><button type="button" class="dr-i" data-a="go" data-v="home"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হোম</b><em>আজকের সারসংক্ষেপ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="days"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হিসাব</b><em>দিন ও মাসের লেনদেন</em></span></button><button type="button" class="dr-i" data-a="go" data-v="stock"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>দামের তালিকা</b><em>দাম ও কেনা দাম</em></span></button><button type="button" class="dr-i" data-a="go" data-v="report"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>রিপোর্ট</b><em>লাভের বিশ্লেষণ ও PDF</em></span></button><button type="button" class="dr-i" data-a="go" data-v="todo"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>করণীয়</b><em>বাকি কাজ</em></span></button><div class="dr-sec">নতুন</div><button type="button" class="dr-i" data-a="go" data-v="games"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3a9 9 0 1 0 9 9h-9zM15 3.5A9 9 0 0 1 20.5 9H15z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>গেম অনুযায়ী লাভ</b><em>কোন গেম থেকে কত লাভ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="cust"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 19v-1a3 3 0 0 0-2-2.8M16 4.3a3.5 3.5 0 0 1 0 6.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>ক্রেতা বই</b><em>কে কতবার কিনেছে</em></span></button><button type="button" class="dr-i" data-a="go" data-v="goal"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভের লক্ষ্য</b><em>দিন ও মাসের টার্গেট</em></span></button><button type="button" class="dr-i" data-a="go" data-v="watch"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4l9 16H3zM12 10v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভ নজরদারি</b><em>কম লাভের আইটেম</em></span></button><div class="dr-sec">অন্যান্য</div><button type="button" class="dr-i" data-a="go" data-v="settings"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সেটিংস</b><em>থিম, লক, ব্যাকআপ</em></span></button></aside></div>
+<div id="drawer" hidden><div class="dr-scrim" data-a="menu-close"></div><aside class="dr-panel" role="dialog" aria-label="মেনু"><div class="dr-head"><div class="dr-logo">প</div><div><b>পেজের হিসাব</b><em>Express Game Store</em></div></div><div class="dr-sec">প্রধান</div><button type="button" class="dr-i" data-a="go" data-v="home"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হোম</b><em>আজকের সারসংক্ষেপ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="days"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>হিসাব</b><em>দিন ও মাসের লেনদেন</em></span></button><button type="button" class="dr-i" data-a="go" data-v="stock"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>দামের তালিকা</b><em>দাম ও কেনা দাম</em></span></button><button type="button" class="dr-i" data-a="go" data-v="report"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>রিপোর্ট</b><em>লাভের বিশ্লেষণ ও PDF</em></span></button><button type="button" class="dr-i" data-a="go" data-v="todo"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>করণীয়</b><em>বাকি কাজ</em></span></button><div class="dr-sec">নতুন</div><button type="button" class="dr-i" data-a="go" data-v="rates"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 7h12l-3-3M20 17H8l3 3M4 7l3 3M20 17l-3-3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>কাস্টমার রেট</b><em>বিক্রির রেট লিস্ট, নিজে বাড়ে</em></span></button><button type="button" class="dr-i" data-a="go" data-v="games"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3a9 9 0 1 0 9 9h-9zM15 3.5A9 9 0 0 1 20.5 9H15z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>গেম অনুযায়ী লাভ</b><em>কোন গেম থেকে কত লাভ</em></span></button><button type="button" class="dr-i" data-a="go" data-v="cust"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM20 19v-1a3 3 0 0 0-2-2.8M16 4.3a3.5 3.5 0 0 1 0 6.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>ক্রেতা বই</b><em>কে কতবার কিনেছে</em></span></button><button type="button" class="dr-i" data-a="go" data-v="goal"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভের লক্ষ্য</b><em>দিন ও মাসের টার্গেট</em></span></button><button type="button" class="dr-i" data-a="go" data-v="watch"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 4l9 16H3zM12 10v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>লাভ নজরদারি</b><em>কম লাভের আইটেম</em></span></button><div class="dr-sec">অন্যান্য</div><button type="button" class="dr-i" data-a="go" data-v="settings"><span class="dr-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সেটিংস</b><em>থিম, লক, ব্যাকআপ</em></span></button></aside></div>
 <div id="fab" hidden><div class="fab-scrim" data-a="fab-close"></div><div class="fab-menu" role="menu">
   <button type="button" role="menuitem" data-a="fab-sale"><span class="fi g"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>নতুন বিক্রি</button>
   <button type="button" role="menuitem" data-a="fab-expense"><span class="fi r"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>নতুন খরচ</button>
@@ -1030,8 +1056,8 @@ function save(){
 }
 
 /* ---------- state ---------- */
-const VIEWS=['home','days','add','stock','report','todo','settings','cust','goal','watch','games'];
-const TABS={home:'home',days:'days',add:'add',stock:'stock',report:'report',todo:'home',settings:'home',cust:'home',goal:'home',watch:'home',games:'home'};
+const VIEWS=['home','days','add','stock','report','todo','settings','cust','goal','watch','games','rates'];
+const TABS={home:'home',days:'days',add:'add',stock:'stock',report:'report',todo:'home',settings:'home',cust:'home',goal:'home',watch:'home',games:'home',rates:'stock'};
 const S={view:'home',today:dateStr(new Date()),viewYm:'',open:new Set(),sheet:null,pendingDel:null,toastTimer:null,tgErr:'',tgBusy:false,smsPerm:null,lastSync:0,lock:{buf:'',mode:'check',first:''}};
 S.viewYm=ymOf(S.today);
 S.open.add(S.today);
@@ -1125,7 +1151,7 @@ window.addEventListener('hashchange',()=>{
 function renderAll(){
   const L=dayLabel(S.today);
   $('todayLabel').textContent=L.wd+', '+L.date+' '+toBn(S.today.slice(0,4));
-  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderCust();renderGoal();renderWatch();renderGames();renderBadge();
+  renderHome();renderAdd();renderDays();renderStock();renderReport();renderTodo();renderSettings();renderCust();renderGoal();renderWatch();renderGames();renderRates();renderBadge();
 }
 function pendingCount(){return DB.inbox.length+DB.txns.filter(t=>t.kind==='sale'&&!hasCost(t)).length;}
 function renderBadge(){
@@ -1464,7 +1490,7 @@ function renderDays(){
 }
 function renderStock(){
   const el=$('stockBody');
-  let h='<button type="button" class="pp-card" data-a="pp-open" style="width:100%;text-align:left;color:var(--ink);font:inherit"><span class="pp-ic"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1zM9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সাপ্লায়ারের লিস্ট পেস্ট করুন</b><em>'+(DB.settings.ppLast?'শেষ আপডেট: '+esc(DB.settings.ppLast):'সব দাম এক সাথে নিজে বসে যাবে')+'</em></span></button><article class="card"><h3>Free Fire (UC)</h3><p class="help">প্রতিটির দাম বদলালে নিচের কাস্টম প্যাকের দামও নিজে বদলে যাবে।</p><div class="plist">';
+  let h='<button type="button" class="pp-card" data-a="pp-open" style="width:100%;text-align:left;color:var(--ink);font:inherit"><span class="pp-ic"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1zM9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>সাপ্লায়ারের লিস্ট পেস্ট করুন</b><em>'+(DB.settings.ppLast?'শেষ আপডেট: '+esc(DB.settings.ppLast):'সব দাম এক সাথে নিজে বসে যাবে')+'</em></span></button><button type="button" class="pp-card" data-a="go" data-v="rates" style="width:100%;text-align:left;color:var(--ink);font:inherit;margin-top:12px"><span class="pp-ic" style="background:linear-gradient(135deg,#6D6BBB,#8F8DE6);color:#fff"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 7h12l-3-3M20 17H8l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>কাস্টমার রেট লিস্ট</b><em>দাম বাড়লে বিক্রির রেট নিজে হিসাব হবে</em></span></button><article class="card" style="margin-top:12px"><h3>Free Fire (UC)</h3><p class="help">প্রতিটির দাম বদলালে নিচের কাস্টম প্যাকের দামও নিজে বদলে যাবে।</p><div class="plist">';
   DB.pl.units.forEach(u=>{
     h+='<div class="prow"><div class="pn"><b>'+esc(u.name)+'</b><span>'+toBn(u.uc)+' UC</span></div><input type="text" inputmode="decimal" aria-label="'+esc(u.name)+' দাম" data-g="u-price" data-id="'+esc(u.id)+'" value="'+toBn(r2(u.price))+'"></div>';
   });
@@ -1488,6 +1514,7 @@ function renderStock(){
   h+='<div class="grid2" style="margin-top:12px"><label for="itName">আইটেমের নাম<input id="itName" type="text" placeholder="যেমন: TikTok 1000 coin"></label><label for="itPrice">কেনা দাম<input id="itPrice" type="text" inputmode="decimal" placeholder="যেমন ৯৫০"></label></div>'
     +'<div class="btn-row"><button type="button" class="btn primary" data-a="i-add">আইটেম যোগ করুন</button></div></article>';
   el.innerHTML=h;
+  renderRates();
 }
 /* ---------- interactive charts ---------- */
 const DN_COL=['#FFC933','#8F8DE6','#5EE6A4','#FF8F9B','#6CC7FF','#B7B5D6'];
@@ -2356,7 +2383,17 @@ document.addEventListener('click',e=>{
   if(pk){lockKey(pk.dataset.pk);return;}
   const el=e.target.closest('[data-a]');if(!el)return;
   const a=el.dataset.a;
-  if(a==='pp-open'){ppOpen();}
+  if(a==='cr-save'){const t=($('crTxt')||{}).value||'';if(!t.trim()){toast('লিস্ট পেস্ট করুন।','err');return;}const old=crCfg();const lines=crParse(t,old?old.lines:null);if(!lines.some(l=>l.k==='p')){toast('কোনো দাম পাওয়া যায়নি।','err');return;}DB.settings.cr={step:old?old.step||1:1,lines:lines};S.crEdit=false;S.open=new Set();save();renderRates();}
+  else if(a==='cr-edit'){S.crEdit=!S.crEdit;renderRates();}
+  else if(a==='cr-step'){const c=crCfg();if(c){c.step=Number(el.dataset.s)||1;save();renderRates();}}
+  else if(a==='cr-t'){const k='cr'+el.dataset.i;if(S.open.has(k))S.open.delete(k);else S.open.add(k);renderRates();}
+  else if(a==='cr-rowsave'){const c=crCfg(),l=c&&c.lines[Number(el.dataset.i)],i=el.dataset.i;if(l){const sv=num(toEn(($('crS'+i)||{}).value||''));if(isNaN(sv)||sv<0){toast('সঠিক রেট লিখুন।','err');return;}l.sell=sv;l.src=($('crSrc'+i)||{}).value||'';const bv=(($('crB'+i)||{}).value||'').trim();const cc=crCost(l.src);l.base=bv?num(toEn(bv)):(cc!=null?cc:null);if(l.base!=null&&isNaN(l.base))l.base=cc;S.open.delete('cr'+i);save();renderRates();}}
+  else if(a==='cr-copy'){const c=crCfg();if(c)crCopy(crText(c,true));}
+  else if(a==='cr-share'){const c=crCfg();if(c){const t=crText(c,true);if(A){try{A.shareText(t);return;}catch(e){}}crCopy(t);}}
+  else if(a==='cr-apply'){const c=crCfg();if(c){S.crUndo=JSON.stringify(c);c.lines.forEach(l=>{if(l.k==='p'){const nv=crNew(l,c.step||1);l.sell=nv;const cc=crCost(l.src);if(cc!=null)l.base=cc;}});save();renderRates();const t=$('toast');t.className='toast';t.innerHTML='';t.appendChild(document.createTextNode('নতুন রেট চালু হয়েছে '));const b=document.createElement('button');b.type='button';b.setAttribute('data-a','cr-undo');b.textContent='ফিরিয়ে আনুন';b.style.cssText='margin-left:6px;border:0;border-radius:999px;padding:4px 12px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:700';t.appendChild(b);t.hidden=false;clearTimeout(S.toastTimer);S.toastTimer=setTimeout(function(){t.hidden=true;S.crUndo=null;},8000);}}
+  else if(a==='cr-undo'){if(S.crUndo){DB.settings.cr=JSON.parse(S.crUndo);S.crUndo=null;save();renderRates();$('toast').hidden=true;toast('আগের রেট ফিরেছে।','ok');}}
+  else if(a==='cr-reset'){if(!S.crDel){S.crDel=true;renderRates();}else{S.crDel=false;delete DB.settings.cr;save();renderRates();}}
+  else if(a==='pp-open'){ppOpen();}
   else if(a==='pp-close'){ppClose();}
   else if(a==='pp-clear'){$('ppTxt').value='';ppRender();}
   else if(a==='pp-paste'){if(navigator.clipboard&&navigator.clipboard.readText){navigator.clipboard.readText().then(function(x){if(!x||!x.trim()){toast('ক্লিপবোর্ড খালি।','err');return;}$('ppTxt').value=x;ppRender();}).catch(function(){toast('বক্সে চেপে ধরে "Paste" দিন।','err');$('ppTxt').focus();});}else{toast('বক্সে চেপে ধরে "Paste" দিন।','err');$('ppTxt').focus();}}
@@ -2818,9 +2855,91 @@ function ppApply(){
   const el=$('toast');el.className='toast';el.innerHTML='';el.appendChild(document.createTextNode(toBn(n)+'টি দাম বসে গেছে '));
   const b=document.createElement('button');b.type='button';b.setAttribute('data-a','pp-undo');b.textContent='ফিরিয়ে আনুন';
   b.style.cssText='margin-left:6px;border:0;border-radius:999px;padding:4px 12px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:700';
-  el.appendChild(b);el.hidden=false;clearTimeout(S.toastTimer);S.toastTimer=setTimeout(function(){el.hidden=true;S.ppUndo=null;},8000);
+  el.appendChild(b);
+  const cf=crCfg();if(cf){const nc=cf.lines.filter(l=>l.k==='p'&&crNew(l,cf.step||1)!==l.sell).length;if(nc){const g=document.createElement('button');g.type='button';g.setAttribute('data-a','go');g.setAttribute('data-v','rates');g.textContent='কাস্টমার রেট ('+toBn(nc)+')';g.style.cssText='margin-left:6px;border:0;border-radius:999px;padding:4px 12px;background:var(--gold);color:#1B1A33;font:inherit;font-weight:700';el.appendChild(g);}}
+  el.hidden=false;clearTimeout(S.toastTimer);S.toastTimer=setTimeout(function(){el.hidden=true;S.ppUndo=null;},9000);
 }
 document.addEventListener('input',function(e){if(e.target&&e.target.id==='ppTxt'){clearTimeout(S.ppT);S.ppT=setTimeout(ppRender,180);}});
+
+
+/* ---------- customer rate list (v41) ---------- */
+function crCfg(){const c=DB.settings.cr;return c&&Array.isArray(c.lines)?c:null;}
+function crCost(src){
+  if(!src)return null;const k=src.charAt(0),id=src.slice(2);
+  if(k==='u'){const u=unitById(id);return u?u.price:null;}
+  if(k==='i'){const i=DB.pl.items.find(x=>x.id===id);return i?i.price:null;}
+  if(k==='p'){const p=DB.pl.packs.find(x=>x.id===id);return p?packPrice(p):null;}
+  return null;
+}
+function crGuess(name){
+  const n=ppNorm(name),t=toEn(ppClean(name)).toLowerCase();
+  let u=DB.pl.units.find(x=>ppNorm(x.name)===n);if(u)return 'u:'+u.id;
+  let it=DB.pl.items.find(x=>ppNorm(x.name)===n);if(it)return 'i:'+it.id;
+  let p=DB.pl.packs.find(x=>ppNorm(x.name)===n);if(p)return 'p:'+p.id;
+  let m=t.match(/(\d[\d,]*)\s*(?:diamond|dia\b|💎|ডায়মন্ড|ডায়মণ্ড)/);
+  if(m){const d=parseInt(m[1].replace(/,/g,''),10);u=DB.pl.units.find(x=>x.dia===d);if(u)return 'u:'+u.id;p=DB.pl.packs.find(x=>packDia(x)===d);if(p)return 'p:'+p.id;}
+  m=t.match(/(\d[\d,]*)\s*uc\b/);if(m){const d=parseInt(m[1].replace(/,/g,''),10);u=DB.pl.units.find(x=>x.uc===d);if(u)return 'u:'+u.id;}
+  m=t.match(/(?:lvl|level)\s*-?\s*(6|10|15|20|25|30)\b/);if(m&&!/pass|complete|full|set/.test(t)){it=DB.pl.items.find(x=>ppNorm(x.name)==='lvl'+m[1]);if(it)return 'i:'+it.id;}
+  if(/level\s*up|lvl\s*up/.test(t)&&/(complet|full|set)/.test(t)){it=ppSetItem();if(it)return 'i:'+it.id;}
+  return '';
+}
+function crParse(text,old){
+  const prev={};(old||[]).forEach(l=>{if(l.k==='p')prev[ppNorm(l.name)]=l;});
+  return String(text||'').replace(/\r/g,'').split('\n').map(raw=>{
+    const e=toEn(raw),m=e.match(/^(.*?)((?<![\d.,])\d[\d,]*(?:\.\d+)?)(\D*)$/);
+    if(m){
+      const preC=ppClean(m[1]).replace(/\uD83D\uDC8E/g,' Diamond '),name=preC.replace(/^[^A-Za-z0-9ঀ-৿]+/,'').replace(/[^A-Za-z0-9ঀ-৿)\]]+$/,'').trim();
+      if(/[A-Za-zঀ-৿]/.test(preC)&&name&&m[3].length<=14&&m[2].replace(/[^0-9]/g,'').length<8){
+        const sell=parseFloat(m[2].replace(/,/g,'')),pv=prev[ppNorm(name)];
+        let src=pv?pv.src:crGuess(name),c=crCost(src);
+        return {k:'p',onum:raw.slice(m[1].length,m[1].length+m[2].length),osell:sell,pre:raw.slice(0,m[1].length),suf:raw.slice(m[1].length+m[2].length),name:name,sell:sell,dec:/\./.test(m[2]),bn:/[০-৯]/.test(raw),src:src,base:pv&&pv.base!=null&&pv.src===src?pv.base:(c!=null?c:null)};
+      }
+    }
+    return {k:'t',raw:raw};
+  });
+}
+function crNew(l,step){
+  const c=crCost(l.src);if(c==null||l.base==null)return l.sell;
+  const d=c-l.base;if(Math.abs(d)<0.005)return l.sell;
+  const v=l.sell+d;return d>0?Math.ceil(v/step-1e-9)*step:Math.floor(v/step+1e-9)*step;
+}
+function crFmt(l,v){let x=l.dec?v.toFixed(2):String(Math.round(v));if(l.bn)x=toBn(x);return x;}
+function crText(cfg,useNew){
+  return cfg.lines.map(l=>{if(l.k!=='p')return l.raw;const v=useNew?crNew(l,cfg.step||1):l.sell;return l.pre+(v===l.osell&&l.onum!=null?l.onum:crFmt(l,v))+l.suf;}).join('\n');
+}
+function crSrcOpts(sel){
+  let h='<option value="">— যুক্ত নয় —</option>';
+  h+='<optgroup label="Free Fire (UC)">'+DB.pl.units.map(u=>'<option value="u:'+esc(u.id)+'"'+(sel==='u:'+u.id?' selected':'')+'>'+esc(u.name)+'</option>').join('')+'</optgroup>';
+  if(DB.pl.packs.length)h+='<optgroup label="কাস্টম প্যাক">'+DB.pl.packs.map(p=>'<option value="p:'+esc(p.id)+'"'+(sel==='p:'+p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'</optgroup>';
+  if(DB.pl.items.length)h+='<optgroup label="আইটেম">'+DB.pl.items.map(i=>'<option value="i:'+esc(i.id)+'"'+(sel==='i:'+i.id?' selected':'')+'>'+esc(i.name)+'</option>').join('')+'</optgroup>';
+  return h;
+}
+function renderRates(){
+  const el=$('ratesBody');if(!el)return;
+  const cfg=crCfg();
+  if(!cfg||S.crEdit){
+    const cur=cfg?crText(cfg,false):'';
+    el.innerHTML='<article class="card cr-box"><h3>'+(cfg?'লিস্ট বদলান':'আপনার চলতি কাস্টমার লিস্ট')+'</h3><p class="help">এখন যে রেট লিস্ট কাস্টমারকে দিচ্ছেন সেটা হুবহু পেস্ট করুন। আপনার লেখার ধরন যেমন আছে তেমনই থাকবে, শুধু দামগুলো বদলাবে।</p><textarea id="crTxt" spellcheck="false" placeholder="25 Diamond ➪ 28 Tk&#10;50 Diamond ➪ 55 Tk&#10;Weekly ➪ 165 Tk">'+esc(cur)+'</textarea><div class="btn-row" style="margin-top:12px"><button type="button" class="btn primary" data-a="cr-save">সংরক্ষণ করুন</button>'+(cfg?'<button type="button" class="btn" data-a="cr-edit">বাতিল</button>':'')+'</div></article>';
+    return;
+  }
+  const step=cfg.step||1,P=cfg.lines.map((l,i)=>({l:l,i:i})).filter(x=>x.l.k==='p');
+  const chg=P.filter(x=>crNew(x.l,step)!==x.l.sell).length,unl=P.filter(x=>!x.l.src).length;
+  let h='<article class="card cr-sum"><div class="cr-big"><span class="cr-ic '+(chg?'warn':'ok')+'">'+(chg?'▲':'✓')+'</span><span><b>'+(chg?toBn(chg)+'টি রেট বদলানো দরকার':'সব রেট ঠিক আছে')+'</b><em>'+(chg?'কেনা দাম বেড়েছে, নিচে নতুন রেট দেখুন':'কেনা দাম বদলালে এখানে নিজে জানাবে')+'</em></span></div>'
+   +'<div class="cr-step"><span>রাউন্ড:</span>'+[1,5,10].map(n=>'<button type="button" data-a="cr-step" data-s="'+n+'" aria-pressed="'+(step===n)+'">'+toBn(n)+' টাকা</button>').join('')+'</div>'
+   +'<div class="cr-acts"><button type="button" class="btn primary" data-a="cr-copy">'+(chg?'নতুন লিস্ট কপি':'লিস্ট কপি')+'</button><button type="button" class="btn" data-a="cr-share">শেয়ার</button></div>'
+   +(chg?'<button type="button" class="btn" data-a="cr-apply" style="width:100%">✓ নতুন রেটগুলো চালু করুন</button>':'')+'</article>';
+  h+='<article class="card" style="padding-top:6px;padding-bottom:6px">'+P.map(x=>{
+    const l=x.l,i=x.i,c=crCost(l.src),nv=crNew(l,step),ch=nv!==l.sell,d=nv-l.sell,mg=c!=null?r2((ch?nv:l.sell)-c):null,open=S.open.has('cr'+i);
+    return '<div class="cr-row"><button type="button" class="cr-h" data-a="cr-t" data-i="'+i+'"><span class="cr-n"><b>'+esc(l.name)+(!l.src?'<span class="cr-tag">যুক্ত নয়</span>':'')+'</b><em'+(mg!=null&&mg<=0?' class="bad"':'')+'>'+(c!=null?'কেনা '+money(r2(c))+' · লাভ '+money(mg):'কেনা দামের সাথে যুক্ত করুন')+'</em></span><span class="cr-p">'+(ch?'<s>'+money(l.sell)+'</s>':'')+'<b'+(ch?' class="chg"':'')+'>'+money(ch?nv:l.sell)+'</b>'+(ch?'<i class="'+(d<0?'dn':'')+'">'+(d>0?'▲ ':'▼ ')+money(Math.abs(d))+'</i>':'')+'</span></button>'
+     +(open?'<div class="cr-d"><div class="grid2"><label>বিক্রির রেট<input type="text" inputmode="decimal" id="crS'+i+'" value="'+esc(toBn(l.sell))+'"></label><label>যে কেনা দামে ধরা<input type="text" inputmode="decimal" id="crB'+i+'" value="'+(l.base!=null?esc(toBn(r2(l.base))):'')+'"></label></div><label>কেনা দামের সাথে যুক্ত<select id="crSrc'+i+'">'+crSrcOpts(l.src)+'</select></label><div class="btn-row"><button type="button" class="btn primary" data-a="cr-rowsave" data-i="'+i+'">সংরক্ষণ</button></div></div>':'')+'</div>';
+  }).join('')+'</article>';
+  h+='<article class="card"><h3>কাস্টমারকে দেওয়ার লিস্ট</h3><div class="cr-pre">'+esc(crText(cfg,true))+'</div><div class="btn-row"><button type="button" class="btn" data-a="cr-edit">লিস্ট বদলান</button><button type="button" class="btn danger" data-a="cr-reset">'+(S.crDel?'আবার চাপুন':'মুছুন')+'</button></div></article>';
+  el.innerHTML=h;
+}
+function crCopy(txt){
+  const fb=function(){try{const t=document.createElement('textarea');t.value=txt;t.style.cssText='position:fixed;opacity:0;top:0';document.body.appendChild(t);t.select();const ok=document.execCommand('copy');t.remove();toast(ok?'লিস্ট কপি হয়েছে।':'কপি হয়নি, লিস্টে চেপে ধরে কপি করুন।',ok?'ok':'err');}catch(e){toast('কপি হয়নি।','err');}};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(function(){toast('লিস্ট কপি হয়েছে।','ok');},fb);else fb();
+}
 
 /* ---------- boot ---------- */
 function boot(){
